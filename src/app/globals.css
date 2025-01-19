@@ -2,20 +2,231 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.spin-button-none::-webkit-outer-spin-button,
+.spin-button-none::-webkit-inner-spin-button{
+  appearance: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* *{
+  border:1px solid red
+} */
+
+html, body{
+  font-family: var(--font-sora-mono);  
+  @apply overflow-x-hidden;
+}
+
+
+.bg{
+  background-image: url(/Vec_enhanced.jpg);
+  background-size: cover;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.bg2{
+  background-color: #0a0a0a;
+}
+
+.maskk{
+  mask-image: url(/Smoke.gif);
+  mask-size: cover;
+  mask-position: center;
+}
+
+.bg3{
+  background-image: url(/slide10.png);
+  background-size:cover;
+  background-attachment: scroll;
+  width: 100%;
+
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bg4{
+  background-image: url(/Thumb.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: min-content;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+.bg5{
+  background-image: url(/Contactus.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: min-content;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bg6{
+  background-image: url(/aboutus2.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: min-content;
+  background-repeat: no-repeat;
+  background-position:top;
+}
+
+.bg7{
+  background-image: url(/faq1.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: min-content;
+  background-repeat: no-repeat;
+  background-position:top;
+  mix-blend-mode: multiply;
+}
+
+.bg8{
+  background-image: url(/terms.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: min-content;
+  background-repeat: no-repeat;
+  background-position:center;
+  mix-blend-mode: multiply;
+}
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+    
+
+.bluePrint{
+  color: #6699CC;
+  background-color:#ededa7;
+}
+
+.border1{
+  border-color:#ededa7;
+}
+
+.PhoneInputInput:focus-visible {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+}
+
+.PhoneInputInput{
+  background-color: #f8fafc;
+  font-size: 13px;
+}
+
+.PhoneInputInput::placeholder{
+  color: #64748b;
+  opacity: 0.7;
+  font-size: 13px;
+  line-height: 1.25rem; /* 20px */
+  
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 65px;
+  display: grid;
+  --mask: 
+    radial-gradient(12px at left 15px top 50%, #0000 95%, #000),
+    radial-gradient(12px at right 15px top 50%, #0000 95%, #000);
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+  animation: l1 1s infinite alternate;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  height: 30px;
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 50%;
+}
+.loader:after {
+  margin-left: auto;
+}
+@keyframes l1 {
+  to {
+    width: 40px;
   }
 }
 
-body {
+
+/* Loader styles */
+.button-loader {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.button-loader span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.button-loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.button-loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* .input-phone-number input:focus{
+  outline:none !important;
+  border:none !important;
+  box-shadow: none !important;
+ 
+} */
+
+/* .input-phone-number input {
+  background-color: #f8fafc;
+
+} */
+
+/* body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }
