@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="284" height="116" viewBox="0 0 284 116">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 125px;
+        fill: #2b33c6;
+        text-anchor: middle;
+        font-family: Candara;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text id="Login" class="cls-1" x="140.5" y="84"><tspan x="140.5">Login</tspan></text>
+</svg>
