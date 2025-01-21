@@ -73,7 +73,7 @@ const Navbar = () => {
             isOpen
               ? "flex flex-col py-8 opacity-100 visible translate-y-0 h-screen"
               : "hidden"
-          } lg:flex-row lg:items-center absolute lg:static top-full left-4 rounded-lg w-full lg:w-auto bg-slate-900 lg:bg-transparent lg:gap-4 p-4 lg:p-0 text-white lg:text-sm text-xs gap-3`}
+          } lg:flex-row lg:items-center absolute lg:static top-full left-4 rounded-lg w-full lg:w-auto bg-slate-900 lg:bg-transparent lg:gap-4 p-4 lg:p-0 text-white text-sm gap-3`}
         >
           <span className="text-slate-900 bottom-[99%] absolute font-bold right-12 text-3xl">
             !
