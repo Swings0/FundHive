@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
       usdtErc20Address,
       bitcoinAddress,
       userName,
+      phone
     } = body;
 
     if (!email) {
@@ -58,6 +59,10 @@ export async function POST(req: NextRequest) {
     if (userName && userName !== user.username) {
       user.username = userName;
       updatedFields.push('Username');
+    }
+    if (phone && phone !== user.phone) {
+      user.phone = phone;
+      updatedFields.push('Phone');
     }
 
     if (newPassword || retypePassword) {

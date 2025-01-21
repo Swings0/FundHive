@@ -44,7 +44,7 @@ const page = () => {
               individuals, families and institutions into action so that we can
               help our clients reach their most ambitious goals. Spanning
               decades and generations, our longevity comes from the recognition
-              that we are more than a financial institution. We're legal and
+              that we are more than a financial institution. We&apos;re legal and
               registered, learn more by clicking the link below.
             </p>
 
@@ -57,7 +57,7 @@ const page = () => {
               individuals, families and institutions into action so that we can
               help our clients reach their most ambitious goals. Spanning
               decades and generations, our longevity comes from the recognition
-              that we are more than a financial institution. We're legal and
+              that we are more than a financial institution. We&apos;re legal and
               registered, learn more by clicking the link below.
             </p>
 

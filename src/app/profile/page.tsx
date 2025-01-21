@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { MdPermDeviceInformation } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { setPriority } from "os";
 
 interface PageProps {
   username: string;
@@ -53,6 +54,7 @@ const Page = ({ username }: PageProps) => {
           setUsdtTrc20Address(response.data.usdtTrc20Address || "");
           setUsdtErc20Address(response.data.usdtErc20Address || "");
           setBitcoinAddress(response.data.bitcoinAddress || "");
+          setPhone(response.data.phone || "");
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -80,6 +82,7 @@ const Page = ({ username }: PageProps) => {
       usdtErc20Address: usdtErc20Address.trim() || undefined,
       bitcoinAddress: bitcoinAddress.trim() || undefined,
       userName: userName.trim() || undefined,
+      phone: phone.trim() || undefined,
     };
 
     setIsLoading(true);
@@ -106,6 +109,7 @@ const Page = ({ username }: PageProps) => {
         setUsdtTrc20Address("");
         setUsdtErc20Address("");
         setBitcoinAddress("");
+        setPhone("");
       } else {
         setModalMessage("Failed to update account data.");
         setIsModalVisible(true);
@@ -344,6 +348,15 @@ const Page = ({ username }: PageProps) => {
               type="text"
               value={username}
               onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <label className="text-xs text-white">Phone</label>
+            <input
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 

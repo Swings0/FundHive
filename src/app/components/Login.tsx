@@ -112,7 +112,7 @@ const Login = () => {
             </form>        
 
             <div className=''>
-              <span className="text-sm gap-1">Don't have an account? <Link href={"/register"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Create account</Link></span>
+              <span className="text-sm gap-1">Don&apos;t have an account? <Link href={"/register"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Create account</Link></span>
             </div>
         </div>
       </div>

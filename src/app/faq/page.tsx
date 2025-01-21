@@ -30,7 +30,7 @@ const page = () => {
 
           <div className="  bg-white rounded-md shadow-sm border-2 border-[#d9e2ea] hover:border-opacity-10 hover:shadow-md transition-all ease-linear duration-700 px-8 mx-6 md:px-10 md:mx-10 lg:px-10 lg:mx-10   py-14 space-y-5 ">
             <Image src="/icon3.png" alt="" width={50} height={50} />
-            <h1 className="font-semibold text-2xl text-slate-900">FAQ's</h1>
+            <h1 className="font-semibold text-2xl text-slate-900">FAQ&apos;s</h1>
 
             <div className="space-y-8 text-sm">
               <div>
@@ -44,7 +44,7 @@ const page = () => {
 
               <div>
                 <strong>
-                  I wish to invest with you but I don't have an any ecurrency
+                  I wish to invest with you but I don&apos;t have an any ecurrency
                   account. What should I do?
                 </strong>
                 <p>You can open a free PM account here: blockchain.com</p>
@@ -85,19 +85,19 @@ const page = () => {
                 <strong>How can I change my e-mail address or password?</strong>
                 <p>
                   Log into your nordhavencorps.com account and click on the
-                  "Account Information". You can change your e-mail address and
+                  &quot;Account Information&quot;. You can change your e-mail address and
                   password there.
                 </p>
               </div>
 
               <div>
                 <strong>
-                  What if I can't log into my account because I forgot my
+                  What if I can&apos;t log into my account because I forgot my
                   password?
                 </strong>
                 <p>
                   Click forgot password link, type your username or e-mail and
-                  you'll receive your account information.
+                  you&apos;ll receive your account information.
                 </p>
               </div>
 
@@ -203,7 +203,7 @@ const page = () => {
             <p className="text-xs ">Referral Commission</p>
           </div>
 
-          <span className=" border-l-[1px] h-16 hidden lg:block border-white  "></span>
+          <span className=" border-l-[1px] h-16 hidden lg:block border-white"></span>
 
           <div>
             <h1 className="text-[2rem] font-semibold">Instant</h1>

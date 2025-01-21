@@ -88,7 +88,7 @@ const Page = () => {
         <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
           <h1 className="text-2xl lg:text-3xl font-bold text-left lg:text-left">Get In Touch</h1>
           <p className="text-slate-600 text-xs md:text-sm lg:text-sm text-left lg:text-left mt-2">
-            Send us a message, we'll be sure to get back to you.
+            Send us a message, we&apos;ll be sure to get back to you.
           </p>
         </div>
 
