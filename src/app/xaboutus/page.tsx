@@ -128,7 +128,7 @@ const page = () => {
 
             <div className="bg-white w-[22rem] h-[20-rem] flex flex-col px-8 py-10 rounded-lg border border-slate-200 hover:shadow-md hover:border-opacity-10 transition-all  duration-700">
               <div>
-                <Image src="/Icon2.png" alt="" width={50} height={50} />
+                <Image src="/icon2.png" alt="" width={50} height={50} />
               </div>
 
               <div>
