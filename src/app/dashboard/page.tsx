@@ -10,11 +10,12 @@ import { useEffect,useState } from "react";
 
 
 
-interface Page {
+interface PageProps {
   username: string;
 }
 
-const Page = ({username}: Page) => {
+
+const Page = ({username}: PageProps) => {
   const { data: session, status } = useSession();
   const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
 

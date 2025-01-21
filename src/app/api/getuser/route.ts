@@ -1,6 +1,6 @@
 import {  NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route'; // Ensure this points to your next-auth configuration file
+import { authOptions } from "@/lib/authOptions"; // Ensure this points to your next-auth configuration file
 import User from '@/models/user'; // Adjust the import path if needed
 
 export async function GET() {
