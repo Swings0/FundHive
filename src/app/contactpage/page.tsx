@@ -2,13 +2,12 @@
 import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Image from 'next/image'
 import { MdLocationPin } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 
-const page = () => {
+const Page = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -187,4 +186,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -40,7 +40,7 @@ const page = () => {
               institutional asset management and financial advisory services
               under one distinguished banner. We operate thoughtful innovation
               across asset classes and global markets. Through our expertise and
-              dedication, we transform the plans of the world’s most successful
+              dedication, we transform the plans of the world&apos;s most successful
               individuals, families and institutions into action so that we can
               help our clients reach their most ambitious goals. Spanning
               decades and generations, our longevity comes from the recognition
@@ -53,7 +53,7 @@ const page = () => {
               institutional asset management and financial advisory services
               under one distinguished banner. We operate thoughtful innovation
               across asset classes and global markets. Through our expertise and
-              dedication, we transform the plans of the world’s most successful
+              dedication, we transform the plans of the world&apos;s most successful
               individuals, families and institutions into action so that we can
               help our clients reach their most ambitious goals. Spanning
               decades and generations, our longevity comes from the recognition

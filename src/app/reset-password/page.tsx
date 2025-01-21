@@ -32,8 +32,12 @@ export default function Page() {
       const data = await res.json();
       setMessage(data.message ||`${ <div className="text-green-600">Password updated successfully.</div>}`);
       setSuccess(true);
-    } catch (error: any) {
-      setMessage(error.message || `${<div className="text-red-600">An error occurred. Please try again.</div>}`);
+    } catch (error:unknown) {
+      if(error instanceof Error) {
+        setMessage(error.message || `${<div className="text-red-600">An error occurred. Please try again.</div>}`);
+      } else {
+        setMessage("An unknown error occurred. Please try again.");
+      }
     }
   };
 

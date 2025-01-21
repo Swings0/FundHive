@@ -10,11 +10,11 @@ import { useEffect,useState } from "react";
 
 
 
-interface page {
+interface Page {
   username: string;
 }
 
-const page = ({username}: page) => {
+const Page = ({username}: Page) => {
   const { data: session, status } = useSession();
   const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
 
@@ -152,4 +152,4 @@ console.log(session);
 };
 
 
-export default page
+export default Page

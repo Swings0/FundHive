@@ -1,17 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, {Document} from "mongoose";
 
 export interface IUser extends Document {
-    name: String;
-    email: String;
-    password: String;
-    phone: String;
-    otp?: Number;
-    otpExpires?: Number;
-    resetPasswordToken?: String;
+    username: string;
+    email: string;
+    password: string;
+    phone: string;
+    otp?: number;
+    otpExpires?: number;
+    resetPasswordToken?: string;
     resetPasswordExpires?:Date;
-    usdtTrc20Address?:String;
-    usdtErc20Address?:String;
-    bitcoinAddress?:String;
+    usdtTrc20Address?:string;
+    usdtErc20Address?:string;
+    bitcoinAddress?:string;
     registrationDate?:Date
 
   }

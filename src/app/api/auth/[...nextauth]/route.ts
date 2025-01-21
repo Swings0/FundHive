@@ -3,7 +3,6 @@ import dbConnect from "@/utils/dbConnect";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { NextResponse } from "next/server";
 
 export const authOptions: NextAuthOptions = {
   providers: [

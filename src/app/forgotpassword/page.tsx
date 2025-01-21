@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 
-const page = () => {
+const Page = () => {
     const [email, setEmail] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [successMessage, setSuccessMessage] = useState<string>('')
@@ -62,5 +62,5 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
 

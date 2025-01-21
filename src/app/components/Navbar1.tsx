@@ -16,7 +16,7 @@ const Navbar1 = ({ username }: Navbar1Props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     // Fetch username from the backend API if the session is available

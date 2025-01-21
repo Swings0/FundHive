@@ -1,6 +1,4 @@
 'use client'
-import { setConfig } from 'next/config';
-import { Span } from 'next/dist/trace';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react'
 import { useState } from 'react';
@@ -13,7 +11,6 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
         let currentOTPIndex: number = 0;
         const router = useRouter();
         const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
-        const [otp1, setOtp1] = useState <string | boolean>(false);
         const [err, setErr] = useState<string | null>(null);
         const [activeOtpIndex, setActiveOtpIndex] = useState<number>(0);
         const inputRef = useRef<HTMLInputElement>(null)
@@ -35,13 +32,13 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
            setOtp(newOTP)
         };
 
-        const handleOnKeyDown = (e:any,index:number) => {
+        const handleOnKeyDown = (e:React.KeyboardEvent<HTMLInputElement>,index:number) => {
             currentOTPIndex = index;
           if(e.key === 'Tab') {
             e.preventDefault();
             setActiveOtpIndex(currentOTPIndex + 1);
           }
-          if(e.key === 'Backspace' && !e.target.value){
+          if(e.key === 'Backspace' && !e.currentTarget.value){
             e.preventDefault();
             setActiveOtpIndex(currentOTPIndex - 1);
           } 
@@ -49,11 +46,11 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
    
           
-        const handlePaste = (e:any) => {
+        const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
          const value = e.clipboardData.getData('text');
 
 
-         if(isNaN(value)) return false;
+         if(isNaN(Number(value))) return false;
          
          const updatedValue = value.toString().split("").slice(0, otp.length)
          setOtp(updatedValue)

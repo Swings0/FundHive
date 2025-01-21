@@ -12,13 +12,13 @@ const Layout = ({ children, username }: LayoutProps) => {
   return (
     <div className="flex flex-col h-full bg-sky-100 border-t-4 border-white">
       {/* Navbar */}
-      <Navbar1 username="" />
+      <Navbar1 username={displayName} />
       <div className="w-full bg-blue-900 text-blue-900 h-24 shadow-lg">-</div>
 
       {/* Sidebar and Main Content */}
       <div className="flex-1 flex flex-col lg:flex-row mx-10 mt-[-40px] ">
         {/* Sidebar */}
-        <Sidebar username={username} />
+        <Sidebar />
 
         {/* Main Content */}
         <main className="flex-1 p-6  mx-3 rounded-lg  overflow-auto lg:mt-[-20px]">

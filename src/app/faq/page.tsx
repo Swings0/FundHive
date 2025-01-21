@@ -17,7 +17,7 @@ const page = () => {
           <div className="flex items-center space-x-4 mt-4">
             <p>Home </p>
             <span>-</span>
-            <p>FAQ's</p>
+            <p>FAQ&apos;s</p>
           </div>
         </div>
 
@@ -53,7 +53,7 @@ const page = () => {
               <div>
                 <strong>How do I open my Account?</strong>
                 <p>
-                  It's quite easy and convenient. Follow this link, fill in the
+                  It&apos;s quite easy and convenient. Follow this link, fill in the
                   registration form and then press "Register"
                 </p>
               </div>

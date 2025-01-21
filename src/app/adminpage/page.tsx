@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
 
-const page = () => {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
@@ -183,5 +183,5 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 

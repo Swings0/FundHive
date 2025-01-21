@@ -37,7 +37,7 @@ export const validatePhoneNumber = async (
             
         });
         return response.data;
-    } catch (error: any) {
+    } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             console.log('Error validating phone number:', error.response?.data || error.message);
         } else {

@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/models/user";
 import dbConnect from "@/utils/dbConnect";
 import { NextResponse } from "next/server";

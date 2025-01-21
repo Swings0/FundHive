@@ -1,7 +1,4 @@
 import React from 'react'
-import Login from './components/Login'
-import Otp from './components/Otp'
-import Register from './components/Register'
 import Navbar from './components/Navbar'
 import Sec1 from './components/HomeSections/Sec1'
 import Sec2 from './components/HomeSections/Sec2'

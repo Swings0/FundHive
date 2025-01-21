@@ -106,6 +106,12 @@ const Register = () => {
       setPhoneError(false)
     }
 
+    await handleValidate();
+
+    if (err || !validationResult?.valid) {
+      setLoading(false);
+      return; // Stop form submission if there's an error
+    }
 
 
    try {

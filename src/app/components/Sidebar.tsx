@@ -4,15 +4,14 @@ import { IoTvOutline } from "react-icons/io5";
 import { MdAddHomeWork } from "react-icons/md";
 import { GrTransaction } from "react-icons/gr";
 import { IoWalletOutline } from "react-icons/io5";
-import { SiMoneygram } from "react-icons/si";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { GiProfit } from "react-icons/gi";
 
-interface SidebarProps {
-  username: string;  // Ensure it expects the 'username' prop
-}
+// interface SidebarProps {
+//   username: string;  // Ensure it expects the 'username' prop
+// }
 
-const Sidebar = ({ username }: { username: string }) => {
+const Sidebar = () => {
   return (
     <aside
       className="bg-blue-600 glass text-white w-full lg:w-40 p-6 lg:min-h-screen rounded-t-md shadow-lg"

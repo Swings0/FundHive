@@ -12,7 +12,7 @@ interface Transaction {
 
 
 // Main TransactionHistory Component
-const page = () => {
+const Page = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const handleTransaction = (type: "withdraw" | "deposit", amount: number) => {
@@ -87,5 +87,5 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 
