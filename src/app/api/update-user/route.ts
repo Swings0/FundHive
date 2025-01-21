@@ -38,31 +38,31 @@ export async function POST(req: NextRequest) {
     // Update fields if provided in the request
     if (fullName && fullName !== user.fullname) {
       user.fullname = fullName;
-      updatedFields.push('Full Name');
+      updatedFields.push('Your FullName');
     }
 
     if (usdtTrc20Address && usdtTrc20Address !== user.usdtTrc20Address) {
       user.usdtTrc20Address = usdtTrc20Address;
-      updatedFields.push('USDT TRC20 Address');
+      updatedFields.push('Your USDT TRC20 Address');
     }
 
     if (usdtErc20Address && usdtErc20Address !== user.usdtErc20Address) {
       user.usdtErc20Address = usdtErc20Address;
-      updatedFields.push('USDT ERC20 Address');
+      updatedFields.push('Your USDT ERC20 Address');
     }
 
     if (bitcoinAddress && bitcoinAddress !== user.bitcoinAddress) {
       user.bitcoinAddress = bitcoinAddress;
-      updatedFields.push('Bitcoin Address');
+      updatedFields.push('Your Bitcoin Address');
     }
 
     if (userName && userName !== user.username) {
       user.username = userName;
-      updatedFields.push('Username');
+      updatedFields.push('Your Username');
     }
     if (phone && phone !== user.phone) {
       user.phone = phone;
-      updatedFields.push('Phone');
+      updatedFields.push('Your Phone');
     }
 
     if (newPassword || retypePassword) {
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ message: 'Passwords do not match.' }, { status: 400 });
       }
       user.password = await bcrypt.hash(newPassword, 10);
-      updatedFields.push('Password');
+      updatedFields.push('Your Password');
     }
 
     if (newEmail && newEmail !== email) {
@@ -105,9 +105,8 @@ export async function POST(req: NextRequest) {
       from: process.env.GMAIL_USER,
       to: user.email,
       subject: 'Your Account Details Have Been Updated',
-      text: `The following fields in your account were updated: "\n\n${updatedFields.join(
-        '\n'
-      )}\n\n" If you did not initiate these changes, please contact support immediately.`,
+      text: `The following info in your account were updated: "\n${updatedFields.join('\n')}\n"
+       If you did not initiate these changes, please contact support immediately.`,
     };
 
     await transporter.sendMail(mailOptions);
