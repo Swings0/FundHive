@@ -228,36 +228,36 @@ const Page = () => {
           <div
             data-aos="fade-down"
             data-aos-duration="500"
-            className="absolute right-0 mt-10 bg-white text-black rounded shadow-lg w-fit h-fit transition-all ease-linear delay-200 p-3 duration-300 opacity-100 transform translate-y-2 z-50"
+            className="absolute right-0 mt-20 mr-4   text-black rounded-md shadow-lg w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
           >
-            <ul className="text-xs space-y-2">
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text-blue-950">FullName</span>
-                <p className="text-xs text-gray-700">{userInfo?.fullname || "Not set"}</p>
+            <ul className="text-xs">
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg rounded-t-md">
+                <span className="font-semibold text-xs text-white">FullName:</span>
+                <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
               </li>
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text- blue-950">Email</span>
-                <p className="text-xs text-gray-700">{userInfo?.email || "Not set"}</p>
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                <span className="font-semibold text-xs text-white ">Email:</span>
+                <p className="text-xs text-blue-100">{userInfo?.email || "Not set"}</p>
               </li>
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text-blue-950">Username</span>
-                <p className="text-xs text-gray-700">{userInfo?.username || "Not set"}</p>
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                <span className="font-semibold text-xs text-white">Username:</span>
+                <p className="text-xs text-blue-100">{userInfo?.username || "Not set"}</p>
               </li>
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text-blue-950">USDT TRC20</span>
-                <p className="text-xs text-gray-700">{userInfo?.usdtTrc20Address || "Not set"}</p>
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                <span className="font-semibold text-xs text-white">USDT TRC20:</span>
+                <p className="text-xs text-blue-100">{userInfo?.usdtTrc20Address || "Not set"}</p>
               </li>
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text-blue-950">USDT ERC20</span>
-                <p className="text-xs text-gray-700">{userInfo?.usdtErc20Address || "Not set"}</p>
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                <span className="font-semibold text-xs text-white">USDT ERC20:</span>
+                <p className="text-xs text-blue-100">{userInfo?.usdtErc20Address || "Not set"}</p>
               </li>
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text-blue-950">Bitcoin</span>
-                <p className="text-xs text-gray-700">{userInfo.bitcoinAddress || "Not set"}</p>
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                <span className="font-semibold text-xs text-white">Bitcoin:</span>
+                <p className="text-xs text-blue-100">{userInfo.bitcoinAddress || "Not set"}</p>
               </li>
-              <li className="text-sm p-2 bg-blue-50 shadow-md rounded">
-                <span className="font-semibold text-xs text-blue-950">Phone</span>
-                <p className="text-xs text-gray-700">{userInfo.phone || "Not set"}</p>
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                <span className="font-semibold text-xs text-white">Phone:</span>
+                <p className="text-xs text-blue-100">{userInfo.phone || "Not set"}</p>
               </li>
             </ul>
           </div>
