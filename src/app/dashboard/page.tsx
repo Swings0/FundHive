@@ -10,12 +10,9 @@ import { useEffect,useState } from "react";
 
 
 
-interface PageProps {
-  username: string;
-}
 
 
-const Page = ({username}: PageProps) => {
+const Page= () => {
   const { data: session, status } = useSession();
   const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
 
@@ -36,7 +33,7 @@ const Page = ({username}: PageProps) => {
   }, [session]);
   
   // Fallback to the username from props or fetched data
-  const displayUsername = fetchedUsername || username;
+  const displayUsername = fetchedUsername || "Guest";
 
 // Fetch active deposit amount (replace in your deposit page)
 useEffect(() => {

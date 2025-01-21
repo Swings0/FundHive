@@ -11,11 +11,9 @@ import { MdPermDeviceInformation } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-interface PageProps {
-  username: string;
-}
 
-const Page = ({ username }: PageProps) => {
+
+const Page = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
@@ -172,7 +170,7 @@ const Page = ({ username }: PageProps) => {
     });
   }, []);
 
-  const displayUsername = fetchedUsername || username;
+  const displayUsername = fetchedUsername || "Guest";
 
   // if (isLoading) {
   //   return <p>Loading...</p>; // Show loading indicator while data fetch is in progress
@@ -181,7 +179,7 @@ const Page = ({ username }: PageProps) => {
   const userInfo = userData || {}; // Ensure safe access
 
   return (
-    <Layout username={username}>
+    <Layout username={''}>
       <div className="w-full bg-blue-50 rounded-lg shadow-md p-5 mt-[-20px] flex flex-row justify-end">
         <div className=" w-full mx-auto items-center gap-5">
           <h1 className="text-sm font-semibold opacity-80 ml-3 ">
@@ -361,7 +359,7 @@ const Page = ({ username }: PageProps) => {
             <input
               className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
               type="text"
-              value={username}
+              value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
           </div>
