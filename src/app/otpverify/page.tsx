@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import Otp from '../components/Otp'
 
 const page = () => {
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
      <Otp/> 
-    </div>
+    </Suspense>
   )
 }
 
