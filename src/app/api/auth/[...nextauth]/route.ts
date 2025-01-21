@@ -36,9 +36,10 @@ export const authOptions: NextAuthOptions = {
           return { email: user.email, id: user._id.toString() }; // Convert ObjectId to string
         } catch (error: unknown) {
           if (error instanceof Error) {
-            console.error(error.message);
+            console.error("Error in authorization:", error.message);
             throw new Error("Invalid credentials");
           }
+          console.error("Unexpected error during authorization:", error);
           throw new Error("An unexpected error occurred");
         }
       },
@@ -60,7 +61,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-  
+
     async session({ session, token }) {
       // Attach user data from token to session
       if (token) {
@@ -68,12 +69,12 @@ export const authOptions: NextAuthOptions = {
         
         // Ensure token.lastActive is treated as a number
         const lastActive = typeof token.lastActive === 'number' ? token.lastActive : undefined;
-  
+
         session.user = {
           email: token.email as string,
           id: token.id as string, // Add the user id to the session
         };
-        session.lastActive = lastActive; // Add lastActive timestamp to session
+        session.lastActive = lastActive || Date.now(); // Default to current time if lastActive is undefined
       }
       return session;
     },
@@ -89,5 +90,4 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
-
 

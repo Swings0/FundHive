@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Modal from "../components/Modal";
@@ -34,7 +34,18 @@ const Page = ({ username }: PageProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>("");
-  const [userData, setUserData] = useState<any>(null);
+
+  interface User {
+    fullname?: string;
+    username?: string;
+    email?: string;
+    phone?: string;
+    usdtTrc20Address?: string;
+    usdtErc20Address?: string;
+    bitcoinAddress?: string;
+    // other properties here
+  }
+  const [userData, setUserData] = useState<User | null>(null);
 
   useEffect(() => {
     if (session) {
@@ -163,9 +174,9 @@ const Page = ({ username }: PageProps) => {
 
   const displayUsername = fetchedUsername || username;
 
-  if (isLoading) {
-    return <p>Loading...</p>; // Show loading indicator while data fetch is in progress
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>; // Show loading indicator while data fetch is in progress
+  // }
 
   const userInfo = userData || {}; // Ensure safe access
 
