@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
+import axios, { Axios, AxiosError } from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Modal from "../components/Modal";
@@ -113,15 +113,20 @@ const Page = ({ username }: PageProps) => {
         setModalMessage("Failed to update account data.");
         setIsModalVisible(true);
       }
-    } catch (error: any) {
-      console.error(
-        "Error updating account data:",
-        error.response?.data || error
-      );
-      setModalMessage(
-        error.response?.data?.message ||
-          "An error occurred while updating account data."
-      );
+    } catch (error: unknown) {
+      if(error instanceof AxiosError){
+        console.error(
+          "Error updating account data:",
+          error.response?.data || error
+        );
+        setModalMessage(
+          error.response?.data?.message ||
+            "An error occurred while updating account data."
+        );
+      } else if (error instanceof Error){
+        console.error("Error updating account data:", error.message);
+        setModalMessage(error.message || "An error occurred while updating account data.");
+      }
       setIsModalVisible(true);
     } finally {
       setIsLoading(false);
