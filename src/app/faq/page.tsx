@@ -54,7 +54,7 @@ const page = () => {
                 <strong>How do I open my Account?</strong>
                 <p>
                   It&apos;s quite easy and convenient. Follow this link, fill in the
-                  registration form and then press "Register"
+                  registration form and then press &quot;Register&quot;
                 </p>
               </div>
 

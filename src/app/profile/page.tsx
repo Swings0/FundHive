@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { MdPermDeviceInformation } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { setPriority } from "os";
 
 interface PageProps {
   username: string;
