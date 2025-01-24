@@ -10,7 +10,7 @@ const Layout = ({ children, username }: LayoutProps) => {
 
   const displayName = username || "Guest"
   return (
-    <div className="flex flex-col max-h-full lg:h-full md:h-full h-screen  bg-sky-100 border-t-4 border-white  ">
+    <div className="flex flex-col h-full bg-sky-100  border-t-4 border-white  ">
       {/* Navbar */}
       <div className="z-50">
       <Navbar1 username={displayName} />
