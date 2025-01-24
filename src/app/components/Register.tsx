@@ -138,7 +138,7 @@ const Register = () => {
 
 
     // performing a fetch call to the register api route
-    const res = await axios.post('http://localhost:3000/api/register', {username,email,password,phone})
+    const res = await axios.post('/api/register', {username,email,password,phone})
     if (res.status === 200){
       console.log('User registered successfully')
 
