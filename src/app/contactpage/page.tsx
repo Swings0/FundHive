@@ -112,8 +112,8 @@ const Page = () => {
               </div>
 
             {/* Email Input */}
-            <div className="flex flex-col text-sm">
-                <label className="lg:text-sm text-base font-semibold text-gray-600 mb-2">Email</label>
+            <div className="flex flex-col lg:text-sm text-base">
+                <label className="text-sm font-semibold text-gray-600 mb-2">Email</label>
                 <input
                   type="email"
                   name="email"
