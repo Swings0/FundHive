@@ -66,15 +66,15 @@ const Page = () => {
 
         </div>
 
-        <div className='bg-slate-200 lg:flex md:flex grid lg:gap-0 gap-5 items-center justify-center lg:justify-start py-20 lg:space-x-10 md:space-x-10 lg:px-8 md:px-8 '>
-          <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-72 h-32 bg-slate-100 shadow-md rounded-lg py-10 px-5'>
+        <div className='bg-slate-200 lg:flex md:flex grid lg:gap-0 gap-4 items-center justify-center lg:justify-start py-20 lg:space-x-10 md:space-x-10 space-x-2 lg:px-8 md:px-8 px-1 '>
+          <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-80 h-32 bg-slate-100 shadow-md rounded-lg py-10 lg:px-5 md:px-5 px-3'>
             <span className='inline-flex items-center text-2xl gap-2'><MdLocationPin/><h1 className='text-lg font-semibold'>Address</h1></span>
             <p className='text-sm text-slate-600'>
               Riddargatan 13A, 114 51 <br /> Stockholm, Sweden
             </p>
           </div>
 
-          <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-72 h-32 bg-slate-100 shadow-md rounded-lg py-10 px-5'>
+          <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-80 h-32 bg-slate-100 shadow-md rounded-lg py-10 lg:px-5 md:px-5 px-3'>
             <span className='inline-flex items-center text-2xl gap-2'><MdEmail/><h1 className='text-lg font-semibold'>Email</h1></span>
             <p className='text-sm text-slate-600'>
              support@comingsoon.com
