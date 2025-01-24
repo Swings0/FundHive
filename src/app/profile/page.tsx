@@ -231,7 +231,7 @@ const Page = () => {
             className="absolute right-0 mt-20 lg:mr-4 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-lg w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
           >
             <ul className="text-xs">
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md lg:rounded-md rounded-tl-md ">
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md lg:rounded-tl-none  rounded-tl-md ">
                 <span className="font-semibold text-xs text-white">FullName:</span>
                 <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
               </li>
