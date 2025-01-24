@@ -74,7 +74,7 @@ const Page = () => {
             </p>
           </div>
 
-          <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-80 h-32 bg-slate-100 shadow-md rounded-lg py-10 lg:px-5 md:px-5 px-3'>
+          <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-80 h-32 bg-slate-100 shadow-md rounded-lg py-10 lg:px-5 md:px-5 px-3 mr-2'>
             <span className='inline-flex items-center text-2xl gap-2'><MdEmail/><h1 className='text-lg font-semibold'>Email</h1></span>
             <p className='text-sm text-slate-600'>
              support@comingsoon.com
