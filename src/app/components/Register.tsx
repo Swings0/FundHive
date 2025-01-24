@@ -195,7 +195,7 @@ const Register = () => {
                     required: true,
                   }}
                   onChange={(value) => setPhone(value)} className= {'PhoneInputInput::placeholder PhoneInputInput PhoneInputInput:focus-visible border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70 focus:outline-none'} type='text' placeholder={`${phoneError && "Required" || "Enter phone number" }`} /> 
-                  <div className={'absolute top-2 right-4 text-base lg:text-sm  text-slate-500 opacity-50 z-10'}>{country && (<p className="text-gray-500 text-xs font-sans">{country}</p>)}
+                  <div className={'absolute top-2 right-4 text-base lg:text-sm  text-slate-500 opacity-50 z-10'}>{country && (<p className="text-gray-500 text-base lg:text-xs font-sans">{country}</p>)}
                  </div>
                 </div>
                   
