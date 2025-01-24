@@ -223,7 +223,7 @@ const Page = () => {
                     investmentAmount === 0 ? "" : investmentAmount.toString()
                   } // Show empty when reset
                   onChange={(e) => handleAmountChange(e.target.value)}
-                  className={`mt-2 w-full text-sm p-2 border rounded outline-none ${
+                  className={`mt-2 w-full lg:text-sm text-base p-2 border rounded outline-none ${
                     error ? "border-red-500" : "border-gray-300"
                   } focus:border-gray-400`}
                   min={plans[selectedPlan].min}

@@ -98,7 +98,7 @@ const Page = () => {
               className="grid grid-cols-1 gap-3 lg:gap-6 w-full max-w-lg bg-slate-300 rounded-lg"
               onSubmit={handleSubmit}
             >
-              <div className="flex flex-col text-sm">
+              <div className="flex flex-col lg:text-sm text-base">
                 <label className="text-sm font-semibold text-gray-600 mb-2">Name</label>
                 <input
                   type="text"
@@ -113,7 +113,7 @@ const Page = () => {
 
             {/* Email Input */}
             <div className="flex flex-col text-sm">
-                <label className="text-sm font-semibold text-gray-600 mb-2">Email</label>
+                <label className="lg:text-sm text-base font-semibold text-gray-600 mb-2">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -126,7 +126,7 @@ const Page = () => {
               </div>
 
             {/* Message Input */}
-            <div className="flex flex-col text-sm">
+            <div className="flex flex-col lg:text-sm text-base">
                 <label className="text-sm font-semibold text-gray-600 mb-2">Message</label>
                 <textarea
                   name="message"
