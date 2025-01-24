@@ -180,9 +180,9 @@ const Page = () => {
 
   return (
     <Layout username={''}>
-      <div className="w-full bg-blue-50 rounded-lg shadow-md p-5 mt-[-20px] flex flex-row justify-end">
+      <div className="w-full bg-blue-50 lg:rounded-lg md-rounded-lg rounded-sm shadow-md lg:p-5 md:p-5 p-3 mt-[-20px] flex flex-row justify-end z-10">
         <div className=" w-full mx-auto items-center gap-5">
-          <h1 className="text-sm font-semibold opacity-80 ml-3 ">
+          <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
             Your Account
           </h1>
           <div className="flex items-center w-full mx-auto">
@@ -196,15 +196,15 @@ const Page = () => {
               />
             </div>
 
-            <div className="flex flex-col">
-              <div className="flex flex-col gap-1">
+            <div className="flex flex-col  ">
+              <div className="flex flex-col gap-1 w-full my-4 lg:my-0 md:my-0 ">
                 <div>
-                  <p className="text-sm opacity-70">Username:</p>
-                  <p className="text-xs mt-1">{displayUsername}</p>
+                  <span className="text-sm  text-gray-600 relative">Username:</span>
+                  <p className="text-xs lg:mt-1 md:mt-1">{displayUsername}</p>
                 </div>
                 <div>
-                  <p className="text-sm opacity-70">Registration date:</p>
-                  <p className="text-xs mt-1">
+                  <p className="text-sm opacity-70 whitespace-nowrap">Registration date:</p>
+                  <p className="text-xs lg:mt-1 md:mt-1">
                     {registrationDate
                       ? new Date(registrationDate).toLocaleDateString()
                       : "Loading..."}
@@ -264,42 +264,42 @@ const Page = () => {
         )}
       </div>
 
-      <div className="w-full bg-blue-600 glass rounded-lg shadow-md p-6 mt-4">
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">Enter full name:</label>
+      <div className="w-full bg-blue-600 glass lg:rounded-lg md:rounded-lg rounded-sm shadow-md lg:p-6 md:p-6 py-6 px-4 lg:mt-4 md:mt-3 mt-3">
+        <form className="flex flex-col lg:gap-4 md:gap-4 gap-3" onSubmit={handleSubmit}>
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">Email:</label>
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Email:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">New Email:</label>
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">New Email:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="email"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">New Password:</label>
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">New Password:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -307,10 +307,10 @@ const Page = () => {
           </div>
 
           {newPassword && (
-            <div className="flex items-center justify-between">
-              <label className="text-xs text-white">Retype Password:</label>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Retype Password:</label>
               <input
-                className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+                className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="password"
                 value={retypePassword}
                 onChange={(e) => setRetypePassword(e.target.value)}
@@ -318,68 +318,68 @@ const Page = () => {
             </div>
           )}
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">
               Your USDT TRC20 Withdrawal Address:
             </label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={usdtTrc20Address}
               onChange={(e) => setUsdtTrc20Address(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">
               Your USDT ERC20 Withdrawal Address:
             </label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={usdtErc20Address}
               onChange={(e) => setUsdtErc20Address(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">
               Your Bitcoin Withdrawal Address:
             </label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={bitcoinAddress}
               onChange={(e) => setBitcoinAddress(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">U-name</label>
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">U-name:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
           </div>
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-white">Phone</label>
+          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Phone:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 text-sm w-[60%]"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 
-          <div className="pt-5 flex justify-end">
+          <div className="pt-5 flex lg:justify-end md:justify-end justify-center w-full  ">
             <button
               type="submit"
               className={`update-btn ${
                 isLoading
                   ? "loading text-white"
-                  : "text-blue-600 bg-blue-400 glass px-4 py-2 rounded-sm font-semibold text-xs hover:bg-blue-600 hover:text-white transition-all delay-200 duration-300 ease-linear"
+                  : "text-blue-600 bg-blue-400 glass px-4 py-2 rounded-sm font-semibold text-xs hover:bg-blue-600 hover:text-white transition-all delay-200 duration-300 ease-linear lg:w-fit md:w-fit w-full"
               }`}
             >
               {isLoading ? (
@@ -396,6 +396,7 @@ const Page = () => {
         isVisible={isModalVisible}
         message={modalMessage}
         onClose={() => setIsModalVisible(false)}
+        
       />
     </Layout>
   );

@@ -50,15 +50,15 @@ console.log(session);
 
   return (
     <Layout username="">
-      <div className="flex gap-5">
-        <div className="w-56 h-80 bg-white rounded-md shadow-md p-4 flex flex-col space-y-5 mt-[-20px]">
+      <div className="lg:flex lg:flex-row flex flex-col w-full lg:gap-5 gap-7">
+        <div className="lg:w-56 w-full h-80 bg-white lg:rounded-md rounded-sm shadow-md p-4 flex flex-col space-y-5 mt-[-20px]">
           {/* Header */}
           <h1 className="font-medium text-gray-600 mb-2">Overview</h1>
 
           <div className="flex justify-between items-center">
             <div className="flex-1">
               <p className="text-sm text-gray-600">Active Deposit</p>
-              <span className="text-gray-800 font-semibold text-base">
+              <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
                 $0.00
               </span>
             </div>
@@ -78,7 +78,7 @@ console.log(session);
           <div className="flex justify-between items-center">
             <div className="flex-1">
               <p className="text-sm text-gray-600">Total Deposit</p>
-              <span className="text-gray-800 font-semibold text-base">
+              <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
                 $0.00
               </span>
             </div>
@@ -96,7 +96,7 @@ console.log(session);
           <div className="flex justify-between items-center">
             <div className="flex-1">
               <p className="text-sm text-gray-600">Total Withdrawal</p>
-              <span className="text-gray-800 font-semibold text-base">
+              <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
                 $0.00
               </span>
             </div>
@@ -113,7 +113,7 @@ console.log(session);
         </div>
 
         <div className="w-full">
-          <div className=" h-[21rem] bg-white rounded-lg shadow-md p-4 mt-[-20px] space-y-2">
+          <div className=" h-[21rem] bg-white lg:rounded-lg rounded-sm shadow-lg md:shadow-lg lg:shadow-md p-4 mt-[-20px] space-y-2">
             {/* Header */}
             <h1 className="text-lg font-semibold text-gray-700 mb-2">
               Your Account
@@ -122,25 +122,25 @@ console.log(session);
             {/* User */}
             <div className="flex justify-between items-center border-b border-gray-200 py-2">
               <span className="text-sm text-gray-600">User:</span>
-              <span className="text-gray-600 font-medium">{displayUsername}</span>
+              <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">{displayUsername}</span>
             </div>
 
             {/* Account Balance */}
             <div className="flex justify-between items-center border-b border-gray-200 py-2">
               <span className="text-sm text-gray-600">Account Balance:</span>
-              <span className="text-gray-600 font-medium">$0.00</span>
+              <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">$0.00</span>
             </div>
 
             {/* Earned Total */}
             <div className="flex justify-between items-center border-b border-gray-200 py-2">
               <span className="text-sm text-gray-600">Earned Total:</span>
-              <span className="text-gray-600 font-medium">$0.00</span>
+              <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">$0.00</span>
             </div>
 
             {/* Pending Withdrawal */}
             <div className="flex justify-between items-center border-b border-gray-200 py-2">
               <span className="text-sm text-gray-600">Pending Withdrawal:</span>
-              <span className="text-gray-600 font-medium">$0.00</span>
+              <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">$0.00</span>
             </div>
           </div>
         </div>

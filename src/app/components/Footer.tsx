@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-800 fixed text-white py-6 lg:py-0 md:py-0 lg:pt-14 md:pt-12 w-full z-50">
-      <div className="container fixed mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-slate-800 text-white py-6 lg:py-0 md:py-0 lg:pt-14 md:pt-12 w-full z-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 justify-center items-start pb-10">
           {/* Logo and description */}
           <div className=" md:text-left">

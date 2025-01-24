@@ -211,9 +211,9 @@ const Page = () => {
           </div>
 
           {/* Calculator */}
-          <div className="mb-4 flex justify-between items-center">
+          <div className="mb-4 lg:flex md:flex grid lg:justify-between md:justify-between items-center">
             <div className="w-full">
-              <label className="block text-gray-600 text-sm">
+              <label className="block text-gray-600 text-sm whitespace-nowrap">
                 Investment Amount ($):
               </label>
               <input
@@ -232,7 +232,7 @@ const Page = () => {
             </div>
             <button
               onClick={calculateProfit}
-              className={`ml-4 text-xs text-center whitespace-nowrap mt-7 font-medium py-[11px] px-2 glass rounded ${
+              className={`lg:ml-4 md:ml-4 text-xs text-center whitespace-nowrap lg:mt-7 md:mt-7 mt-2 font-medium lg:py-[11px] md:py-[11px] py-[8px] px-2 glass rounded ${
                 error
                   ? "bg-gray-300 text-gray-600  px-2 mb-5"
                   : "bg-blue-600 text-white"
@@ -290,81 +290,74 @@ const Page = () => {
         </div>
       ) : (
         // Confirmation Page
-        <div className="w-full bg-white rounded-lg shadow-md p-6 mt-[-20px]">
-          <h1 className="text-xl font-semibold text-blue-900 mb-6">
-            Confirm Deposit
-          </h1>
 
-          <p className="text-sm text-gray-600 mb-5">
-            Please kindly send your deposit to this wallet address:{" "}
-            <strong>{walletAddresses[selectedCurrency]}</strong>
-          </p>
+<div className="w-full bg-white rounded-lg shadow-md p-6 mt-[-20px]">
+  <h1 className="text-xl font-semibold text-blue-900 lg:mb-6 md:mb-6 mb-2">Confirm Deposit</h1>
 
-          <div className="mb-4 space-y-4">
-            <div className="text-xs text-gray-600  flex items-center gap-[405px]">
-              <p>Plan:</p> <p>{selectedPlan}</p>
-            </div>
-            <div className="text-xs text-gray-600 flex items-center gap-[398px]">
-              <p className="">Profit:</p>{" "}
-              <p>
-                {plans[selectedPlan].dailyProfit}% Daily for{" "}
-                {plans[selectedPlan].duration} days
-              </p>
-            </div>
-            <div className="text-xs text-gray-600 flex items-center gap-[335px]">
-              <p className="">Principal Return:</p>{" "}
-              <p>{plans[selectedPlan].principalReturn ? "Yes" : "No"}</p>
-            </div>
-            <div className="text-xs text-gray-600 flex items-center gap-[317px]">
-              <p className="">Principal Withdraw:</p> <p>Not available</p>
-            </div>
-            <div className="text-xs text-gray-600 flex items-center gap-96">
-              <p className="">Amount:</p> <p> ${investmentAmount.toFixed(2)}</p>
-            </div>
-            <div className="text-xs text-gray-600 flex items-center gap-96">
-              <p className="">Amount:</p> <p>{investmentAmount.toFixed(2)}</p>
-            </div>
-          </div>
+  <p className="text-xs lg:text-sm md:text-sm text-gray-600 mb-5">
+    Please kindly send your deposit to this wallet address: <strong>{walletAddresses[selectedCurrency]}</strong>
+  </p>
 
-          {/* Transaction Hash Input */}
-          <div className="mb-4 mt-6">
-            <p className="text-md text-gray-600 font-semibold mb-1 mt-3">
-              Required Information:
-            </p>
+  <div className="mb-4 space-y-4">
+    <div className="text-xs text-gray-600 flex flex-wrap justify-between">
+      <p>Plan:</p>
+      <p>{selectedPlan}</p>
+    </div>
+    <div className="text-xs text-gray-600 flex flex-wrap justify-between">
+      <p>Profit:</p>
+      <p>{plans[selectedPlan].dailyProfit}% Daily for {plans[selectedPlan].duration} days</p>
+    </div>
+    <div className="text-xs text-gray-600 flex flex-wrap justify-between">
+      <p>Principal Return:</p>
+      <p>{plans[selectedPlan].principalReturn ? "Yes" : "No"}</p>
+    </div>
+    <div className="text-xs text-gray-600 flex flex-wrap justify-between">
+      <p>Principal Withdraw:</p>
+      <p>Not available</p>
+    </div>
+    <div className="text-xs text-gray-600 flex flex-wrap justify-between">
+      <p>Amount:</p>
+      <p>${investmentAmount.toFixed(2)}</p>
+    </div>
+  </div>
 
-            <div className="flex items-center gap-72">
-              <label className="whitespace-nowrap text-gray-600 text-xs">
-                Transaction Hash
-              </label>
-              <input
-                type="text"
-                value={transactionHash}
-                onChange={(e) => setTransactionHash(e.target.value)}
-                className={`${
-                  (err &&
-                    "mt-2 w-96 text-xs py-1 px-2  border border-red-500 rounded outline-none focus:border-red-500") ||
-                  "mt-2 w-96 text-xs py-1 px-2  border border-gray-300 rounded outline-none focus:border-gray-400"
-                }`}
-              />
-            </div>
-          </div>
+  {/* Transaction Hash Input */}
+  <div className="mb-4 mt-6">
+    <p className="text-md text-gray-600 font-semibold mb-1 mt-3">
+      Required Information:
+    </p>
 
-          {/* Save and Cancel Buttons */}
-          <div className="flex mt-2 gap-2">
-            <button
-              onClick={handleConfirmDeposit} // Save the deposit
-              className="bg-blue-600 text-sm text-white py-1 px-5  rounded"
-            >
-              Save
-            </button>
-            <button
-              onClick={() => setIsConfirming(false)} // Go back to normal deposit page
-              className="bg-slate-700 text-sm text-white py-1 px-4 rounded"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
+    <div className="flex flex-wrap items-center justify-between gap-1 lg:gap-4 md:gap-4">
+      <label className="whitespace-nowrap text-gray-600 text-xs">
+        Transaction Hash
+      </label>
+      <input
+        type="text"
+        value={transactionHash}
+        onChange={(e) => setTransactionHash(e.target.value)}
+        className={`mt-2 text-xs py-1 px-2 w-full md:w-96 border rounded outline-none focus:border-gray-500
+          ${err ? "border-red-500" : "border-gray-400"}`}
+      />
+    </div>
+  </div>
+
+  {/* Save and Cancel Buttons */}
+  <div className="flex flex-wrap justify-between sm:justify-start gap-4 mt-4">
+    <button
+      onClick={handleConfirmDeposit} // Save the deposit
+      className="bg-blue-600 text-sm text-white py-1 px-5 rounded"
+    >
+      Save
+    </button>
+    <button
+      onClick={() => setIsConfirming(false)} // Go back to normal deposit page
+      className="bg-slate-700 text-sm text-white py-1 px-4 rounded"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+
       )}
     </Layout>
   );

@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ isVisible, message, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm lg:w-full md:w-full w-fit text-center">
         <p className="text-sm">{message}</p>
       </div>
     </div>
