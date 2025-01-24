@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 
 const page = () => {
   return (
+    <div className='h-screen lg:h-full'>
     <Layout username='Swings'>
         <div className='w-full bg-white rounded-lg shadow-md lg:p-6 md:p-6 p-4 mt-[-20px]'>
           <div className='flex flex-col gap-1'>
@@ -67,6 +68,8 @@ const page = () => {
 
         </div>
     </Layout>
+
+    </div>
   )
 }
 

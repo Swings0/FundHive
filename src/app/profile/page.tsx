@@ -228,10 +228,10 @@ const Page = () => {
           <div
             data-aos="fade-down"
             data-aos-duration="500"
-            className="absolute right-0 mt-20 mr-4   text-black rounded-md shadow-lg w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
+            className="absolute right-0 mt-20 lg:mr-4 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-lg w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
           >
             <ul className="text-xs">
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg rounded-t-md">
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md lg:rounded-md rounded-tl-md ">
                 <span className="font-semibold text-xs text-white">FullName:</span>
                 <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
               </li>
@@ -255,7 +255,7 @@ const Page = () => {
                 <span className="font-semibold text-xs text-white">Bitcoin:</span>
                 <p className="text-xs text-blue-100">{userInfo.bitcoinAddress || "Not set"}</p>
               </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg rounded-bl-md lg:rounded-bl-none">
                 <span className="font-semibold text-xs text-white">Phone:</span>
                 <p className="text-xs text-blue-100">{userInfo.phone || "Not set"}</p>
               </li>
@@ -269,7 +269,7 @@ const Page = () => {
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -279,7 +279,7 @@ const Page = () => {
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Email:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -289,7 +289,7 @@ const Page = () => {
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">New Email:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="email"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
@@ -299,7 +299,7 @@ const Page = () => {
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">New Password:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -310,7 +310,7 @@ const Page = () => {
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
               <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Retype Password:</label>
               <input
-                className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="password"
                 value={retypePassword}
                 onChange={(e) => setRetypePassword(e.target.value)}
@@ -323,7 +323,7 @@ const Page = () => {
               Your USDT TRC20 Withdrawal Address:
             </label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={usdtTrc20Address}
               onChange={(e) => setUsdtTrc20Address(e.target.value)}
@@ -335,7 +335,7 @@ const Page = () => {
               Your USDT ERC20 Withdrawal Address:
             </label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={usdtErc20Address}
               onChange={(e) => setUsdtErc20Address(e.target.value)}
@@ -347,7 +347,7 @@ const Page = () => {
               Your Bitcoin Withdrawal Address:
             </label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={bitcoinAddress}
               onChange={(e) => setBitcoinAddress(e.target.value)}
@@ -357,7 +357,7 @@ const Page = () => {
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">U-name:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
@@ -366,7 +366,7 @@ const Page = () => {
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Phone:</label>
             <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-xs py-[2px] lg:w-[60%] md:w-[60%] w-full"
+              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -379,7 +379,7 @@ const Page = () => {
               className={`update-btn ${
                 isLoading
                   ? "loading text-white"
-                  : "text-blue-600 bg-blue-400 glass px-4 py-2 rounded-sm font-semibold text-xs hover:bg-blue-600 hover:text-white transition-all delay-200 duration-300 ease-linear lg:w-fit md:w-fit w-full"
+                  : "text-blue-100 bg-blue-500 glass px-4 py-2 rounded-sm font-semibold text-xs hover:bg-blue-600 hover:text-white transition-all delay-200 duration-300 ease-linear lg:w-fit md:w-fit w-full"
               }`}
             >
               {isLoading ? (
