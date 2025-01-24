@@ -349,7 +349,7 @@ const Page = () => {
             </div>
 
             {/* Save and Cancel Buttons */}
-            <div className="flex flex-wrap justify-between sm:justify-start gap-4 mt-4">
+            <div className="flex flex-wrap lg:justify-between mdjustify-between justify-end gap-2 lg:gap-4 md:gap-4 lg:mt-4 md:mt-4 mt-8">
               <button
                 onClick={handleConfirmDeposit} // Save the deposit
                 className="bg-blue-600 text-sm text-white py-1 px-5 rounded"
