@@ -116,7 +116,7 @@ const Register = () => {
 
    try {
 
-    const resUserExists = await fetch("http://localhost:3000/api/user", {
+    const resUserExists = await fetch('/api/user', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
