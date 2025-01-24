@@ -48,7 +48,7 @@ const Page = () => {
                 <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                     type="email"
-                    className="outline-none border-2 border-blue-200 w-full md:w-96 lg:w-96 rounded-full focus:border-blue-300 text-blue-400 text-sm placeholder:text-center px-3 py-[5px] placeholder:text-sm placeholder:text-blue-300"
+                    className="outline-none border-2 border-blue-200 w-full md:w-96 lg:w-96 rounded-full focus:border-blue-300 text-blue-400 lg:text-sm md:text-sm text-base placeholder:text-center px-3 py-[5px] placeholder:text-sm placeholder:text-blue-300"
                     placeholder="Enter email address"
                 />
 

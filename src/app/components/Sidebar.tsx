@@ -50,7 +50,7 @@ const Sidebar = () => {
         )}
       </div>
 
-      <div className="bg-blue-600 glass text-white w-full lg:w-40 p-6 lg:min-h-screen rounded-t-md shadow-lg hidden lg:block">
+      <div className="bg-blue-600 glass text-white w-full lg:w-40 p-6 lg:min-h-screen h-screen rounded-t-md shadow-lg hidden lg:block">
         <div className="flex flex-col items-center justify-center space-y-5 ">
           <Image
             className=" "

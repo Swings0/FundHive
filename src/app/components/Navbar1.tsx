@@ -51,7 +51,7 @@ const Navbar1 = ({ username }: Navbar1Props) => {
         data-aos-duration="700"
         className="flex items-center lg:px-6 md:px-6 px-4"
       >
-        <Link className="flex items-center" href={"/"}>
+        <Link className="lg:flex items-center md:block hidden" href={"/"}>
           <Image
             className="w-10 "
             src="/Fundhive1.svg"

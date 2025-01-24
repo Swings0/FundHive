@@ -60,7 +60,7 @@ export default function ResetPassword() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              className="outline-none border-[1.9px] border-blue-500 focus:border-blue-600 text-sm text-blue-500 px-2 py-1 rounded-sm"
+              className="outline-none border-[1.9px] border-blue-500 focus:border-blue-600 lg:text-sm md:text-sm text-base text-blue-500 px-2 py-1 rounded-sm"
             />
     
             <div className="mt-4">

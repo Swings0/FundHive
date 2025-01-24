@@ -51,7 +51,7 @@ const page = () => {
              </div>
 
              <div className='w-full lg:hidden md:hidden block'>
-              <div className='block lg:hidden md:hidden mt-4 -scroll-ml-32 w-full'>
+              <div className='block lg:hidden md:hidden mt-4 -scroll-ml-32 w-full text-xs'>
                <p className='lg:text-sm md:text-sm text-xs font-medium text-slate-500  ml-1'>Account</p>
                <p className='font-sans text-blue-600 pr-3 ml-1'>not set</p>
                <p className='font-sans text-blue-600 pr-3 ml-1'>not set</p>
