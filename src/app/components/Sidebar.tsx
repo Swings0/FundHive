@@ -37,7 +37,7 @@ const Sidebar = () => {
     <aside className="relative">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer absolute lg:hidden block text-white text-xl mb-2 -left-9 -top-7 mx-10 "
+        className="cursor-pointer absolute lg:hidden block text-white text-2xl mb-2 -left-9 -top-7 mx-10 "
       >
         {icon === true ? (
           <p onClick={toggle}>

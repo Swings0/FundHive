@@ -69,7 +69,7 @@ const Navbar1 = ({ username }: Navbar1Props) => {
       <div className="relative">
         {loading ? (
           <span className="flex items-center justify-center">
-            <span className="button-loader py-1 ml-28">
+            <span className="button-loader py-1 ml-24">
               <span></span>
               <span></span>
               <span></span>
