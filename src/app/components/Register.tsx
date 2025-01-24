@@ -174,15 +174,15 @@ const Register = () => {
 
             <form onSubmit={submitHandler} className='flex flex-col gap-5 py-6'>
                 <div className='w-full relative'>
-                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} className= {`${emailError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-sm outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`} type='email' placeholder={`${emailError && 'please enter email' || 'Email'}`} /> <div className={( emailError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><IoMdMail/></div>
+                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} className= {`${emailError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`} type='email' placeholder={`${emailError && 'please enter email' || 'Email'}`} /> <div className={( emailError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><IoMdMail/></div>
                 </div>
 
                 <div className='w-full relative'>
-                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setUsername(e.target.value)} className= {`${usernameError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-sm outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`} type='text' placeholder={`${usernameError && 'please enter username' || 'Username'}`} /> <div className={( usernameError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><FaUser/></div>
+                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setUsername(e.target.value)} className= {`${usernameError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`} type='text' placeholder={`${usernameError && 'please enter username' || 'Username'}`} /> <div className={( usernameError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><FaUser/></div>
                 </div>
 
                 <div className='w-full relative'>
-                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)} className= {`${passwordError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-sm outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`}
+                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)} className= {`${passwordError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`}
                  type={( show === true ? 'password' : 'text')} placeholder={`${passwordError && 'please enter password' || 'Password'}`} /> <div className={( passwordError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><FaLock/></div>
                 </div>
 
@@ -195,7 +195,7 @@ const Register = () => {
                     required: true,
                   }}
                   onChange={(value) => setPhone(value)} className= {'PhoneInputInput::placeholder PhoneInputInput PhoneInputInput:focus-visible border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70 focus:outline-none'} type='text' placeholder={`${phoneError && "Required" || "Enter phone number" }`} /> 
-                  <div className={'absolute top-2 right-4 text-sm text-slate-500 opacity-50 z-10'}>{country && (<p className="text-gray-500 text-xs font-sans">{country}</p>)}
+                  <div className={'absolute top-2 right-4 text-base lg:text-sm  text-slate-500 opacity-50 z-10'}>{country && (<p className="text-gray-500 text-xs font-sans">{country}</p>)}
                  </div>
                 </div>
                   
