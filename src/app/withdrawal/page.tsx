@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className='h-screen lg:h-full'>
     <Layout username='Swings'>
-        <div className='w-full bg-white rounded-lg shadow-md lg:p-6 md:p-6 p-4 mt-[-20px]'>
+        <div className='w-full bg-white lg:rounded-lg rounded-sm shadow-md lg:p-6 md:p-6 p-4 mt-[-20px]'>
           <div className='flex flex-col gap-1'>
             <h1 className='flex font-medium text-md text-gray-600 lg:mb-8 md:mb-8 mb-6'>Active Withdrawel</h1>
             <div className='flex lg:gap-0 md:gap-0 gap-16 text-sm text-slate-500 justify-between border-t border-gray-100 p-1 whitespace-nowrap '><p>Active Balance</p> <p className='font-semibold mr-36'>$0.00</p></div>
@@ -50,8 +50,8 @@ const page = () => {
               </div>
              </div>
 
-             <div className='w-full lg:hidden md:hidden block'>
-              <div className='block lg:hidden md:hidden mt-4 -scroll-ml-32 w-full text-xs'>
+             <div className='w-full lg:hidden md:hidden block mt-8'>
+              <div className='block lg:hidden md:hidden w-full text-xs'>
                <p className='lg:text-sm md:text-sm text-xs font-medium text-slate-500  ml-1'>Account</p>
                <p className='font-sans text-blue-600 pr-3 ml-1'>not set</p>
                <p className='font-sans text-blue-600 pr-3 ml-1'>not set</p>

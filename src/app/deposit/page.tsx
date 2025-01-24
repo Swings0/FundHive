@@ -172,7 +172,7 @@ const Page = () => {
         />
         {!isConfirming ? (
           // Normal Deposit Form
-          <div className="w-full bg-white rounded-lg shadow-md p-6 mt-[-20px]">
+          <div className="w-full bg-white lg:rounded-lg rounded-sm  shadow-md p-6 mt-[-20px]">
             <h1 className="text-xl font-semibold text-blue-900 mb-4">
               Make a Deposit
             </h1>
@@ -297,7 +297,7 @@ const Page = () => {
               Confirm Deposit
             </h1>
 
-            <p className="text-xs lg:text-sm md:text-sm text-gray-600 mb-5">
+            <p className="text-xs lg:text-sm md:text-sm text-gray-600 lg:mb-5 mb-10">
               Please kindly send your deposit to this wallet address:{" "}
               <strong>{walletAddresses[selectedCurrency]}</strong>
             </p>
@@ -342,7 +342,7 @@ const Page = () => {
                   type="text"
                   value={transactionHash}
                   onChange={(e) => setTransactionHash(e.target.value)}
-                  className={`mt-2 text-xs py-1 px-2 w-full md:w-96 border rounded outline-none focus:border-gray-500
+                  className={`mt-2 text-base lg:text-xs lg:py-1 px-2 w-full md:w-96 border rounded outline-none focus:border-gray-500
             ${err ? "border-red-500" : "border-gray-400"}`}
                 />
               </div>

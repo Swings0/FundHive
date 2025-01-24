@@ -47,7 +47,7 @@ export default function ResetPassword() {
 
   return (
   
-    <div className="flex flex-col items-center justify-center h-screen bg">
+    <div className="fixed lg:w-full w-screen lg:h-[100vh] flex flex-col items-center justify-center h-screen bg">
       {!success ? (
           <>
           <h1 className="text-blue-500 font-semibold font-sans text-xl">Reset Password</h1>

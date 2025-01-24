@@ -42,7 +42,7 @@ const Page = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg">
+        <div className="fixed lg:w-full w-screen lg:h-[100vh] flex flex-col items-center justify-center h-screen bg">
             <h1 className="font-semibold text-lg font-sans px-6 text-blue-400">Forgot Password?</h1>
             <form onSubmit={handleSubmit} className="w-full py-6 px-6 lg:flex lg:flex-col items-center md:flex md:flex-col">
                 <input
