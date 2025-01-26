@@ -44,7 +44,7 @@ const Navbar1 = ({ username }: Navbar1Props) => {
   };
 
   return (
-    <nav className="bg-blue-900 glass text-white flex h-16 items-center justify-between lg:px-6  py-1 shadow-md">
+    <nav className="bg-blue-900 glass text-white flex h-16 items-center justify-between lg:px-6  py-1 shadow-md fixed w-full border-t-4 border-white">
       {/* Logo */}
       <div
         data-aos="fade-down"
