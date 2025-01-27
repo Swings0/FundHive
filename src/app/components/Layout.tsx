@@ -9,8 +9,8 @@ interface LayoutProps {
 const Layout = ({ children, username }: LayoutProps) => {
   const displayName = username || "Guest";
   return (
-    <div className="">
-      <div className="flex flex-col h-full bg-[#f1f3f6]">
+    <div className="h-full">
+      <div className="flex flex-col lg:h-full bg-scroll  bg-[#f1f3f6] ">
         {/* Navbar */}
         <div className="z-50 ">
           <Navbar1 username={displayName} />
@@ -27,15 +27,17 @@ const Layout = ({ children, username }: LayoutProps) => {
             </div>
 
             {/* Main Content */}
-            <div className="w-full flex flex-col">
+            <div className="w-full flex flex-col z-20">
               <main className="flex-1 p-6  lg:mx-3 rounded-lg lg:overflow-auto lg:mt-[-20px]">
                 {children}
               </main>
             </div>
 
-           <footer className=" lg:absolute bottom-0 left-40 w-full bg-[#dadcdf] text-gray-500 text-left p-5 text-xs lg:text-sm z-0 lg:ml-10 bg-opacity-80 whitespace-nowrap mt-24 md:mt-32">
+          <div className="">
+           <footer className="lg:absolute bottom-0 lg:left-40 w-full bg-[#dadcdf] text-gray-500 text-left p-5 text-xs lg:text-sm z-0 lg:ml-10 bg-opacity-80 whitespace-nowrap mt-24 md:mt-32">
             2025 � fundhivecorps.com. All rights reserved.
           </footer>
+          </div>
           </div>
         </div>
 
