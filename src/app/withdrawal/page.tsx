@@ -13,7 +13,7 @@ const page = () => {
             <div className='flex lg:gap-0 md:gap-0 gap-6 text-sm text-slate-500 justify-between border-t border-gray-100 p-1 whitespace-nowrap '><p>Pending Withdrawel</p> <p className='font-light mr-[179px]'>$</p></div>
           </div>
 
-          <div className='mt-8 lg:mt-10 md:mt-10 lg:flex lg:flex-col md:flex md:flex-col gap-1 grid relative'>
+          <div className='mt-10 lg:mt-10 md:mt-10 lg:flex lg:flex-col md:flex md:flex-col gap-1 grid relative'>
              <div className='flex justify-between lg:px-9 md:px-9 px-1 border-y border-gray-100 p-1'>
               <p className='lg:text-sm md:text-sm font-medium text-slate-500 text-xs'>Processing</p>
               <p className='lg:text-sm md:text-sm font-medium text-slate-500 lg:ml-12 md:ml-12 text-xs'>Avaliable</p>
@@ -61,7 +61,7 @@ const page = () => {
           </div>
 
           <div>
-            <p className='text-xs lg:text-sm md:text-sm whitespace-nowrap font-md text-slate-500 px-3 lg:px-8 md:px-8 py-7'>
+            <p className='text-xs lg:text-sm md:text-sm text-left whitespace-nowrap font-md text-slate-500 px-3 lg:px-8 md:px-8 py-7'>
              You have no funds to withdraw.
             </p>
           </div>
