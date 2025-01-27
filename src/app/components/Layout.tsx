@@ -33,7 +33,7 @@ const Layout = ({ children, username }: LayoutProps) => {
               </main>
             </div>
 
-           <footer className=" lg:absolute bottom-0 left-40 w-full bg-[#dadcdf] text-gray-500 text-left p-5 text-xs lg:text-sm z-0 lg:ml-10 bg-opacity-80 whitespace-nowrap ">
+           <footer className=" lg:absolute bottom-0 left-40 w-full bg-[#dadcdf] text-gray-500 text-left p-5 text-xs lg:text-sm z-0 lg:ml-10 bg-opacity-80 whitespace-nowrap mt-24 md:mt-32">
             2025 � fundhivecorps.com. All rights reserved.
           </footer>
           </div>
