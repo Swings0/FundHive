@@ -185,7 +185,7 @@ const Page = () => {
               <select
                 value={selectedPlan}
                 onChange={(e) => setSelectedPlan(e.target.value)}
-                className="mt-2 w-full text-sm p-2 border border-gray-300 rounded outline-none focus:border-gray-400"
+                className="mt-2 w-full text-base lg:text-sm p-2 border border-gray-300 rounded outline-none focus:border-gray-400"
               >
                 <option value="Gold Plan">Gold Plan</option>
                 <option value="Diamond Plan">Diamond Plan</option>
@@ -245,7 +245,7 @@ const Page = () => {
             </div>
 
             {/* Profit Output */}
-            <div className="mb-4">
+            <div className="mb-8">
               <p className="text-xs text-gray-600">
                 Estimated Daily Profit: <strong>${profit.toFixed(2)}</strong>
               </p>
@@ -259,7 +259,7 @@ const Page = () => {
               <select
                 value={selectedCurrency}
                 onChange={(e) => setSelectedCurrency(e.target.value)}
-                className="mt-2 w-full text-sm p-2 border border-gray-300 rounded outline-none focus:border-gray-400"
+                className="mt-2 w-full text-base lg:text-sm p-2 border border-gray-300 rounded outline-none focus:border-gray-400"
               >
                 <option value="USDT TRC20">Invest from USDT TRC20</option>
                 <option value="USDT ERC20">Invest from USDT ERC20</option>
@@ -283,8 +283,8 @@ const Page = () => {
             </div>
 
             {/* Account Balance */}
-            <div className="text-sm text-gray-600">
-              <p>
+            <div className="text-xs text-gray-600 mt-2">
+              <p className="whitespace-nowrap">
                 Your account balance ($): <strong> $0.00</strong>
               </p>
             </div>

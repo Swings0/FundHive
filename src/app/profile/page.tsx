@@ -179,226 +179,229 @@ const Page = () => {
   const userInfo = userData || {}; // Ensure safe access
 
   return (
-    <Layout username={''}>
-      <div className="w-full bg-blue-50 rounded-sm shadow-md lg:p-5 md:p-5 p-3 mt-[-20px] flex flex-row justify-end z-10">
-        <div className=" w-full mx-auto items-center gap-5">
-          <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
-            Your Account
-          </h1>
-          <div className="flex items-center w-full mx-auto">
-            <div className="p-4">
-              <Image
-                className="opacity-80"
-                src={"/avatar3.png"}
-                alt=""
-                width={100}
-                height={100}
-              />
-            </div>
+    <div className="">
+      <Layout username={''}>
+        <div className="w-full bg-white rounded-sm shadow-sm lg:p-3 md:p-5 p-3 mt-[-24px] flex flex-row justify-end z-10">
+          <div className=" w-full mx-auto items-center gap-5">
+            <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
+              Your Account
+            </h1>
+            <div className="flex items-center w-full mx-auto">
+              <div className="p-4">
+                <Image
+                  className="opacity-80"
+                  src={"/avatar3.png"}
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+              </div>
 
-            <div className="flex flex-col  ">
-              <div className="flex flex-col gap-1 w-full my-4 lg:my-0 md:my-0 ">
-                <div>
-                  <span className="text-sm  text-gray-600 relative">Username:</span>
-                  <p className="text-xs lg:mt-1 md:mt-1">{displayUsername}</p>
-                </div>
-                <div>
-                  <p className="text-sm opacity-70 whitespace-nowrap">Registration date:</p>
-                  <p className="text-xs lg:mt-1 md:mt-1">
-                    {registrationDate
-                      ? new Date(registrationDate).toLocaleDateString()
-                      : "Loading..."}
-                  </p>
+              <div className="flex flex-col  ">
+                <div className="flex flex-col gap-1 w-full my-4 lg:my-0 md:my-0 ">
+                  <div>
+                    <span className="text-sm  text-gray-600 relative">Username:</span>
+                    <p className="text-xs lg:mt-1 md:mt-1">{displayUsername}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm opacity-70 whitespace-nowrap">Registration date:</p>
+                    <p className="text-xs lg:mt-1 md:mt-1">
+                      {registrationDate
+                        ? new Date(registrationDate).toLocaleDateString()
+                        : "Loading..."}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="">
-          <p
-            onClick={() => setShowInfo(!showInfo)}
-            className=" text-lg text-blue-600 cursor-pointer"
-          >
-            <MdPermDeviceInformation />
-          </p>
-        </div>
-
-        {showInfo && userData && (
-          <div
-            data-aos="fade-down"
-            data-aos-duration="500"
-            className="absolute right-0 mt-20 lg:mr-4 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-sm w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
-          >
-            <ul className="text-xs">
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md  rounded-tl-md ">
-                <span className="font-semibold text-xs text-white">FullName:</span>
-                <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
-              </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                <span className="font-semibold text-xs text-white ">Email:</span>
-                <p className="text-xs text-blue-100">{userInfo?.email || "Not set"}</p>
-              </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                <span className="font-semibold text-xs text-white">Username:</span>
-                <p className="text-xs text-blue-100">{userInfo?.username || "Not set"}</p>
-              </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                <span className="font-semibold text-xs text-white">USDT TRC20:</span>
-                <p className="text-xs text-blue-100">{userInfo?.usdtTrc20Address || "Not set"}</p>
-              </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                <span className="font-semibold text-xs text-white">USDT ERC20:</span>
-                <p className="text-xs text-blue-100">{userInfo?.usdtErc20Address || "Not set"}</p>
-              </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                <span className="font-semibold text-xs text-white">Bitcoin:</span>
-                <p className="text-xs text-blue-100">{userInfo.bitcoinAddress || "Not set"}</p>
-              </li>
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg rounded-bl-md lg:rounded-bl-none">
-                <span className="font-semibold text-xs text-white">Phone:</span>
-                <p className="text-xs text-blue-100">{userInfo.phone || "Not set"}</p>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
-
-      <div className="w-full bg-blue-600 glass rounded-sm shadow-sm shadow-gray-200 lg:p-6 md:p-6 py-6 px-4 lg:mt-4 md:mt-3 mt-3 lg:mb-20 mb-10">
-        <form className="flex flex-col lg:gap-4 md:gap-4 gap-3" onSubmit={handleSubmit}>
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
+          <div className="">
+            <p
+              onClick={() => setShowInfo(!showInfo)}
+              className=" text-lg text-blue-600 cursor-pointer"
+            >
+              <MdPermDeviceInformation />
+            </p>
           </div>
 
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Email:</label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">New Email:</label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">New Password:</label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </div>
-
-          {newPassword && (
-            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Retype Password:</label>
-              <input
-                className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-                type="password"
-                value={retypePassword}
-                onChange={(e) => setRetypePassword(e.target.value)}
-              />
+          {showInfo && userData && (
+            <div
+              data-aos="fade-down"
+              data-aos-duration="500"
+              className="absolute right-0 mt-20 lg:mr-3 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-sm w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
+            >
+              <ul className="text-xs">
+                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md  rounded-tl-md ">
+                  <span className="font-semibold text-xs text-white">FullName:</span>
+                  <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
+                </li>
+                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                  <span className="font-semibold text-xs text-white ">Email:</span>
+                  <p className="text-xs text-blue-100">{userInfo?.email || "Not set"}</p>
+                </li>
+                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                  <span className="font-semibold text-xs text-white">Username:</span>
+                  <p className="text-xs text-blue-100">{userInfo?.username || "Not set"}</p>
+                </li>
+                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                  <span className="font-semibold text-xs text-white">USDT TRC20:</span>
+                  <p className="text-xs text-blue-100">{userInfo?.usdtTrc20Address || "Not set"}</p>
+                </li>
+                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                  <span className="font-semibold text-xs text-white">USDT ERC20:</span>
+                  <p className="text-xs text-blue-100">{userInfo?.usdtErc20Address || "Not set"}</p>
+                </li>
+                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
+                  <span className="font-semibold text-xs text-white">Bitcoin:</span>
+                  <p className="text-xs text-blue-100">{userInfo.bitcoinAddress || "Not set"}</p>
+                </li>
+                <li className="text-sm py-2 pb-3 px-3 bg-blue-600 glass shadow-lg rounded-bl-md lg:rounded-bl-none">
+                  <span className="font-semibold text-xs text-white">Phone:</span>
+                  <p className="text-xs text-blue-100">{userInfo.phone || "Not set"}</p>
+                </li>
+              </ul>
             </div>
           )}
+        </div>
 
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">
-              Your USDT TRC20 Withdrawal Address:
-            </label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="text"
-              value={usdtTrc20Address}
-              onChange={(e) => setUsdtTrc20Address(e.target.value)}
-            />
-          </div>
+        <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5  md:p-6 py-5 px-4  mt-3 lg:mb-0 mb-10">
+          <form className="flex flex-col gap-3 p-1" onSubmit={handleSubmit}>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+            </div>
 
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">
-              Your USDT ERC20 Withdrawal Address:
-            </label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="text"
-              value={usdtErc20Address}
-              onChange={(e) => setUsdtErc20Address(e.target.value)}
-            />
-          </div>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Email:</label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">
-              Your Bitcoin Withdrawal Address:
-            </label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="text"
-              value={bitcoinAddress}
-              onChange={(e) => setBitcoinAddress(e.target.value)}
-            />
-          </div>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">New Email:</label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+            </div>
 
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">U-name:</label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="text"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </div>
-          <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-            <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Phone:</label>
-            <input
-              className="bg-transparent text-blue-100 outline-none border border-blue-400 rounded-sm focus:border-white px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">New Password:</label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
 
-          <div className="pt-5 flex lg:justify-end md:justify-end justify-center w-full  ">
-            <button
-              type="submit"
-              className={`update-btn ${
-                isLoading
-                  ? "loading text-white"
-                  : "text-blue-100 bg-blue-500 glass px-4 py-2 rounded-sm font-semibold text-xs hover:bg-blue-600 hover:text-white transition-all delay-200 duration-300 ease-linear lg:w-fit md:w-fit w-full"
-              }`}
-            >
-              {isLoading ? (
-                <span className="spinner"></span> // Add a spinner when loading
-              ) : (
-                "Add or Change Account Data"
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
+            {newPassword && (
+              <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+                <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Retype Password:</label>
+                <input
+                  className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                  type="password"
+                  value={retypePassword}
+                  onChange={(e) => setRetypePassword(e.target.value)}
+                />
+              </div>
+            )}
 
-      <Modal
-        isVisible={isModalVisible}
-        message={modalMessage}
-        onClose={() => setIsModalVisible(false)}
-        
-      />
-    </Layout>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                Your USDT TRC20 Withdrawal Address:
+              </label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="text"
+                value={usdtTrc20Address}
+                onChange={(e) => setUsdtTrc20Address(e.target.value)}
+              />
+            </div>
+
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                Your USDT ERC20 Withdrawal Address:
+              </label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="text"
+                value={usdtErc20Address}
+                onChange={(e) => setUsdtErc20Address(e.target.value)}
+              />
+            </div>
+
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                Your Bitcoin Withdrawal Address:
+              </label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="text"
+                value={bitcoinAddress}
+                onChange={(e) => setBitcoinAddress(e.target.value)}
+              />
+            </div>
+
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">U-name:</label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Phone:</label>
+              <input
+                className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+
+            <div className="pt-3 flex lg:justify-end md:justify-end justify-center w-full  ">
+              <button
+                type="submit"
+                className={`update-btn ${
+                  isLoading
+                    ? "loading text-blue-600"
+                    : "text-blue-50 bg-blue-500 glass px-4 py-2 rounded-sm font-semibold text-xs hover:bg-blue-600 hover:text-white transition-all delay-200 duration-300 ease-linear lg:w-fit md:w-fit w-full"
+                }`}
+              >
+                {isLoading ? (
+                  <span className="spinner"></span> // Add a spinner when loading
+                ) : (
+                  "Add or Change Account Data"
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <Modal
+          isVisible={isModalVisible}
+          message={modalMessage}
+          onClose={() => setIsModalVisible(false)}
+          
+        />
+      </Layout>
+
+    </div>
   );
 };
 

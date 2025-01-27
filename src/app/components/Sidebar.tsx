@@ -70,13 +70,13 @@ const Sidebar = () => {
             <TbLayoutSidebarRightExpandFilled />
           </p>
         ) : (
-          <p  className="opacity-80">
+          <p  className="opacity-90">
             <TbLayoutSidebarRightFilled />
           </p>
         )}
       </div>
 
-      <div className="bg-blue-600 glass text-white w-full lg:w-40 p-6 lg:min-h-screen rounded-t-md shadow-lg hidden lg:block">
+      <div className="bg-blue-600 glass text-white w-full lg:w-40 p-6 min-h-screen rounded-t-md shadow-lg hidden lg:flex flex-col">
         <div className="flex flex-col items-center justify-center space-y-5 ">
           <Image
             className=" "
@@ -156,7 +156,7 @@ const Sidebar = () => {
         <div 
           data-aos="fade-right"
           data-aos-duration="500"
-          className="fixed top-32 left-0 h-screen bg-blue-600 text-white  glass rounded-r-md shadow-lg w-fit p-4 transition-all ease-linear delay-200 duration-300  opacity-100 transform translate-y-2 z-50 block lg:hidden "
+          className="fixed top-[7rem] left-0 h-screen bg-blue-600 text-white  glass rounded-r-md shadow-lg w-fit p-4 transition-all ease-linear delay-200 duration-300  opacity-100 transform translate-y-2 z-50 block lg:hidden "
         >
           <div className="flex flex-col items-center justify-center space-y-4 mt-3 ">
             <Image
