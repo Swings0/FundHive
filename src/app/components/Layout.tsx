@@ -34,7 +34,7 @@ const Layout = ({ children, username }: LayoutProps) => {
             </div>
 
           <div className="">
-           <footer className="lg:absolute bottom-0 lg:left-40 w-full bg-[#dadcdf] text-gray-500 text-left p-3 text-xs lg:text-sm z-0 lg:ml-10 bg-opacity-80 whitespace-nowrap mt-16 md:mt-16 lg:mt-5">
+           <footer className="lg:absolute bottom-0 lg:left-40 w-full bg-[#dadcdf] text-gray-500 text-left p-4 text-xs lg:text-sm z-0 lg:ml-10 bg-opacity-80 whitespace-nowrap mt-16 md:mt-16 lg:mt-5">
             2025 � fundhivecorps.com. All rights reserved.
           </footer>
           </div>
