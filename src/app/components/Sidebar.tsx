@@ -36,25 +36,25 @@ const Sidebar = () => {
     });
   }, []);
 
-  const handleScroll = () => {
-    // Show the second navbar when scrolling down past 50px
-    if (window.scrollY > 20) {
-      setIcon(icon);
-      setIsOpen(isOpen);
-    } else {
-     return(false)
+  // const handleScroll = () => {
+  //   // Show the second navbar when scrolling down past 50px
+  //   if (window.scrollY > 30) {
+  //     setIcon(icon);
+  //     setIsOpen(isOpen);
+  //   } else {
+  //    return(false)
       
-    }
-  };
-  useEffect(() => {
-    // Attach scroll event listener
-    window.addEventListener("scroll", handleScroll);
+  //   }
+  // };
+  // useEffect(() => {
+  //   // Attach scroll event listener
+  //   window.addEventListener("scroll", handleScroll);
   
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []); 
+  //   // Cleanup event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []); 
 
 
   
@@ -156,7 +156,7 @@ const Sidebar = () => {
         <div 
           data-aos="fade-right"
           data-aos-duration="500"
-          className="fixed top-28 left-0 h-screen bg-blue-600 text-white  glass rounded-r-md shadow-lg w-fit p-4 transition-all ease-linear delay-200 duration-300  opacity-100 transform translate-y-2 z-50 block lg:hidden "
+          className="fixed top-32 left-0 h-screen bg-blue-600 text-white  glass rounded-r-md shadow-lg w-fit p-4 transition-all ease-linear delay-200 duration-300  opacity-100 transform translate-y-2 z-50 block lg:hidden "
         >
           <div className="flex flex-col items-center justify-center space-y-4 mt-3 ">
             <Image

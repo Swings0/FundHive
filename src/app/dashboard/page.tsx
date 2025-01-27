@@ -49,7 +49,7 @@ console.log(session);
   
 
   return (
-    <div className="h-screen lg:h-full">
+    <div className="h-full">
       <Layout username="">
         <div className="lg:flex lg:flex-row flex flex-col w-full lg:gap-5 gap-7">
           <div className="lg:w-64 w-full h-80 bg-white rounded-sm shadow-sm shadow-gray-200 p-4 flex flex-col space-y-5 mt-[-20px]">
