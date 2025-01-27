@@ -23,7 +23,10 @@ const Sidebar = () => {
 
   const toggle = () => {
     setIcon(!icon);
+    setIsOpen(!isOpen);
   };
+
+
 
   useEffect(() => {
     AOS.init({
@@ -33,18 +36,41 @@ const Sidebar = () => {
     });
   }, []);
 
+  const handleScroll = () => {
+    // Show the second navbar when scrolling down past 50px
+    if (window.scrollY > 20) {
+      setIcon(icon);
+      setIsOpen(isOpen);
+    } else {
+     return(false)
+      
+    }
+  };
+  useEffect(() => {
+    // Attach scroll event listener
+    window.addEventListener("scroll", handleScroll);
+  
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); 
+
+
+  
+
   return (
     <aside className="relative">
       <div
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggle}
         className="cursor-pointer absolute lg:hidden block text-white text-2xl mb-2 -left-4 -top-7 mx-10 "
       >
-        {icon === true ? (
-          <p onClick={toggle}>
+        {icon ? (
+          <p >
             <TbLayoutSidebarRightExpandFilled />
           </p>
         ) : (
-          <p onClick={toggle}  className="opacity-80">
+          <p  className="opacity-80">
             <TbLayoutSidebarRightFilled />
           </p>
         )}
@@ -130,7 +156,7 @@ const Sidebar = () => {
         <div 
           data-aos="fade-right"
           data-aos-duration="500"
-          className="absolute  bg-blue-600 glass text-white rounded-r-md shadow-lg w-fit p-4 transition-all min-h-screen ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-50 block lg:hidden "
+          className="fixed top-28 left-0 h-screen bg-blue-600 text-white  glass rounded-r-md shadow-lg w-fit p-4 transition-all ease-linear delay-200 duration-300  opacity-100 transform translate-y-2 z-50 block lg:hidden "
         >
           <div className="flex flex-col items-center justify-center space-y-4 mt-3 ">
             <Image
