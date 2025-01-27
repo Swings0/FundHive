@@ -36,25 +36,25 @@ const Sidebar = () => {
     });
   }, []);
 
-  // const handleScroll = () => {
-  //   // Show the second navbar when scrolling down past 50px
-  //   if (window.scrollY > 30) {
-  //     setIcon(icon);
-  //     setIsOpen(isOpen);
-  //   } else {
-  //    return(false)
+  const handleScroll = () => {
+    // Show the second navbar when scrolling down past 50px
+    if (window.scrollY > 50) {
+      setIcon(icon);
+      setIsOpen(isOpen);
+    } else {
+     return(false)
       
-  //   }
-  // };
-  // useEffect(() => {
-  //   // Attach scroll event listener
-  //   window.addEventListener("scroll", handleScroll);
+    }
+  };
+  useEffect(() => {
+    // Attach scroll event listener
+    window.addEventListener("scroll", handleScroll);
   
-  //   // Cleanup event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []); 
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); 
 
 
   
