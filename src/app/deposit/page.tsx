@@ -156,7 +156,7 @@ const Page = () => {
   };
 
   return (
-    <div className="h-screen lg:h-full">
+    <div className="h-full">
       <Layout username="">
         {isLoading && (
           <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop:blur-2xl flex justify-center items-center z-50">
