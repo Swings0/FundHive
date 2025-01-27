@@ -37,20 +37,20 @@ const Sidebar = () => {
     <aside className="relative">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer absolute lg:hidden block text-white text-2xl mb-2 -left-5 -top-7 mx-10 "
+        className="cursor-pointer absolute lg:hidden block text-white text-2xl mb-2 -left-4 -top-7 mx-10 "
       >
         {icon === true ? (
           <p onClick={toggle}>
             <TbLayoutSidebarRightExpandFilled />
           </p>
         ) : (
-          <p onClick={toggle}>
+          <p onClick={toggle}  className="opacity-80">
             <TbLayoutSidebarRightFilled />
           </p>
         )}
       </div>
 
-      <div className="bg-blue-600 glass text-white w-full lg:w-40 p-6 lg:min-h-screen h-full rounded-t-md shadow-lg hidden lg:block">
+      <div className="bg-blue-600 glass text-white w-full lg:w-40 p-6 lg:min-h-screen rounded-t-md shadow-lg hidden lg:block">
         <div className="flex flex-col items-center justify-center space-y-5 ">
           <Image
             className=" "
@@ -130,7 +130,7 @@ const Sidebar = () => {
         <div 
           data-aos="fade-right"
           data-aos-duration="500"
-          className="absolute  bg-blue-600 glass text-white rounded-r-md shadow-lg w-fit p-4 h-screen transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-50 block lg:hidden "
+          className="absolute  bg-blue-600 glass text-white rounded-r-md shadow-lg w-fit p-4 transition-all min-h-screen ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-50 block lg:hidden "
         >
           <div className="flex flex-col items-center justify-center space-y-4 mt-3 ">
             <Image

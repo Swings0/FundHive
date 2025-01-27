@@ -52,7 +52,7 @@ console.log(session);
     <div className="h-screen lg:h-full">
       <Layout username="">
         <div className="lg:flex lg:flex-row flex flex-col w-full lg:gap-5 gap-7">
-          <div className="lg:w-56 w-full h-80 bg-white lg:rounded-md rounded-sm shadow-md p-4 flex flex-col space-y-5 mt-[-20px]">
+          <div className="lg:w-64 w-full h-80 bg-white rounded-sm shadow-sm shadow-gray-200 p-4 flex flex-col space-y-5 mt-[-20px]">
             {/* Header */}
             <h1 className="font-medium text-gray-600 mb-2">Overview</h1>
 
@@ -114,7 +114,7 @@ console.log(session);
           </div>
 
           <div className="w-full">
-            <div className=" h-[21rem] bg-white lg:rounded-lg rounded-sm shadow-lg md:shadow-lg lg:shadow-md p-4 mt-[-20px] space-y-2">
+            <div className=" h-[21rem] bg-white rounded-sm shadow-sm shadow-gray-200 p-4 mt-[-20px] space-y-2">
               {/* Header */}
               <h1 className="text-lg font-semibold text-gray-700 mb-2">
                 Your Account

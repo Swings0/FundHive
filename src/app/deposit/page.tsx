@@ -172,7 +172,7 @@ const Page = () => {
         />
         {!isConfirming ? (
           // Normal Deposit Form
-          <div className="w-full bg-white lg:rounded-lg rounded-sm  shadow-md p-6 mt-[-20px]">
+          <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 p-6 mt-[-20px]">
             <h1 className="text-xl font-semibold text-blue-900 mb-4">
               Make a Deposit
             </h1>

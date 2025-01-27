@@ -168,7 +168,7 @@ const Register = () => {
 
   return (
     <div className='w-screen lg:w-full md:w-screen fixed  lg:h-[100vh] h-screen flex flex-col justify-center items-center bg'>
-        <div className='flex flex-col fixed ustify-center items-left bg-white py-8 px-8 rounded-md shadow-sm md:shadow-md lg:border-blue-300 lg:border-t-2 lg:py-11'>
+        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white py-8 px-8 rounded-md shadow-sm md:shadow-md lg:border-blue-300 lg:border-t-2 lg:py-11'>
         
           <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>Register</h1>
 
@@ -226,7 +226,7 @@ const Register = () => {
             </form>
 
             <div className=''>
-              <span className="text-sm gap-1">Already have an account? <Link href={"/login"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Signin here</Link></span>
+              <span className="text-sm flex gap-2">Already have an account? <Link href={"/login"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Signin here</Link></span>
             </div>
         </div>
       </div>

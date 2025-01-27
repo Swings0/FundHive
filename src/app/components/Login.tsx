@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div className='fixed lg:w-full w-screen lg:h-[100vh] h-screen flex flex-col justify-center items-center bg'>
-        <div className='flex flex-col fixed justify-center items-left bg-white py-8 px-8  rounded-md shadow-sm md:shadow-md lg:border-blue-300 md:border-blue-300 lg:border-t-2 md:border-t-2 lg:py-11'>
+        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white py-8 px-8  rounded-md md:shadow-md lg:border-blue-300 md:border-blue-300 lg:border-t-2 md:border-t-2 lg:py-11'>
         
           <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>Login</h1>
 
@@ -104,7 +104,7 @@ const Login = () => {
                  <span className='ml-auto opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition'><MdOutlineKeyboardArrowRight/></span>
                   </>)}
                 </button>
-                  <Link href={"/forgotpassword"} className='text-xs font-sans font-semibold mt-1 text-blue-400'>Forgot Password?</Link>
+                  <Link href={"/forgotpassword"} className='text-xs mt-1 text-blue-400'>Forgot Password?</Link>
               
 
                 {err && <div className='text-red-600 text-xs'>{err}</div> }
@@ -112,7 +112,7 @@ const Login = () => {
             </form>        
 
             <div className=''>
-              <span className="text-sm gap-1">Don&apos;t have an account? <Link href={"/register"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Create account</Link></span>
+              <span className="text-sm flex gap-2 whitespace-nowrap items-center">Don&apos;t have an account? <Link href={"/register"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Create account</Link></span>
             </div>
         </div>
       </div>

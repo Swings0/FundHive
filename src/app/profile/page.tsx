@@ -180,7 +180,7 @@ const Page = () => {
 
   return (
     <Layout username={''}>
-      <div className="w-full bg-blue-50 lg:rounded-lg md-rounded-lg rounded-sm shadow-md lg:p-5 md:p-5 p-3 mt-[-20px] flex flex-row justify-end z-10">
+      <div className="w-full bg-blue-50 rounded-sm shadow-md lg:p-5 md:p-5 p-3 mt-[-20px] flex flex-row justify-end z-10">
         <div className=" w-full mx-auto items-center gap-5">
           <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
             Your Account
@@ -228,10 +228,10 @@ const Page = () => {
           <div
             data-aos="fade-down"
             data-aos-duration="500"
-            className="absolute right-0 mt-20 lg:mr-4 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-lg w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
+            className="absolute right-0 mt-20 lg:mr-4 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-sm w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
           >
             <ul className="text-xs">
-              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md lg:rounded-tl-none  rounded-tl-md ">
+              <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md  rounded-tl-md ">
                 <span className="font-semibold text-xs text-white">FullName:</span>
                 <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
               </li>
@@ -264,7 +264,7 @@ const Page = () => {
         )}
       </div>
 
-      <div className="w-full bg-blue-600 glass lg:rounded-lg md:rounded-lg rounded-sm shadow-md lg:p-6 md:p-6 py-6 px-4 lg:mt-4 md:mt-3 mt-3">
+      <div className="w-full bg-blue-600 glass rounded-sm shadow-sm shadow-gray-200 lg:p-6 md:p-6 py-6 px-4 lg:mt-4 md:mt-3 mt-3 lg:mb-20 mb-10">
         <form className="flex flex-col lg:gap-4 md:gap-4 gap-3" onSubmit={handleSubmit}>
           <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
             <label className="text-xs text-white mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
