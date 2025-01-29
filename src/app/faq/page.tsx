@@ -23,7 +23,7 @@ const page = () => {
 
         <div className="bg-slate-50 flex flex-col justify-center items-center  py-24 ">
           <div className="flex flex-col items-center justify-center text-slate-900  lg:pb-10 pb-8">
-            <h2 className="lg:text-3xl md:text-3xl text-center text-[1.665rem] font-bold">
+            <h2 className="lg:text-3xl md:text-3xl text-center text-2xl font-bold">
               Frequently Asked Questions
             </h2>
           </div>
@@ -84,7 +84,7 @@ const page = () => {
               <div>
                 <strong>How can I change my e-mail address or password?</strong>
                 <p>
-                  Log into your nordhavencorps.com account and click on the
+                  Log into your fundhivecorps.com account and click on the
                   &quot;Account Information&quot;. You can change your e-mail address and
                   password there.
                 </p>

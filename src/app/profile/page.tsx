@@ -181,15 +181,15 @@ const Page = () => {
   return (
     <div className="">
       <Layout username={''}>
-        <div className="w-full bg-white rounded-sm shadow-sm lg:p-3 md:p-5 p-3 mt-[-24px] flex flex-row justify-end z-10">
+        <div className="w-full bg-white rounded-sm shadow-sm lg:p-3 md:p-5 p-3 mt-[-24px] flex flex-row justify-end z-10 top">
           <div className=" w-full mx-auto items-center gap-5">
             <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
               Your Account
             </h1>
             <div className="flex items-center w-full mx-auto">
-              <div className="p-4">
+              <div className="p-4 top">
                 <Image
-                  className="opacity-80"
+                  className="opacity-80 img"
                   src={"/avatar3.png"}
                   alt=""
                   width={100}
@@ -265,8 +265,8 @@ const Page = () => {
           )}
         </div>
 
-        <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5  md:p-6 py-5 px-4  mt-3 lg:mb-0 mb-10">
-          <form className="flex flex-col gap-3 p-1" onSubmit={handleSubmit}>
+        <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5  md:p-6 py-5 px-4  mt-3 lg:mb-0 mb-10 profile">
+          <form className="flex flex-col gap-3 p-1 vest" onSubmit={handleSubmit}>
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
               <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
               <input

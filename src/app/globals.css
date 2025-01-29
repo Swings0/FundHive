@@ -230,3 +230,46 @@ html, body{
     --radius: 0.5rem;
   }
 }
+
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .profile {
+    width: 100%;
+    height: fit-content;
+    padding: 5px;
+  }
+
+  .vest{
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+  }
+
+  .top{
+    padding: 6px;
+  }
+
+  .img{
+    width: 80%;
+    height: 80%;
+  }
+  
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+

@@ -6,6 +6,7 @@ import Providers from "./Providers";
 
 
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -40,6 +41,8 @@ export default function RootLayout({
       <Providers>
         {children}
       </Providers>
+       <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cm3suitcw0eaosvbm7id1fvcr"></script>
+   
       </body>
     </html>
   );
