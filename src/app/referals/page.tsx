@@ -16,7 +16,7 @@ const Page = () => {
   useEffect(() => {
     if (session?.user) {
       const userId = session.user.id;
-      setReferralLink(`${window.location.origin}/signup?ref=${userId}`);
+      setReferralLink(`${window.location.origin}/register?ref=${userId}`);
       fetchReferralData(userId);
     }
   }, [session]);
