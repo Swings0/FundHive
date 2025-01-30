@@ -131,7 +131,7 @@ const Sidebar = () => {
 
           <li className="text-center">
             <Link
-              href="/referal"
+              href="/referals"
               className="flex flex-col items-center justify-center hover:text-sky-300"
             >
               <MdOutlineGroupAdd className="text-lg mb-1" />
@@ -212,7 +212,7 @@ const Sidebar = () => {
 
             <li className="text-center">
               <Link
-                href="/referal"
+                href="/referals"
                 className="flex flex-col items-center justify-center hover:text-sky-300"
               >
                 <MdOutlineGroupAdd className="text-lg mb-1" />

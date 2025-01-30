@@ -129,7 +129,7 @@ const Navbar1 = ({ username }: Navbar1Props) => {
                 <li className="px-4 py-2 hover:bg-gray-200 hover:rounded cursor-pointer">
                   <span className="flex items-center space-x-2">
                     <IoWalletOutline className="text-lg" />
-                    <span>Withdraw</span>
+                    <Link href={"/withdrawal"}><span>Withdraw</span></Link>
                   </span>
                 </li>
 

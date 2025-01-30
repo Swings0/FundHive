@@ -13,8 +13,11 @@ export interface IUser extends Document {
     usdtErc20Address?:string;
     bitcoinAddress?:string;
     registrationDate?:Date
-
+    referrals: number;
+    activeReferrals: number;
+    referral?: mongoose.Schema.Types.ObjectId;
   }
+  
   
 
 const userSchema = new mongoose.Schema ({
@@ -68,6 +71,17 @@ const userSchema = new mongoose.Schema ({
         type: Date, 
         default: Date.now
      },
+     referrals: {
+         type: Number,
+         default: 0
+     }, 
+     activeReferrals: {
+         type: Number,
+         default: 0
+     }, 
+     referral: { 
+        type: mongoose.Schema.Types.ObjectId, ref: "User", default: null 
+    },
 
 },{timestamps:true})
 
