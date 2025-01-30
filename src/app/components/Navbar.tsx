@@ -75,7 +75,7 @@ const Navbar = () => {
               : "hidden"
           } lg:flex-row lg:items-center absolute lg:static top-full left-4 rounded-lg w-full lg:w-auto bg-slate-900 lg:bg-transparent lg:gap-4 p-4 lg:p-0 text-white text-sm gap-3`}
         >
-          <span className="text-slate-900 bottom-[98%] absolute font-bold right-[47px] text-3xl">
+          <span className="text-slate-900 bottom-[98.6%] absolute font-bold right-[47px] text-3xl">
             !
           </span>
           <li
