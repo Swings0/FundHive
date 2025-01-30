@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { FaCopy, FaCheck } from 'react-icons/fa';
 import { BsClipboard, BsCheck, BsWhatsapp, BsInstagram } from "react-icons/bs";
 import Layout from '../components/Layout';
 

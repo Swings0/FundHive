@@ -9,6 +9,7 @@ import { GiProfit } from "react-icons/gi";
 import { useState, useEffect } from "react";
 import { TbLayoutSidebarRightExpandFilled } from "react-icons/tb";
 import { TbLayoutSidebarRightFilled } from "react-icons/tb";
+import { useCallback } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -36,7 +37,7 @@ const Sidebar = () => {
     });
   }, []);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     // Show the second navbar when scrolling down past 50px
     if (window.scrollY > 20) {
       setIcon(icon);
@@ -44,7 +45,8 @@ const Sidebar = () => {
     } else {
      return(false)
     }
-  };
+  },[]);
+
   useEffect(() => {
     // Attach scroll event listener
     window.addEventListener("scroll", handleScroll);
@@ -53,7 +55,7 @@ const Sidebar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); 
+  }, [handleScroll]); 
 
 
   
