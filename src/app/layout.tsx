@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-// import { Sora } from "next/font/google";
+import { Sora } from "next/font/google";
 import "./globals.css";
 import Providers from "./Providers";
-import { Arimo } from "next/font/google";
+
 
 
 
@@ -18,17 +18,13 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-// const sora = Sora ({
-//   subsets: ["latin"],
-//   variable: "--font-sora-mono",
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
-// });
-
-const arimo = Arimo ({
+const sora = Sora ({
   subsets: ["latin"],
-  variable: "--font-arimo",
-  weight: [ "400", "500", "600", "700"]
-})
+  variable: "--font-sora-mono",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
+});
+
+
 
 export const metadata: Metadata = {
   title: "Fundhivecorps.com",
@@ -43,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light" >
       <body
-         className={`${geistSans.variable} ${geistMono.variable} ${arimo.variable} antialiased`}
+         className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}
       >
       <Providers>
         {children}

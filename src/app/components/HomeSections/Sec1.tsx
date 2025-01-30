@@ -9,7 +9,7 @@ const Sec1 = () => {
         <h1 className="lg:text-5xl text-3xl text-white font-bold leading-tight lg:mr-64 lg:mt-36 mt-32 lg:px-0 px-[1rem] ">
           Sustainable <br /> Investment <br /> Management <br /> Services.
         </h1>
-        <p className="lg:mr-[6.30rem] lg:block hidden text-white leading-relaxed md:hidden px-[0] lg:text-base text-xs ">
+        <p className="lg:mr-[6.32rem] lg:block hidden text-white leading-relaxed md:hidden px-[0] lg:text-base text-xs ">
           Fund Hive Company delivers world-class investment services, <br />{" "}
           institutional asset management and financial advisory services <br />{" "}
           under one distinguished banner. We operate thoughtful <br />{" "}
