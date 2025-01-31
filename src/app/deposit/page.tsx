@@ -348,6 +348,10 @@ const Page = () => {
                 <p>Amount:</p>
                 <p>${investmentAmount.toFixed(2)}</p>
               </div>
+              <div className="text-xs text-gray-600 flex flex-wrap justify-between">
+                <p>A/M:</p>
+                <p>${investmentAmount.toLocaleString()}</p>
+              </div>
             </div>
 
             {/* Transaction Hash Input */}
