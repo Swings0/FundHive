@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 
@@ -15,9 +15,8 @@ interface Plan {
 const Page = () => {
   // State variables
   const [selectedPlan, setSelectedPlan] = useState<string>("Gold Plan");
-  const [investmentAmount, setInvestmentAmount] = useState<number>(100);
-  const [selectedCurrency, setSelectedCurrency] =
-    useState<string>("USDT TRC20");
+  const [investmentAmount, setInvestmentAmount] = useState<number>(200);
+  const [selectedCurrency, setSelectedCurrency] = useState<string>("USDT TRC20");
   const [profit, setProfit] = useState<number>(0);
   const [isConfirming, setIsConfirming] = useState<boolean>(false); // Track if we're on the confirm page
   const [transactionHash, setTransactionHash] = useState<string>("");
@@ -30,24 +29,24 @@ const Page = () => {
   // Plan definitions
   const plans: Record<string, Plan> = {
     "Gold Plan": {
-      min: 100,
+      min: 200,
       max: 20000,
-      dailyProfit: 3.0,
-      duration: 6,
+      dailyProfit: 3.4,
+      duration: 14,
       principalReturn: true,
     },
     "Diamond Plan": {
       min: 25000,
       max: 40000,
       dailyProfit: 3.6,
-      duration: 30,
+      duration: 8,
       principalReturn: true,
     },
     "Zonal Representative": {
       min: 50000,
-      max: Infinity,
+      max: 1000000,
       dailyProfit: 4.0,
-      duration: 60,
+      duration: 6,
       principalReturn: true,
     },
   };
@@ -59,17 +58,34 @@ const Page = () => {
     Bitcoin: "address 3",
   };
 
-  // Function to validate the investment amount
-  const validateAmount = (amount: number): void => {
-    const plan = plans[selectedPlan];
-    if (amount < plan.min) {
-      setError(
-        `Amount must be between $${plan.min} and $${plan.max} for the ${selectedPlan}.`
-      );
+
+  const handlePlanChange = (newPlan: string) => {
+    setSelectedPlan(newPlan);
+  
+    const plan = plans[newPlan];
+    
+    // If the current investment amount is out of range, reset it
+    if (investmentAmount < plan.min || investmentAmount > plan.max) {
+      setInvestmentAmount(0);
+      setError(""); // Clear error when switching plans
     } else {
-      setError(""); // Clear the error if the amount is valid
+      validateAmount(investmentAmount); // Revalidate for the new plan
     }
   };
+
+  // Function to validate the investment amount
+  const validateAmount = (amount: number) => {
+    const plan = plans[selectedPlan];
+  
+    if (amount >= plan.min && amount <= plan.max) {
+      setError(""); // Clear error when valid
+    } else {
+      setError(`Amount must be between $${plan.min} and $${plan.max} for the ${selectedPlan}.`);
+    }
+  };
+
+
+
 
   // Function to calculate profit
   const calculateProfit = (): void => {
@@ -78,7 +94,7 @@ const Page = () => {
       Math.max(investmentAmount, plan.min),
       plan.max
     );
-    const dailyProfitAmount = (validAmount * plan.dailyProfit) / 100;
+    const dailyProfitAmount = (validAmount * plan.dailyProfit) / 4;
     setProfit(dailyProfitAmount);
   };
 
@@ -113,6 +129,8 @@ const Page = () => {
         setIsModalVisible(false);
       }
 
+
+
       if (response.ok) {
         setModalMessage(
           "The deposit has been saved. It will become active when the admin checks statistics."
@@ -120,7 +138,9 @@ const Page = () => {
         setIsModalVisible(true); // Show the modal
         setIsConfirming(false); // Go back to the normal deposit form after saving
         setTransactionHash("");
-      } else {
+      }
+      
+      else {
         console.error("Error saving deposit:", result.message);
         setModalMessage(
           "There was an issue saving your deposit. Please try again."
@@ -136,22 +156,23 @@ const Page = () => {
     }
   };
 
+  // Validate investment amount when plan changes
+  useEffect(() => {
+    validateAmount(investmentAmount);
+  }, [selectedPlan]);
+
   const handleAmountChange = (value: string): void => {
     if (value === "") {
-      setInvestmentAmount(0); // Reset to 0 when input is empty
+      setInvestmentAmount(0);
+      setError("");
       return;
     }
 
-    // Check if the input is a valid number
     const amount = parseFloat(value);
     if (!isNaN(amount)) {
-      // If valid, update the state with the formatted number
-      const formattedAmount = Math.floor(amount * 100) / 100; // Ensure valid decimal precision
-      setInvestmentAmount(formattedAmount); // Update the number state
-      validateAmount(formattedAmount); // Call validation function
-    } else if (/^\d$/.test(value)) {
-      // If user starts typing a single digit after clearing, replace the 0
-      setInvestmentAmount(parseFloat(value));
+      const formattedAmount = Math.floor(amount * 100) / 100;
+      setInvestmentAmount(formattedAmount);
+      validateAmount(formattedAmount);
     }
   };
 
@@ -184,7 +205,7 @@ const Page = () => {
               </label>
               <select
                 value={selectedPlan}
-                onChange={(e) => setSelectedPlan(e.target.value)}
+                onChange={(e) => handlePlanChange(e.target.value)}
                 className="mt-2 w-full text-base lg:text-sm p-2 border border-gray-300 rounded outline-none focus:border-gray-400"
               >
                 <option value="Gold Plan">Gold Plan</option>
@@ -223,22 +244,22 @@ const Page = () => {
                     investmentAmount === 0 ? "" : investmentAmount.toString()
                   } // Show empty when reset
                   onChange={(e) => handleAmountChange(e.target.value)}
+                  
                   className={`mt-2 w-full lg:text-sm text-base p-2 border rounded outline-none ${
                     error ? "border-red-500" : "border-gray-300"
                   } focus:border-gray-400`}
-                  min={plans[selectedPlan].min}
-                  max={plans[selectedPlan].max}
+
                 />
                 {error && <span className="text-red-500 text-xs">{error}</span>}
               </div>
               <button
                 onClick={calculateProfit}
                 className={`lg:ml-4 md:ml-4 text-xs text-center whitespace-nowrap lg:mt-7 md:mt-7 mt-2 font-medium lg:py-[11px] md:py-[11px] py-[8px] px-2 glass rounded ${
-                  error
+                  error 
                     ? "bg-gray-300 text-gray-600  px-2 mb-5"
                     : "bg-blue-600 text-white"
                 }`}
-                disabled={!!error} // Disable button if there's an error
+                disabled={investmentAmount === 0 ||!!error} // Disable button if there's an error
               >
                 Calculate your profit
               </button>
@@ -272,13 +293,14 @@ const Page = () => {
               <button
                 onClick={() => setIsConfirming(true)} // Navigate to confirmation page
                 className={`w-full bg-blue-600 text-white p-2 text-sm rounded glass ${
-                  error
-                    ? "bg-gray-400 text-gray-600  px-2"
-                    : "bg-blue-600 text-white"
+                  error || investmentAmount === 0
+                  ? "bg-gray-400 text-gray-600  px-2"
+                  : "bg-blue-600 text-white"
                 }`}
-                disabled={!!error}
+                disabled={ investmentAmount === 0 || !!error}
               >
                 Proceed to Confirmation
+              
               </button>
             </div>
 
@@ -292,7 +314,7 @@ const Page = () => {
         ) : (
           // Confirmation Page
 
-          <div className="w-full bg-white rounded-lg shadow-md p-6 mt-[-20px]">
+          <div className="w-full bg-white rounded-sm shadow-sm p-6 mt-[-20px]">
             <h1 className="text-xl font-semibold text-blue-900 lg:mb-6 md:mb-6 mb-2">
               Confirm Deposit
             </h1>
@@ -349,7 +371,7 @@ const Page = () => {
             </div>
 
             {/* Save and Cancel Buttons */}
-            <div className="flex flex-wrap lg:justify-between mdjustify-between justify-end gap-2 lg:gap-4 md:gap-4 lg:mt-4 md:mt-4 mt-8">
+            <div className="flex flex-wrap justify-end gap-2 lg:gap-4 md:gap-4 lg:mt-4 md:mt-4 mt-8">
               <button
                 onClick={handleConfirmDeposit} // Save the deposit
                 className="bg-blue-600 text-sm text-white py-1 px-5 rounded"

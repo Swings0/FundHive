@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
     "/withdrawal",
     "/transactions",
     "/deposit",
-    "/referral",
+    "/referals",
     "/earnings",
   ];
 
@@ -67,7 +67,7 @@ export const config = {
     "/withdrawal/:path*",
     "/transactions/:path*",
     "/deposit/:path*",
-    "/referral/:path*",
+    "/referals/:path*",
     "/earnings/:path*",
   ],
 };

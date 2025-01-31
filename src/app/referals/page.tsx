@@ -51,7 +51,7 @@ const Page = () => {
 
   return (
     <Layout username="">
-    <div className="w-full  p-4 sm:p-6 bg-white shadow-sm rounded-sm mt-[-20px]">
+    <div className="w-full  p-4 sm:p-7 bg-white shadow-sm rounded-sm mt-[-20px]">
         <h2 className="text-xl text-blue-900 font-bold mb-3 text-center sm:text-left">Refer & Earn</h2>
         <p className="text-gray-600 mb-4 text-center leading-snug sm:text-left">
             Share your referral link with friends and earn rewards when they sign up!
@@ -90,7 +90,7 @@ const Page = () => {
             </a>
         </div>
 
-        <div className='flex flex-col sm:flex-row gap-4 mt-6 p-4 bg-white border rounded-lg'>
+        <div className='flex flex-col sm:flex-row gap-4 mt-8 md:mt-6 lg:mt-6 p-4 bg-white border rounded-lg'>
             <div className='w-full'>
                 <h1 className='text-base font-semibold text-gray-600 text-center sm:text-left'>Your Referrals</h1>
                 <div className='flex justify-between items-center mt-2 text-sm'>

@@ -34,15 +34,15 @@ const page = () => {
                 Gold plan
               </p>
               <h1 className="text-black text-lg pt-3 font-bold group-hover:text-white transition duration-500">
-                3% Daily
+                3.4% Daily
               </h1>
               <p className="text-sm font-semibold text-gray-600 group-hover:text-gray-400 transition duration-500">
-                For 6 Days
+                For 14 Days
               </p>
 
               <ul className="text-center text-sm  text-gray-500 leading-loose py-8 group-hover:text-gray-400 transition duration-500">
                 <li>Stable Profit</li>
-                <li>Minimum Amount - $100</li>
+                <li>Minimum Amount - $200</li>
                 <li> Maximum Amount - $20,000</li>
                 <li>Support Service - 24/7</li>
               </ul>
@@ -73,7 +73,7 @@ const page = () => {
                 3.6% Daily
               </h1>
               <p className="text-sm font-semibold text-gray-600 group-hover:text-gray-400 transition duration-500">
-                For 10 Days
+                For 8 Days
               </p>
 
               <ul className="text-center text-sm text-gray-500 leading-loose py-8 group-hover:text-gray-400 transition duration-500">
@@ -103,13 +103,13 @@ const page = () => {
                 4% Daily
               </h1>
               <p className="text-sm font-semibold text-gray-600 group-hover:text-gray-400 transition duration-500">
-                For 30 Days
+                For 6 Days
               </p>
 
               <ul className="text-center text-sm text-gray-500 leading-loose py-8 group-hover:text-gray-400 transition duration-500">
                 <li>Stable Profit</li>
                 <li>Minimum Amount - $50,000</li>
-                <li> Maximum Amount - Unlimited</li>
+                <li> Maximum Amount - $1,000,000</li>
                 <li>Support Service - 24/7</li>
               </ul>
 
