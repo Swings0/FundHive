@@ -72,11 +72,11 @@ const Page = () => {
         </div>
         
         <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}&text=Check this out...Join this amazing investment site!`} target="_blank" 
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
                 className="bg-blue-600 text-white px-4 glass py-2 rounded-full text-sm hover:bg-blue-700 transition-all ease-in-out delay-100 duration-200">
                 Share on Facebook
             </a>
-            <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(referralLink)}&text=Check this out...Join this amazing investment site!`} target="_blank" 
+            <a href={`https://twitter.com/intent/tweet?url=?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
                 className="bg-blue-400 text-white px-4 glass py-2 rounded-full text-sm hover:bg-blue-500 transition-all ease-in-out delay-100 duration-200">
                 Share on Twitter
             </a>
@@ -84,7 +84,7 @@ const Page = () => {
                 className="text-white bg-green-500 p-2 glass rounded-full text-xl flex hover:bg-green-600 transition-all ease-in-out delay-100 duration-200">
                 <BsWhatsapp />
             </a>
-            <a href={`https://www.instagram.com/direct/new/?text=${encodeURIComponent(referralLink)}&text=Check this out...Join this amazing investment site!`} target="_blank" 
+            <a href={`https://www.instagram.com/direct/new/?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
                 className="text-white bg-pink-500 p-2 glass rounded-full text-xl flex hover:bg-pink-600 transition-all ease-in-out delay-100 duration-200">
                 <BsInstagram />
             </a>
