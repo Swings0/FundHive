@@ -80,7 +80,7 @@ const Page = () => {
                 className="bg-blue-400 text-white px-4 glass py-2 rounded-full text-sm hover:bg-blue-500 transition-all ease-in-out delay-100 duration-200">
                 Share on Twitter
             </a>
-            <a href={`https://wa.me/?text=${encodeURIComponent(referralLink)}&text=Check this out...Join this amazing investment site!`} target="_blank" 
+            <a href={`https://wa.me?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
                 className="text-white bg-green-500 p-2 glass rounded-full text-xl flex hover:bg-green-600 transition-all ease-in-out delay-100 duration-200">
                 <BsWhatsapp />
             </a>
