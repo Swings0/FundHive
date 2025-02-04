@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Modal from "../components/Modal";
 import { useRouter } from "next/navigation";
-import { MdPermDeviceInformation } from "react-icons/md";
+import { IoIosInformationCircle } from "react-icons/io";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -204,7 +204,7 @@ const Page = () => {
                     <p className="text-xs lg:mt-1 md:mt-1">{displayUsername}</p>
                   </div>
                   <div>
-                    <p className="text-sm opacity-70 whitespace-nowrap">Registration date:</p>
+                    <p className="text-sm text-gray-600 whitespace-nowrap">Registration date:</p>
                     <p className="text-xs lg:mt-1 md:mt-1">
                       {registrationDate
                         ? new Date(registrationDate).toLocaleDateString()
@@ -219,9 +219,9 @@ const Page = () => {
           <div className="">
             <p
               onClick={() => setShowInfo(!showInfo)}
-              className=" text-lg text-blue-600 cursor-pointer"
+              className=" text-lg text-blue-600 cursor-pointer hover:text-[1.22rem]  hover:text-blue-700 hover:rotate-180 duration-300 delay-100 transition-all ease-in-out "
             >
-              <MdPermDeviceInformation />
+              <IoIosInformationCircle />
             </p>
           </div>
 

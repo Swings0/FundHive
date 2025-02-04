@@ -52,8 +52,8 @@ const Page = () => {
   return (
     <Layout username="">
     <div className="w-full  p-4 sm:p-7 bg-white shadow-sm rounded-sm mt-[-20px]">
-        <h2 className="text-xl text-blue-900 font-bold mb-3 text-center sm:text-left">Refer & Earn</h2>
-        <p className="text-gray-600 mb-4 text-center leading-snug sm:text-left">
+        <h2 className="text-xl text-blue-900 font-bold mb-3 text-left">Refer & Earn</h2>
+        <p className="text-gray-600 mb-4 leading-snug text-left">
             Share your referral link with friends and earn rewards when they sign up!
         </p>
         
@@ -71,20 +71,20 @@ const Page = () => {
             </CopyToClipboard>
         </div>
         
-        <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
+        <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-2">
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=?text=${encodeURIComponent(`...Join this amazing investment platform! ${referralLink}`)}`} target="_blank" 
                 className="bg-blue-600 text-white px-4 glass py-2 rounded-full text-sm hover:bg-blue-700 transition-all ease-in-out delay-100 duration-200">
                 Share on Facebook
             </a>
-            <a href={`https://twitter.com/intent/tweet?url=?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
+            <a href={`https://twitter.com/intent/tweet?url=?text=${encodeURIComponent(`...Join this amazing investment platform! ${referralLink}`)}`} target="_blank" 
                 className="bg-blue-400 text-white px-4 glass py-2 rounded-full text-sm hover:bg-blue-500 transition-all ease-in-out delay-100 duration-200">
                 Share on Twitter
             </a>
-            <a href={`https://wa.me?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
+            <a href={`https://wa.me?text=${encodeURIComponent(`...Join this amazing investment platform! ${referralLink}`)}`} target="_blank" 
                 className="text-white bg-green-500 p-2 glass rounded-full text-xl flex hover:bg-green-600 transition-all ease-in-out delay-100 duration-200">
                 <BsWhatsapp />
             </a>
-            <a href={`https://www.instagram.com/direct/new/?text=${encodeURIComponent(`Check this out... Join this amazing investment site! ${referralLink}`)}`} target="_blank" 
+            <a href={`https://www.instagram.com/direct/new/?text=${encodeURIComponent(`... Join this amazing investment platform! ${referralLink}`)}`} target="_blank" 
                 className="text-white bg-pink-500 p-2 glass rounded-full text-xl flex hover:bg-pink-600 transition-all ease-in-out delay-100 duration-200">
                 <BsInstagram />
             </a>
