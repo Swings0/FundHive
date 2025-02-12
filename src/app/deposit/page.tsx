@@ -1,7 +1,8 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
+import axios from 'axios';
 
 // Define the interface for the plan structure
 interface Plan {
@@ -58,12 +59,11 @@ const Page = () => {
     Bitcoin: "address 3",
   };
 
-
   const handlePlanChange = (newPlan: string) => {
     setSelectedPlan(newPlan);
-  
+
     const plan = plans[newPlan];
-    
+
     // If the current investment amount is out of range, reset it
     if (investmentAmount < plan.min || investmentAmount > plan.max) {
       setInvestmentAmount(0);
@@ -73,27 +73,23 @@ const Page = () => {
     }
   };
 
-  // Function to validate the investment amount
-  const validateAmount = (amount: number) => {
-    const plan = plans[selectedPlan];
-  
-    if (amount >= plan.min && amount <= plan.max) {
-      setError(""); // Clear error when valid
-    } else {
-      setError(`Amount must be between $${plan.min} and $${plan.max} for the ${selectedPlan}.`);
-    }
-  };
-
-
-
+  // Wrap validateAmount in useCallback so that it doesn't change on every render.
+  const validateAmount = useCallback(
+    (amount: number) => {
+      const plan = plans[selectedPlan];
+      if (amount >= plan.min && amount <= plan.max) {
+        setError(""); // Clear error when valid
+      } else {
+        setError(`Amount must be between $${plan.min} and $${plan.max} for the ${selectedPlan}.`);
+      }
+    },
+    [selectedPlan] // Recreate the function if selectedPlan changes
+  );
 
   // Function to calculate profit
   const calculateProfit = (): void => {
     const plan = plans[selectedPlan];
-    const validAmount = Math.min(
-      Math.max(investmentAmount, plan.min),
-      plan.max
-    );
+    const validAmount = Math.min(Math.max(investmentAmount, plan.min), plan.max);
     const dailyProfitAmount = (validAmount * plan.dailyProfit) / 4;
     setProfit(dailyProfitAmount);
   };
@@ -115,48 +111,47 @@ const Page = () => {
       setErr(false);
     }
 
+    
     try {
-      const response = await fetch("/api/savedeposit", {
-        method: "POST",
+      const response = await axios.post("/api/savedeposit", depositData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(depositData), // Send deposit data, including transactionHash
       });
 
-      const result = await response.json();
+      const result = response.data;
+
+
       if (!transactionHash) {
         setIsModalVisible(false);
       }
 
-
-
-      if (response.ok) {
+      if (response.status === 200) {
         setModalMessage(
           "The deposit has been saved. It will become active when the admin checks statistics."
         );
         setIsModalVisible(true); // Show the modal
         setIsConfirming(false); // Go back to the normal deposit form after saving
         setTransactionHash("");
-      }
-      
-      else {
+      } else {
         console.error("Error saving deposit:", result.message);
-        setModalMessage(
-          "There was an issue saving your deposit. Please try again."
-        );
+        setModalMessage("There was an issue saving your deposit. Please try again.");
         setIsModalVisible(true); // Show the modal with error message
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      let errorMessage = 'An unexpected error occurred. Please try again.';
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message ?? error.message;
+      }
       console.error("Error during API request:", error);
-      setModalMessage("An unexpected error occurred. Please try again.");
+      setModalMessage(errorMessage);
       setIsModalVisible(true); // Show the modal with error message
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Validate investment amount when plan changes
+  // Validate investment amount when plan or amount changes.
   useEffect(() => {
     validateAmount(investmentAmount);
   }, [selectedPlan, investmentAmount, validateAmount]);
@@ -167,7 +162,6 @@ const Page = () => {
       setError("");
       return;
     }
-
     const amount = parseFloat(value);
     if (!isNaN(amount)) {
       const formattedAmount = Math.floor(amount * 100) / 100;
@@ -176,6 +170,7 @@ const Page = () => {
     }
   };
 
+  
   return (
     <div className="h-full">
       <Layout username="">
