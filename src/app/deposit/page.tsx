@@ -140,9 +140,9 @@ const Page = () => {
       }
     } catch (error: unknown) {
       let errorMessage = 'An unexpected error occurred. Please try again.';
-      if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message ?? error.message;
-      }
+      // if (axios.isAxiosError(error)) {
+      //   errorMessage = error.response?.data?.message ?? error.message;
+      // }
       console.error("Error during API request:", error);
       setModalMessage(errorMessage);
       setIsModalVisible(true); // Show the modal with error message
