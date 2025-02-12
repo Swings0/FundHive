@@ -3,6 +3,12 @@ import { updateActiveDeposits, updateAccountBalanceUpdates } from '@/lib/update_
 
 export async function GET(_req: NextRequest) {
   void _req
+
+  const authHeader = _req.headers.get('Authorization') || '';
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     await updateActiveDeposits();
     await updateAccountBalanceUpdates();

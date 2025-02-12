@@ -15,7 +15,7 @@
     "baseUrl": ".",
     "isolatedModules": true,
     "typeRoots": ["./types", "./node_modules/@types"],  // Optionally specify typeRoots
-    "types": [], // Remove 'global' from the types array
+    "types": ["node"], // Remove 'global' from the types array
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
