@@ -8,7 +8,7 @@ export async function GET(_req: NextRequest) {
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
-
+  
   try {
     await updateActiveDeposits();
     await updateAccountBalanceUpdates();
