@@ -46,7 +46,7 @@ const Sidebar = () => {
     } else {
      return(false)
     }
-  },[]);
+  },[icon,isOpen]);
 
   useEffect(() => {
     // Attach scroll event listener

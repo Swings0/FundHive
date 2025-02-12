@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { updateActiveDeposits, updateAccountBalanceUpdates } from '@/lib/update_active_deposit';
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     await updateActiveDeposits();
     await updateAccountBalanceUpdates();

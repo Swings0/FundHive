@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import jwt from 'jsonwebtoken';
 import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {

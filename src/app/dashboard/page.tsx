@@ -14,9 +14,6 @@ const Page = () => {
     accountBalance: 0,
     targetActiveDeposit: 0, 
     targetTotalDeposit: 0,
-
-    // Add more fields if needed.
-    // You can include other fields if desired.
   });
   const [error, setError] = useState('');
 
@@ -35,13 +32,16 @@ const Page = () => {
     const fetchInvestment = async () => {
       try {
         const response = await axios.get(`/api/getuser-investment?email=${session.user.email}`);
-        // Assuming the API returns a JSON object with the investment fields.
         setInvestment(response.data);
         setError('');
         console.log('Fetched investment:', response.data);
-      } catch (err: any) {
-        console.error('Error fetching investment data:', err);
-        setError(err.response?.data?.message || 'Error fetching investment data.');
+      } catch (error: unknown) {
+        let errorMessage = 'Error fetching investment data'
+        if (axios.isAxiosError(error)){
+          errorMessage = error.response?.data?.message ?? error.message
+        }
+        console.error('Error fetching investment data:', error);
+        setError(errorMessage);
       }
     };
 
@@ -72,7 +72,10 @@ const Page = () => {
     if (status === "unauthenticated") {
       console.error("User is not authenticated");
     }
-  }, [status]);
+  }, []);
+
+  console.log(error);
+  
 
 
 

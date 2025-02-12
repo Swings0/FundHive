@@ -39,8 +39,12 @@ const Page = () => {
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
       setMessageA(response.data.message);
-    } catch (err: any) {
-      setErrorA(err.response?.data?.message || 'An error occurred.');
+    } catch (error: unknown ) {
+      let errorMessage = 'An error occurred';
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message ?? errorMessage
+      }
+      setErrorA(errorMessage);
     }
   };
 
@@ -60,8 +64,12 @@ const Page = () => {
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
       setMessageB(response.data.message);
-    } catch (err: any) {
-      setErrorB(err.response?.data?.message || 'An error occurred.');
+    } catch (error: unknown) {
+      let errorMessage = 'An error occurred';
+      if (axios.isAxiosError(error)){
+        errorMessage = error.response?.data?.message ?? errorMessage
+      }
+      setErrorB(errorMessage);
     }
   };
 

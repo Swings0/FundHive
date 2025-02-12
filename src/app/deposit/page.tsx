@@ -159,7 +159,7 @@ const Page = () => {
   // Validate investment amount when plan changes
   useEffect(() => {
     validateAmount(investmentAmount);
-  }, [selectedPlan]);
+  }, [selectedPlan, investmentAmount, validateAmount]);
 
   const handleAmountChange = (value: string): void => {
     if (value === "") {
