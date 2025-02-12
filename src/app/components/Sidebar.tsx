@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { TbLayoutSidebarRightExpandFilled } from "react-icons/tb";
 import { TbLayoutSidebarRightFilled } from "react-icons/tb";
 import { useCallback } from "react";
+import { GrLineChart } from "react-icons/gr";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -103,6 +104,16 @@ const Sidebar = () => {
 
           <li className="text-center">
             <Link
+              href="/tradeview"
+              className="flex flex-col items-center justify-center hover:text-sky-300"
+            >
+              <GrLineChart className=" mb-1 text-lg" />
+              <span>TradingView</span>
+            </Link>
+          </li>
+
+          <li className="text-center">
+            <Link
               href="/deposit"
               className="flex flex-col items-center justify-center hover:text-sky-300"
             >
@@ -181,6 +192,16 @@ const Sidebar = () => {
                 <span>Dashboard</span>
               </Link>
             </li>
+
+            <li className="text-center">
+            <Link
+              href="/tradeview"
+              className="flex flex-col items-center justify-center hover:text-sky-300"
+            >
+              <GrLineChart className=" mb-1 text-lg" />
+              <span>TradingView</span>
+            </Link>
+          </li>
 
             <li className="text-center">
               <Link

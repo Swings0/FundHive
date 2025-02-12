@@ -4,7 +4,8 @@ import NextAuth from "next-auth";
 
 declare module "next-auth" {
   interface Session {
-    user: {
+    user:User & {
+      role?: string;
       email: string;
       id: string; // Add id to user session
       name?: string | null;
@@ -14,6 +15,7 @@ declare module "next-auth" {
   }
 
   interface User {
+    role?: string;
     email: string;
     id: string; // Add id to user object
     name?: string | null;
@@ -22,5 +24,6 @@ declare module "next-auth" {
 
   interface JWT{
     lastAcive?: number;
+    role?: string;
   }
 }

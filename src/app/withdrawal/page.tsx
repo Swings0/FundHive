@@ -2,7 +2,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 
-const page = () => {
+const Page = () => {
   return (
     <div className='h-full'>
     <Layout username='Swings'>
@@ -73,4 +73,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

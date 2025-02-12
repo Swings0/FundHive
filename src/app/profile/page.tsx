@@ -11,8 +11,6 @@ import { IoIosInformationCircle } from "react-icons/io";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-
-
 const Page = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -123,7 +121,7 @@ const Page = () => {
         setIsModalVisible(true);
       }
     } catch (error: unknown) {
-      if(error instanceof AxiosError){
+      if (error instanceof AxiosError) {
         console.error(
           "Error updating account data:",
           error.response?.data || error
@@ -132,9 +130,11 @@ const Page = () => {
           error.response?.data?.message ||
             "An error occurred while updating account data."
         );
-      } else if (error instanceof Error){
+      } else if (error instanceof Error) {
         console.error("Error updating account data:", error.message);
-        setModalMessage(error.message || "An error occurred while updating account data.");
+        setModalMessage(
+          error.message || "An error occurred while updating account data."
+        );
       }
       setIsModalVisible(true);
     } finally {
@@ -180,7 +180,7 @@ const Page = () => {
 
   return (
     <div className="">
-      <Layout username={''}>
+      <Layout username={""}>
         <div className="w-full bg-white rounded-sm shadow-sm lg:p-3 md:p-5 p-3 mt-[-24px] flex flex-row justify-end z-10 top">
           <div className=" w-full mx-auto items-center gap-5">
             <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
@@ -200,11 +200,15 @@ const Page = () => {
               <div className="flex flex-col  ">
                 <div className="flex flex-col gap-1 w-full my-4 lg:my-0 md:my-0 ">
                   <div>
-                    <span className="text-sm  text-gray-600 relative">Username:</span>
+                    <span className="text-sm  text-gray-600 relative">
+                      Username:
+                    </span>
                     <p className="text-xs lg:mt-1 md:mt-1">{displayUsername}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 whitespace-nowrap">Registration date:</p>
+                    <p className="text-sm text-gray-600 whitespace-nowrap">
+                      Registration date:
+                    </p>
                     <p className="text-xs lg:mt-1 md:mt-1">
                       {registrationDate
                         ? new Date(registrationDate).toLocaleDateString()
@@ -233,32 +237,60 @@ const Page = () => {
             >
               <ul className="text-xs">
                 <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md  rounded-tl-md ">
-                  <span className="font-semibold text-xs text-white">FullName:</span>
-                  <p className="text-xs text-blue-100">{userInfo?.fullname || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white">
+                    Full Name:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo?.fullname || "Not set"}
+                  </p>
                 </li>
                 <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white ">Email:</span>
-                  <p className="text-xs text-blue-100">{userInfo?.email || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white ">
+                    Email:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo?.email || "Not set"}
+                  </p>
                 </li>
                 <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">Username:</span>
-                  <p className="text-xs text-blue-100">{userInfo?.username || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white">
+                    Username:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo?.username || "Not set"}
+                  </p>
                 </li>
                 <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">USDT TRC20:</span>
-                  <p className="text-xs text-blue-100">{userInfo?.usdtTrc20Address || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white">
+                    USDT TRC20:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo?.usdtTrc20Address || "Not set"}
+                  </p>
                 </li>
                 <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">USDT ERC20:</span>
-                  <p className="text-xs text-blue-100">{userInfo?.usdtErc20Address || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white">
+                    USDT ERC20:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo?.usdtErc20Address || "Not set"}
+                  </p>
                 </li>
                 <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">Bitcoin:</span>
-                  <p className="text-xs text-blue-100">{userInfo.bitcoinAddress || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white">
+                    Bitcoin:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo.bitcoinAddress || "Not set"}
+                  </p>
                 </li>
                 <li className="text-sm py-2 pb-3 px-3 bg-blue-600 glass shadow-lg rounded-bl-md lg:rounded-bl-none">
-                  <span className="font-semibold text-xs text-white">Phone:</span>
-                  <p className="text-xs text-blue-100">{userInfo.phone || "Not set"}</p>
+                  <span className="font-semibold text-xs text-white">
+                    Phone:
+                  </span>
+                  <p className="text-xs text-blue-100">
+                    {userInfo.phone || "Not set"}
+                  </p>
                 </li>
               </ul>
             </div>
@@ -266,9 +298,14 @@ const Page = () => {
         </div>
 
         <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5  md:p-6 py-5 px-4  mt-3 lg:mb-0 mb-10 profile">
-          <form className="flex flex-col gap-3 p-1 vest" onSubmit={handleSubmit}>
+          <form
+            className="flex flex-col gap-3 p-1 vest"
+            onSubmit={handleSubmit}
+          >
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Enter full name:</label>
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                Enter full name:
+              </label>
               <input
                 className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="text"
@@ -278,7 +315,9 @@ const Page = () => {
             </div>
 
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Email:</label>
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                Email:
+              </label>
               <input
                 className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="email"
@@ -288,7 +327,9 @@ const Page = () => {
             </div>
 
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">New Email:</label>
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                New Email:
+              </label>
               <input
                 className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="email"
@@ -298,7 +339,9 @@ const Page = () => {
             </div>
 
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">New Password:</label>
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                New Password:
+              </label>
               <input
                 className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="password"
@@ -309,7 +352,9 @@ const Page = () => {
 
             {newPassword && (
               <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-                <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Retype Password:</label>
+                <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                  Retype Password:
+                </label>
                 <input
                   className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                   type="password"
@@ -356,7 +401,9 @@ const Page = () => {
             </div>
 
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">U-name:</label>
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                U-name:
+              </label>
               <input
                 className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="text"
@@ -365,7 +412,9 @@ const Page = () => {
               />
             </div>
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
-              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">Phone:</label>
+              <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
+                Phone:
+              </label>
               <input
                 className="bg-transparent text-slate-800 focus:text-blue-700 outline-none border-[1.3px] border-slate-300 rounded-sm focus:border-blue-500 px-2 lg:text-sm md:text-sm text-base py-[2px] lg:w-[60%] md:w-[60%] w-full"
                 type="text"
@@ -397,10 +446,8 @@ const Page = () => {
           isVisible={isModalVisible}
           message={modalMessage}
           onClose={() => setIsModalVisible(false)}
-          
         />
       </Layout>
-
     </div>
   );
 };

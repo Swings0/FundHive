@@ -210,9 +210,7 @@ const Page = () => {
               >
                 <option value="Gold Plan">Gold Plan</option>
                 <option value="Diamond Plan">Diamond Plan</option>
-                <option value="Zonal Representative">
-                  Zonal Representative
-                </option>
+                <option value="Zonal Representative">Zonal Representative</option>
               </select>
             </div>
 

@@ -1,6 +1,7 @@
 import Navbar1 from "./Navbar1";
 import Sidebar from "./Sidebar";
 
+
 interface LayoutProps {
   children: React.ReactNode;
   username: string;

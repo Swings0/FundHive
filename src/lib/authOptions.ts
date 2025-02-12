@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Return user object with id if validation passes
-          return { email: user.email, id: user._id.toString() }; // Convert ObjectId to string
+          return { email: user.email, id: user._id.toString(), role: user.role }; // Convert ObjectId to string
         } catch (error: unknown) {
           if (error instanceof Error) {
             console.error("Error in authorization:", error.message);
@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
         console.log("JWT Callback: User", user);
         token.email = user.email;
         token.id = user.id; // Store the user ID in JWT token
+        token.role = user.role; // Store user role
         token.lastActive = Date.now(); // Add lastActive timestamp
       }
       return token;
@@ -73,6 +74,7 @@ export const authOptions: NextAuthOptions = {
         session.user = {
           email: token.email as string,
           id: token.id as string, // Add the user id to the session
+          role: token.role as "user" | "admin", // Add the user role to the session
         };
         session.lastActive = lastActive || Date.now(); // Default to current time if lastActive is undefined
       }
