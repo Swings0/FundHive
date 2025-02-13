@@ -40,13 +40,11 @@ const Sidebar = () => {
 
   const handleScroll = useCallback(() => {
     // Show the second navbar when scrolling down past 50px
-    if (window.scrollY > 20) {
-      setIcon(icon);
-      setIsOpen(isOpen);
-    } else {
-     return(false)
+    if (window.scrollY > 20 || window.scrollY > -80) {
+      setIcon(false);
+      setIsOpen(false);
     }
-  },[icon,isOpen]);
+  },[]);
 
   useEffect(() => {
     // Attach scroll event listener
