@@ -83,7 +83,7 @@ const Page = () => {
         setError(`Amount must be between $${plan.min} and $${plan.max} for the ${selectedPlan}.`);
       }
     },
-    [selectedPlan] // Recreate the function if selectedPlan changes
+    [selectedPlan, plans] // Recreate the function if selectedPlan changes
   );
 
   // Function to calculate profit
@@ -139,7 +139,7 @@ const Page = () => {
         setIsModalVisible(true); // Show the modal with error message
       }
     } catch (error: unknown) {
-      let errorMessage = 'An unexpected error occurred. Please try again.';
+      const errorMessage = 'An unexpected error occurred. Please try again.';
       // if (axios.isAxiosError(error)) {
       //   errorMessage = error.response?.data?.message ?? error.message;
       // }
