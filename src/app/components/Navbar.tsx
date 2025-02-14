@@ -76,7 +76,7 @@ const Navbar = () => {
           } lg:flex-row lg:items-center absolute lg:static top-full left-4 rounded-lg w-full lg:w-auto bg-slate-900 lg:bg-transparent lg:gap-4 p-4 lg:p-0 text-white text-sm gap-3`}
         >
           <span className="text-slate-900 bottom-[98.8%] absolute font-bold right-[46.7px] text-3xl">
-            !
+            |
           </span>
           <li
             className={`delay-100 hover:text-cyan-300 transition-all duration-500 ease-linear`}
