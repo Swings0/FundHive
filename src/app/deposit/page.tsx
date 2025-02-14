@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 import axios from 'axios';
@@ -28,7 +28,8 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Plan definitions
-  const plans: Record<string, Plan> = {
+  const plans: Record<string, Plan> = useMemo(
+    () => ({
     "Gold Plan": {
       min: 200,
       max: 20000,
@@ -50,7 +51,9 @@ const Page = () => {
       duration: 6,
       principalReturn: true,
     },
-  };
+  }),
+  []
+);
 
   // Wallet addresses
   const walletAddresses: Record<string, string> = {

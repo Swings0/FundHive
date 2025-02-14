@@ -15,7 +15,7 @@ const sendEmail = async  (depositData: { email:string, plan: string; amount: num
 
   const mailOptions = {
     from: `"FundHive" <${process.env.GMAIL_USER}>`,
-    to: process.env.ADMIN_EMAIL, // Your admin email
+    to: process.env.OWNER_EMAIL, // Your admin email
     subject:'New Deposit Made',
     html: `
       <h3>New Deposit</h3>
