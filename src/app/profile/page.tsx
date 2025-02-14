@@ -236,59 +236,59 @@ const Page = () => {
               className="absolute right-0 mt-20 lg:mr-3 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-sm w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
             >
               <ul className="text-xs">
-                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg lg:rounded-t-md  rounded-tl-md ">
-                  <span className="font-semibold text-xs text-white">
+                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg lg:rounded-t-md  rounded-tl-md  glass">
+                  <span className="font-semibold text-xs text-slate-700">
                     Full Name:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo?.fullname || "Not set"}
                   </p>
                 </li>
-                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white ">
+                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
+                  <span className="font-semibold text-xs text-slate-700 ">
                     Email:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo?.email || "Not set"}
                   </p>
                 </li>
-                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">
+                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
+                  <span className="font-semibold text-xs text-slate-700">
                     Username:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo?.username || "Not set"}
                   </p>
                 </li>
-                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">
+                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
+                  <span className="font-semibold text-xs text-slate-700">
                     USDT TRC20:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo?.usdtTrc20Address || "Not set"}
                   </p>
                 </li>
-                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">
+                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
+                  <span className="font-semibold text-xs text-slate-700">
                     USDT ERC20:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo?.usdtErc20Address || "Not set"}
                   </p>
                 </li>
-                <li className="text-sm py-2 px-3 bg-blue-600 glass shadow-lg">
-                  <span className="font-semibold text-xs text-white">
+                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
+                  <span className="font-semibold text-xs text-slate-700">
                     Bitcoin:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo.bitcoinAddress || "Not set"}
                   </p>
                 </li>
-                <li className="text-sm py-2 pb-3 px-3 bg-blue-600 glass shadow-lg rounded-bl-md lg:rounded-bl-none">
-                  <span className="font-semibold text-xs text-white">
+                <li className="text-sm py-2 pb-3 px-3 bg-white/40 backdrop-blur-md shadow-lg rounded-bl-md lg:rounded-bl-none glass">
+                  <span className="font-semibold text-xs text-slate-700">
                     Phone:
                   </span>
-                  <p className="text-xs text-blue-100">
+                  <p className="text-xs text-gray-600">
                     {userInfo.phone || "Not set"}
                   </p>
                 </li>
