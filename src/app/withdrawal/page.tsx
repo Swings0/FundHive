@@ -46,7 +46,7 @@ const Page = () => {
         });
         setError('');
         console.log('Fetched investment:', response.data);
-      } catch (err: any) {
+      } catch (err: unknown) {
         if (axios.isAxiosError(err) && err.response?.status === 404) {
           // If no investment record is found, set defaults.
           setInvestment({

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { RiArrowUpSLine } from "react-icons/ri";
 import { FaArrowLeft } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import Layout from "../components/Layout";
