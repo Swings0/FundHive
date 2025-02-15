@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+// Define a type for the allowed currency values.
+type Currency = "USDT TRC20" | "USDT ERC20" | "Bitcoin";
+
+// Define an array of currencies.
+const currencies: Currency[] = ["USDT TRC20", "USDT ERC20", "Bitcoin"];
+
 const Page = () => {
   // Common field.
   const [email, setEmail] = useState('');
@@ -17,10 +23,20 @@ const Page = () => {
   const [accountBalanceUpdateDuration, setAccountBalanceUpdateDuration] = useState<string>('');
   const [accountBalanceUpdateUnit, setAccountBalanceUpdateUnit] = useState<string>('min');
 
+  // Messages for Process A & B.
   const [messageA, setMessageA] = useState('');
   const [errorA, setErrorA] = useState('');
   const [messageB, setMessageB] = useState('');
   const [errorB, setErrorB] = useState('');
+
+  // Withdrawal activation state.
+  const [withdrawalActivation, setWithdrawalActivation] = useState<{ [key in Currency]: boolean }>({
+    "USDT TRC20": false,
+    "USDT ERC20": false,
+    Bitcoin: false,
+  });
+  const [withdrawalMsg, setWithdrawalMsg] = useState('');
+  const [withdrawalErr, setWithdrawalErr] = useState('');
 
   const handleProcessASubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,10 +55,10 @@ const Page = () => {
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
       setMessageA(response.data.message);
-    } catch (error: unknown ) {
+    } catch (error: unknown) {
       let errorMessage = 'An error occurred';
       if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message ?? errorMessage
+        errorMessage = error.response?.data?.message ?? errorMessage;
       }
       setErrorA(errorMessage);
     }
@@ -67,11 +83,37 @@ const Page = () => {
     } catch (error: unknown) {
       let errorMessage = 'An error occurred';
       if (axios.isAxiosError(error)){
-        errorMessage = error.response?.data?.message ?? errorMessage
+        errorMessage = error.response?.data?.message ?? errorMessage;
       }
       setErrorB(errorMessage);
     }
   };
+
+  const handleWithdrawalToggle = async (currency: Currency) => {
+    // Toggle the current state for the selected currency.
+    const newState = !withdrawalActivation[currency];
+    // Optimistically update the UI.
+    setWithdrawalActivation(prev => ({ ...prev, [currency]: newState }));
+    try {
+      const response = await axios.post(
+        '/api/update-investment/withdrawal',
+        { email, currency, activate: newState },
+        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+      );
+      setWithdrawalMsg(response.data.message);
+      setWithdrawalErr('');
+    } catch (error: unknown) {
+      // Revert the UI if an error occurs.
+      setWithdrawalActivation(prev => ({ ...prev, [currency]: !newState }));
+      let errorMessage = 'An error occurred';
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message ?? errorMessage;
+      }
+      setWithdrawalErr(errorMessage);
+      setWithdrawalMsg('');
+    }
+  };
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -203,9 +245,31 @@ const Page = () => {
             </form>
           </div>
         </div>
+
+        {/* Withdrawal Settings Section */}
+        <div className="mt-12 bg-gradient-to-r from-gray-800 via-gray-900 to-black rounded-xl shadow-3xl p-8">
+          <h2 className="text-3xl font-semibold text-white text-center mb-6">Withdrawal Settings</h2>
+          {currencies.map((currency) => (
+            <div key={currency} className="flex items-center justify-between border-b border-gray-600 py-4">
+              <div className="text-white text-lg">{currency}</div>
+              <button
+                onClick={() => handleWithdrawalToggle(currency)}
+                className={`px-4 py-2 rounded-md text-sm transition-colors duration-300 ${
+                  withdrawalActivation[currency]
+                    ? 'bg-green-600 hover:bg-green-700'
+                    : 'bg-blue-600 hover:bg-blue-700'
+                }`}
+              >
+                {withdrawalActivation[currency] ? 'Deactivate' : 'Activate'}
+              </button>
+            </div>
+          ))}
+          {withdrawalMsg && <div className="mt-4 text-blue-500 text-center">{withdrawalMsg}</div>}
+          {withdrawalErr && <div className="mt-4 text-red-500 text-center">{withdrawalErr}</div>}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Page;
+export default Page

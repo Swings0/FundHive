@@ -35,9 +35,7 @@ function generateRandomData(
 
 // ProfitChart component: displays an animated line chart with gradient stroke.
 const ProfitChart: React.FC = () => {
-  const [data, setData] = useState<number[]>(
-    generateRandomData(30, 100, 10000)
-  );
+  const [data, setData] = useState<number[]>(generateRandomData(30, 100, 10000));
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,9 +67,7 @@ const ProfitChart: React.FC = () => {
   return (
     <div className="relative">
       <svg
-        // width={width}
-        // height={height}
-        className="bg-white lg:rounded md:rounded lg:shadow-lg md:shadow-lg shadow-md lg:w-80 lg:h-36 md:w-[17.8rem] md:h-36 w-[17rem] h-36 lg:ml-0 md:ml-0 ml-[3px] chart"
+        className="bg-white rounded-lg shadow-lg w-80 h-36 md:w-[18.8rem] md:h-36 w-[17rem] h-36 ml-1 chart"
       >
         <defs>
           <linearGradient id="chartGradient" x1="0" y1="0" x2="1" y2="0">
@@ -106,7 +102,7 @@ const Page: React.FC = () => {
   const email = session?.user?.email;
 
   useEffect(() => {
-    if (!email) return; // Do nothing if no email.
+    if (!email) return;
     const fetchInvestment = async () => {
       try {
         const response = await axios.get(
@@ -124,11 +120,12 @@ const Page: React.FC = () => {
     return () => clearInterval(interval);
   }, [email]);
 
-  // Only display chart/profit if an active investment exists and activeDeposit > 0.
+  // Updated condition: an active investment exists if status is "active" and either totalDeposit or activeDeposit is > 0.
   const activeInvestmentExists =
     investment &&
     investment.status === "active" &&
-    investment.activeDeposit > 0;
+    (investment.totalDeposit > 0 || investment.activeDeposit > 0);
+
   const progressPercentage =
     investment && investment.targetActiveDeposit
       ? Math.min(
@@ -138,7 +135,6 @@ const Page: React.FC = () => {
       : 0;
   const randomProfit = Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
 
-  // If session is loading, display a loading message.
   if (status === "loading") {
     return (
       <div className="min-h-screen bg-gray-900 p-8 text-gray-100 flex items-center justify-center">
@@ -147,16 +143,12 @@ const Page: React.FC = () => {
     );
   }
 
-  // If no user is logged in, prompt for login.
   if (!session?.user) {
     return (
-      <div className="min-h-screen space-y-2 bg-gray-900 p-8 text-gray-100 flex flex-col items-center justify-center">
-        <p className="text-sm whitespace-nowrap">
-          Please log in to view your investment data.
-        </p>
-
+      <div className="min-h-screen bg-gray-900 p-8 text-gray-100 flex flex-col items-center justify-center space-y-4">
+        <p className="text-sm">Please log in to view your investment data.</p>
         <Link href={"/login"}>
-          <button className="py-1 px-6 bg-blue-600 glass rounded hover:bg-blue-700">
+          <button className="py-1 px-6 bg-blue-600 rounded hover:bg-blue-700">
             Login
           </button>
         </Link>
@@ -165,81 +157,83 @@ const Page: React.FC = () => {
   }
 
   return (
-    <div className="h-full">
-      <Layout username="">
+    <div className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900">
+      <Layout username={session?.user?.name || ""}>
         <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2  mt-[-20px] overflow-hidden">
-          <h1 className="text-2xl font-bold mb-2 text-left text-blue-900 lg:ml-0 md:ml-0 ml-2">
-            TradeView
-          </h1>
+          <h1 className="text-3xl font-bold text-blue-900 mb-6">TradeView</h1>
 
           {loading ? (
-            <p className="text-center">Loading investment data...</p>
+            <p className="text-center text-lg">Loading investment data...</p>
           ) : activeInvestmentExists ? (
-            <div className="lg:flex lg:flex-row md:grid md:grid-cols-2 flex flex-col md:gap-6 lg:gap-3 gap-5 items-center lg:justify-between md:justify-between justify-center bg-gray-50 rounded-lg p-5 shadow-sm transition-all duration-300 delay-100 ease-in-out sharp">
-              {/* Chart & Profit Info (Left Column) */}
-
-              <div className="bg-zinc-200 p-3 rounded-sm glass ">
-                <Tview />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left Column: Chart & Profit Info */}
+              <div className="flex flex-col space-y-6">
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md">
+                  <Tview />
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                    Profit Chart
+                  </h2>
+                  <ProfitChart />
+                </div>
               </div>
 
-              <div className="flex flex-col">
-                <div className="lg:border-r-2 md:border-r-2 lg:border-b-2 md:border-b-2 border-gray-300 p-2 relative">
-                  <div className="absolute text-md -top-3 right-[-9px] text-gray-400 lg:block md:block hidden">
-                    <RiArrowUpSLine />
-                  </div>
-
-                  <div className="">
-                    <ProfitChart />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center lg:items-start md:items-start justify-center w-full">
-                  <h1 className="font-semibold text-sm lg:mt-3 md:mt-2 text-gray-800">
-                    Active
-                  </h1>
-                  <div className="lg:w-[22rem] md:w-[18rem] w-[18rem] h-2 mt-1 bg-gray-600 rounded bar">
+              {/* Right Column: Investment Summary */}
+              <div className="flex flex-col space-y-6">
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    Progress
+                  </h3>
+                  <div className="w-full h-4 bg-gray-300 rounded-full overflow-hidden">
                     <div
-                      className="h-2 rounded bg-blue-500 transition-all"
+                      className="h-full bg-blue-500 transition-all duration-300"
                       style={{ width: `${progressPercentage}%` }}
                     ></div>
                   </div>
-                </div>
-              </div>
-
-              <div className="lg:mr-10 md:mr-10 text-left flex flex-col">
-                <div className="flex flex-col lg:items-center">
-                  <p className="mt-4 text-md whitespace-nowrap lg:whitespace-normal text-red-500 lg:bg-red-50 md:bg-red-50 rounded-full flex text-center py-2 px-3">
-                    Amount deflated overtime: {randomProfit}{" "}
-                    <MdOutlineKeyboardDoubleArrowDown className="text-red-600 text-base" />
+                  <p className="mt-2 text-sm text-gray-600">
+                    {progressPercentage.toFixed(0)}% completed
                   </p>
-                  <div className="flex space-x-2 mt-3 lg:ml-0 md:ml-5 ml-5">
-                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-100 text-sm" />
-                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-200 text-sm" />
-                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-300 text-sm" />
-                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-300 text-sm" />
-                  </div>
                 </div>
 
-                {/* Active Deposit (Right Column) */}
-                <div className=" text-left mt-2 ml-3">
-                  <h1 className="flex font-semibold text-xl  tracking-wide ">
-                    Profits Earned:
-                  </h1>
-                  <p className="text-lg text-left flex text-gray-700">
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    Profits Earned
+                  </h3>
+                  <p className="text-3xl font-bold text-green-600 flex items-center">
                     ${investment.activeDeposit.toLocaleString()}
-                    <MdOutlineKeyboardDoubleArrowUp className="text-green-600 text-base" />
+                    <MdOutlineKeyboardDoubleArrowUp className="ml-2 text-green-600" />
                   </p>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    Amount Deflated
+                  </h3>
+                  <p className="text-2xl font-bold text-red-600 flex items-center">
+                    {randomProfit}
+                    <MdOutlineKeyboardDoubleArrowDown className="ml-2 text-red-600" />
+                  </p>
+                </div>
+
+                <div className="flex justify-center lg:justify-start">
+                  <div className="flex space-x-3">
+                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-100 text-xl" />
+                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-200 text-xl" />
+                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-300 text-xl" />
+                    <FaArrowLeft className="text-blue-500 animate-slideLeft delay-300 text-xl" />
+                  </div>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="text-left  border-[1.2px] border-gray-200 p-5 rounded-md">
-              <p className="text-xl text-gray-600">
+            <div className="border border-gray-300 p-6 rounded-lg text-center">
+              <p className="text-2xl text-gray-600 mb-4">
                 You have no ongoing investment yet.
               </p>
               <Link href={"/deposit"}>
-                <button className="mt-5 px-6 py-1 bg-blue-600 rounded hover:bg-blue-700 text-white glass transition">
-                  Invest
+                <button className="px-6 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white transition">
+                  Invest Now
                 </button>
               </Link>
             </div>
@@ -251,3 +245,4 @@ const Page: React.FC = () => {
 };
 
 export default Page;
+

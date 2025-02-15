@@ -16,6 +16,12 @@ export interface IInvestment extends Document {
   accountBalanceUpdateUnit: 'min' | 'hour' | 'day'; // Process B: unit for account balance update delay
   accountBalanceUpdateStartTime: Date; // Process B start time
   accountBalance: number;        // Final account balance (displayed only after Process B completes)
+  // New: Withdrawal activation flags.
+  withdrawalActivation: {
+    USDT_TRC20: boolean;
+    USDT_ERC20: boolean;
+    Bitcoin: boolean;
+  };
 }
 
 const InvestmentSchema: Schema = new Schema({
@@ -33,6 +39,11 @@ const InvestmentSchema: Schema = new Schema({
   accountBalanceUpdateUnit: { type: String, enum: ['min', 'hour', 'day'], required: true },
   accountBalanceUpdateStartTime: { type: Date, default: Date.now },
   accountBalance: { type: Number, required: true, default: 0 },
+  withdrawalActivation: {
+    type: Object,
+    required: true,
+    default: { USDT_TRC20: false, USDT_ERC20: false, Bitcoin: false },
+  },
 });
 
 export default mongoose.models.Investment ||

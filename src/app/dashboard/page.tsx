@@ -22,9 +22,17 @@ const Page = () => {
   ? Math.min((investment.activeDeposit / investment.targetActiveDeposit) * 100, 100)
   : 0;
 
-  const progressPercentageOne = investment.targetTotalDeposit
-  ? Math.min((investment.totalDeposit / investment.targetTotalDeposit) * 100, 100)
-  : 0;
+
+  const minDeposit = 100;
+  const maxDeposit = 10000;
+  const deposit = investment.totalDeposit;
+
+  const progressPercentageOne = 
+  deposit <= minDeposit
+  ? 0
+  : deposit >= maxDeposit
+  ? 100
+  : ((deposit - minDeposit) / (maxDeposit - minDeposit) * 100)
 
   useEffect(() => {
     if (!session?.user?.email) return;
@@ -136,7 +144,7 @@ const Page = () => {
                 <div className="w-16 bg-gray-200 rounded-full h-1">
                   <div
                     className="bg-red-500 h-1 rounded-full"
-                    style={{ width: "10%" }}
+                    style={{ width: "0%" }}
                   ></div>
                 </div>
               </div>
