@@ -14,9 +14,12 @@ export default function ResetPassword() {
   const [success,setSuccess] = useState<boolean>(false)
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const res = await fetch("/api/reset-password", {
         method: "PATCH",
@@ -38,6 +41,8 @@ export default function ResetPassword() {
       } else {
         setMessage("An unknown error occurred. Please try again.");
       }
+    } finally {
+    setLoading(false);
     }
   };
 
@@ -60,15 +65,16 @@ export default function ResetPassword() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              className="outline-none border-[1.9px] border-blue-500 focus:border-blue-600 lg:text-sm md:text-sm text-base text-blue-500 px-2 py-1 rounded-sm"
+              className="outline-none border-[1.9px] border-blue-400 focus:border-blue-600 lg:text-sm md:text-sm text-base text-blue-500 px-2 py-1 rounded-sm"
             />
     
             <div className="mt-4">
               <button
                 type="submit"
                 className="w-full glass bg-blue-500 text-sm text-center hover:bg-blue-600 text-white transition-all ease-linear duration-200 delay-100 py-1 px-6 rounded"
+                disabled={loading}
               >
-                Update Password
+                 {loading ? "Loading..." : "Update Password"} 
               </button>
             </div>
     
@@ -86,7 +92,7 @@ export default function ResetPassword() {
             </div>
           </form>
     
-          {message && <p className="text-xs lg:text-center w-full ml-48 lg:ml-0 md:ml-0  mt-3">{message}</p>}
+          {message && <p className="text-xs lg:text-center w-full ml-48 text-red-700 lg:ml-0 md:ml-0  mt-3">{message}</p>}
           </>
       ) : (
         <div className="flex flex-col items-center justify-center">
