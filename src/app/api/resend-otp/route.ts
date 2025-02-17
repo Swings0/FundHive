@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { MongoClient } from "mongodb";
+// import { MongoClient } from "mongodb";
 import dbConnect from "@/utils/dbConnect";
 import User from "@/models/user";
 
-const uri = process.env.MONGODB_URL as string;
-const client = new MongoClient(uri);
+// const uri = process.env.MONGODB_URL as string;
+// const client = new MongoClient(uri);
 // const database = client.db("fundhive");
 // const usersCollection = database.collection("users");
+
+
 
 const generateOTP = (): string => {
   return Math.floor(100000 + Math.random() * 900000).toString();
