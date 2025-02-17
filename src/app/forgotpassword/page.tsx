@@ -5,9 +5,11 @@ const Page = () => {
     const [email, setEmail] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [successMessage, setSuccessMessage] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);
 
         // Reset error messages
         setErrorMessage('');
@@ -15,6 +17,7 @@ const Page = () => {
 
         if (!email) {
             setErrorMessage("Please enter email address");
+            setLoading(false);
             return;
         }
 
@@ -38,6 +41,8 @@ const Page = () => {
             setErrorMessage("Something went wrong. Please try again later.");
              console.error("An issue occured", error);
               
+        }finally{
+            setLoading(false);
         }
     };
 
@@ -53,12 +58,12 @@ const Page = () => {
                 />
 
                 <div className="mt-3">
-                    <button className="w-full md:w-96 lg:w-96 lg:px-6 text-center py-1 glass text-sm rounded-full text-white bg-blue-500 hover:bg-blue-600">
-                        Reset Password
+                    <button className="w-full md:w-96 lg:w-96 lg:px-6 text-center py-1 glass text-sm rounded-full text-white bg-blue-500 hover:bg-blue-600" disabled={loading}> 
+                     {loading ? "Loading..." : "Reset Password"}    
                     </button>
                 </div>
-                {<div className="text-xs text-red-600 mt-2 ml-3 md:ml-0 lg:ml-0">{errorMessage}</div>}
-                {<div className="text-xs text-green-600 mt-2 ml-3 md:ml-0 lg:ml-0">{successMessage}</div>}
+                {<div className="text-xs text-red-500 mt-2 ml-3 md:ml-0 lg:ml-0">{errorMessage}</div>}
+                {<div className="text-xs text-green-700 mt-2 ml-3 md:ml-0 lg:ml-0">{successMessage}</div>}
             </form>
         </div>
     );
