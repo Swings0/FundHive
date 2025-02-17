@@ -17,8 +17,10 @@ html, body{
 }
 
 
+/* Vec_enhanced.jpg */
+
 .bg{
-  background-image: url(/Vec_enhanced.jpg);
+  background-image: url(/bg.svg);
   background-size: cover;
   width: 100%;
   background-repeat: no-repeat;

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export default async function dbConnect() {
   try {
-    const dbConnection = await mongoose.connect(process.env.MONGO_URL || "", {
+    const dbConnection = await mongoose.connect(process.env.MONGODB_URL || "", {
       connectTimeoutMS: 30000, // Increase connection timeout to 30 seconds
       socketTimeoutMS: 30000, // Increase socket timeout to 30 seconds
     });

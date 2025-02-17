@@ -30,6 +30,7 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>("");
+  
 
   interface User {
     fullname?: string;
@@ -180,122 +181,80 @@ const Page = () => {
 
   return (
     <div className="">
-      <Layout username={""}>
-        <div className="w-full bg-white rounded-sm shadow-sm lg:p-3 md:p-5 p-3 mt-[-24px] flex flex-row justify-end z-10 top">
-          <div className=" w-full mx-auto items-center gap-5">
-            <h1 className="text-sm font-semibold  text-gray-600 ml-3 ">
-              Your Account
-            </h1>
-            <div className="flex items-center w-full mx-auto">
-              <div className="p-4 top">
-                <Image
-                  className="opacity-80 img"
-                  src={"/avatar3.png"}
-                  alt=""
-                  width={100}
-                  height={100}
-                />
-              </div>
-
-              <div className="flex flex-col  ">
-                <div className="flex flex-col gap-1 w-full my-4 lg:my-0 md:my-0 ">
-                  <div>
-                    <span className="text-sm  text-gray-600 relative">
-                      Username:
-                    </span>
-                    <p className="text-xs lg:mt-1 md:mt-1">{displayUsername}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 whitespace-nowrap">
-                      Registration date:
-                    </p>
-                    <p className="text-xs lg:mt-1 md:mt-1">
-                      {registrationDate
-                        ? new Date(registrationDate).toLocaleDateString()
-                        : "Loading..."}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="">
-            <p
-              onClick={() => setShowInfo(!showInfo)}
-              className=" text-lg text-blue-600 cursor-pointer hover:text-[1.22rem]  hover:text-blue-700 hover:rotate-180 duration-300 delay-100 transition-all ease-in-out "
-            >
-              <IoIosInformationCircle />
-            </p>
-          </div>
-
-          {showInfo && userData && (
-            <div
-              data-aos="fade-down"
-              data-aos-duration="500"
-              className="absolute right-0 mt-20 lg:mr-3 text-black lg:rounded-md rounded-tl-md rounded-bl-md shadow-sm w-fit h-fit transition-all ease-linear delay-200 duration-300 opacity-100 transform translate-y-2 z-10 "
-            >
-              <ul className="text-xs">
-                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg lg:rounded-t-md  rounded-tl-md  glass">
-                  <span className="font-semibold text-xs text-slate-700">
-                    Full Name:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo?.fullname || "Not set"}
-                  </p>
-                </li>
-                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
-                  <span className="font-semibold text-xs text-slate-700 ">
-                    Email:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo?.email || "Not set"}
-                  </p>
-                </li>
-                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
-                  <span className="font-semibold text-xs text-slate-700">
-                    Username:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo?.username || "Not set"}
-                  </p>
-                </li>
-                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
-                  <span className="font-semibold text-xs text-slate-700">
-                    USDT TRC20:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo?.usdtTrc20Address || "Not set"}
-                  </p>
-                </li>
-                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
-                  <span className="font-semibold text-xs text-slate-700">
-                    USDT ERC20:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo?.usdtErc20Address || "Not set"}
-                  </p>
-                </li>
-                <li className="text-sm py-2 px-3 bg-white/40 backdrop-blur-md shadow-lg glass">
-                  <span className="font-semibold text-xs text-slate-700">
-                    Bitcoin:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo.bitcoinAddress || "Not set"}
-                  </p>
-                </li>
-                <li className="text-sm py-2 pb-3 px-3 bg-white/40 backdrop-blur-md shadow-lg rounded-bl-md lg:rounded-bl-none glass">
-                  <span className="font-semibold text-xs text-slate-700">
-                    Phone:
-                  </span>
-                  <p className="text-xs text-gray-600">
-                    {userInfo.phone || "Not set"}
-                  </p>
-                </li>
-              </ul>
-            </div>
-          )}
+    <Layout username={""}>
+      {/* Profile Header */}
+      <div className="relative flex flex-col sm:flex-row items-center bg-white/80 backdrop-blur-lg mb-3 transform transition-transform hover:scale-100 w-full rounded-sm shadow-sm  p-5 mt-[-24px] z-10">
+        {/* Avatar Container */}
+        <div className="relative w-24 h-24 sm:w-[7rem] sm:h-[7rem] mb-4 sm:mb-0 p-3 ml-3 mr-0 sm:mr-5">
+          <Image
+            src={"/avatar3.png"}
+            alt="Profile Picture"
+            layout="fill"
+            className="rounded-full shadow-xl"
+          />
         </div>
+        {/* User Details */}
+        <div className="flex flex-col items-center sm:items-start mb-3 text-center sm:text-left">
+          <h1 className="lg:text-2xl md:text-2xl text-xl font-bold text-blue-800 mb-1">
+            {userData?.fullname || fullName || "Not set..."}
+          </h1>
+          <p className="text-sm text-slate-500 mb-0">
+            {userData?.email || email || "loading..."}
+          </p>
+          <p className="text-sm text-slate-400">
+            Registration date:{" "}
+            {registrationDate
+              ? new Date(registrationDate).toLocaleDateString()
+              : "loading..."}
+          </p>
+        </div>
+        {/* Info Icon */}
+        <div className="absolute top-4 right-4">
+          <p
+            onClick={() => setShowInfo(!showInfo)}
+            className="text-xl text-blue-600 cursor-pointer transition-transform transform hover:rotate-180"
+          >
+            <IoIosInformationCircle />
+          </p>
+        </div>
+        {showInfo && userData && (
+          <div
+            data-aos="fade-down"
+            className="absolute right-0 top-9 mt-4  bg-white/70 backdrop-blur-lg shadow-lg rounded-lg p-3 z-10"
+          >
+            <ul className="text-xs text-gray-700">
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">Full Name:</span>{" "}
+                {userData.fullname || "Not set"}
+              </li>
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">Email:</span>{" "}
+                {userData.email || "Not set"}
+              </li>
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">Username:</span>{" "}
+                {userData.username || "Not set"}
+              </li>
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">USDT TRC:</span>{" "}
+                {userData.usdtTrc20Address || "Not set"}
+              </li>
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">USDT ERC:</span>{" "}
+                {userData.usdtErc20Address || "Not set"}
+              </li>
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">Bitcoin:</span>{" "}
+                {userData.bitcoinAddress || "Not set"}
+              </li>
+              <li className="py-1">
+                <span className="font-semibold text-slate-600">Phone:</span>{" "}
+                {userData.phone || "Not set"}
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
 
         <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5  md:p-6 py-5 px-4  mt-3 lg:mb-0 mb-10 profile">
           <form

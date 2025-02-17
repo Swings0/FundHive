@@ -1,7 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const Otp = () => {
@@ -14,27 +13,19 @@ const Otp = () => {
   const [isResendAvailable, setIsResendAvailable] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
-  const email = searchParams.get("email"); // Get the email from the query params
+  const email = searchParams.get("email");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = target;
-
-    const newOTP: string[] = [...otp]; // spread if you don"t want to lose previous value
-    newOTP[currentOTPIndex] = value.substring(value.length - 1); //always grap last value
-
+    const newOTP: string[] = [...otp];
+    newOTP[currentOTPIndex] = value.substring(value.length - 1);
     if (!value) setActiveOtpIndex(currentOTPIndex - 1);
     else setActiveOtpIndex(currentOTPIndex + 1);
-
     setOtp(newOTP);
   };
 
-  const handleOnKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     currentOTPIndex = index;
     if (e.key === "Tab") {
       e.preventDefault();
@@ -48,68 +39,43 @@ const Otp = () => {
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     const value = e.clipboardData.getData("text");
-
     if (isNaN(Number(value))) return false;
-
     const updatedValue = value.toString().split("").slice(0, otp.length);
     setOtp(updatedValue);
-    console.log(updatedValue);
-
-    // Automatically blur (remove focus) after pasting
     inputRef.current?.blur();
   };
 
-  // const handleOnKeyDown = ({key}:React.KeyboardEvent<HTMLInputElement>, index:number) => {
-  //     currentOTPIndex = index;
-  //   if(key === 'Backspace') setActiveOtpIndex(currentOTPIndex - 1);
-  // };
-
   useEffect(() => {
     inputRef.current?.focus();
-  }, [activeOtpIndex]); // Pass activeOtpIndex as dependency to focus on the next inputref when ever state update occurs.
-
-  console.log(otp);
+  }, [activeOtpIndex]);
 
   const handleVerifyOTP = async () => {
     setLoading(true);
     try {
       const response = await fetch("/api/verify", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp: otp.join("") }),
       });
-
       const data = await response.json();
-
-      console.log(response);
       if (response.status === 404) {
         setErr("User not found");
-        setLoading(false);
-      } else if (response.status == 401) {
-        setErr("Otp expired");
-        setLoading(false);
-      } else if (response.status == 400) {
-        setErr("Otp incorrect");
-        setLoading(false);
+      } else if (response.status === 401) {
+        setErr("OTP expired");
+      } else if (response.status === 400) {
+        setErr("OTP incorrect");
       } else if (response.ok) {
-        // route to the login page
         router.push("/login");
       } else {
-        setErr(data.error || "invalid OTP");
-        setLoading(false);
+        setErr(data.error || "Invalid OTP");
       }
     } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
+      if (error instanceof Error) console.log(error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  // Start the timer
   useEffect(() => {
     if (timer > 0) {
       const countdown = setInterval(() => {
@@ -121,7 +87,6 @@ const Otp = () => {
     }
   }, [timer]);
 
-  // Resend OTP
   const handleResendOTP = async () => {
     setLoading(true);
     setIsResendAvailable(false);
@@ -129,93 +94,90 @@ const Otp = () => {
     try {
       const response = await fetch("/api/resend-otp", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      if (!response.ok) throw new Error("Failed to resend OTP");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to resend OTP");
+      }
+      console.log("OTP resent successfully");
     } catch (error) {
-      console.error(error);
+      console.error("Error in handleResendOTP:", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="relative h-[100vh] flex flex-col justify-center  items-center bg">
-      <div className="flex flex-col items-left bg-white px-8 rounded-md shadow-blue-50 shadow-lg border-blue-300 border-t-2 lg:pt-11 lg:pb-3 pt-9 pb-1">
-        <h1 className="lg:text-lg text-sm font-semibold text-blue-400 w-full">
+    <main className="relative min-h-screen flex flex-col justify-center items-center bg p-6">
+      <div className="flex flex-col items-start bg-gray-900/70 backdrop-blur-md sm:rounded-lg  shadow-2xl lg:w-[35rem] w-fit  lg:py-6 md:py-6 py-4 px-8 border-t-4 border-blue-400">
+        <h1 className="text-xl font-semibold text-blue-300 sm:mb-2 mb-1 whitespace-nowrap">
           Enter OTP to verify your account
         </h1>
-        <p className="lg:text-sm text-xs pb-3 text-gray-400">
-          OTP has been sent to your email{" "}
+        <p className="text-xs sm:text-sm text-gray-400 sm:mb-4 mb-2">
+          OTP has been sent to your email
         </p>
-        <form className="relative" onSubmit={handleVerifyOTP}>
-          {otp.map((_, index) => {
-            return (
+        <form className="w-full flex justify-center mb-4 sm:mb-6" onSubmit={handleVerifyOTP}>
+          <div className="flex space-x-3">
+            {otp.map((_, index) => (
               <React.Fragment key={index}>
                 <input
                   ref={index === activeOtpIndex ? inputRef : null}
                   type="number"
                   value={otp[index]}
-                  className="lg:w-10 lg:h-10 md:w-8 md:h-8 w-5 h-5 border-[1px] lg:rounded-sm bg-transparent outline-none text-center font-semibold lg:text-xl text-sm border-gray-400 focus:border-blue-400 focus:text-blue-400 text-gray-400 transition spin-button-none"
+                  className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 border border-gray-500 rounded-lg bg-transparent text-center font-bold text-lg sm:text-xl md:text-2xl text-gray-300 focus:border-blue-400 focus:text-blue-400 transition duration-200"
                   maxLength={1}
                   onKeyDown={(e) => handleOnKeyDown(e, index)}
                   onChange={handleChange}
                   onPaste={handlePaste}
                 />
-                {index < 5 && <span className="mx-2 text-gray-400">-</span>}
+                {index < otp.length - 1 && (
+                  <span className="hidden sm:flex text-gray-400 text-xl items-center">-</span>
+                )}
               </React.Fragment>
-            );
-          })}
-        </form>
-        <div className="flex flex-col  py-5 gap-2 relative">
-          <button
-            onClick={handleVerifyOTP}
-            className="group flex place-items-center justify-center w-full lg:px-10 lg:py-2 py-1 relative bg-blue-500  text-white font-semibold rounded-md hover:bg-blue-600 hover:translate-y-px duration-300 glass "
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? (
-              <span className="flex items-center justify-center">
-                <span className="button-loader py-1 ml-3">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-              </span>
-            ) : (
-              <>
-                <span className="absolute left-1/2 -translate-x-1/2 transition text-sm w-full text-left pl-5">
-                  Verify
-                </span>
-                <span className="ml-auto opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition">
-                  <MdOutlineKeyboardArrowRight />
-                </span>
-              </>
-            )}
-          </button>
-          {err && <p className="text-red-500 text-xs">{err}</p>}
-
-          <div className=" pt-3 gap-2 relative">
-            {isResendAvailable ? (
-              <button
-                onClick={handleResendOTP}
-                className="group text-blue-400 text-left w-full text-xs"
-                disabled={loading}
-              >
-                Resend OTP
-              </button>
-            ) : (
-              <p className="text-xs text-stone-400 font-light">
-                Resend available in {timer}s
-              </p>
-            )}
+            ))}
           </div>
+        </form>
+        <button
+          onClick={handleVerifyOTP}
+          className="group flex items-center justify-center w-full px-6 py-2 glass text-white bg-blue-600 rounded-md transition transform hover:scale-105 hover:bg-blue-700 duration-300"
+          disabled={loading}
+        >
+          {loading ? (
+            <span className="flex items-center justify-center">
+              <span className="spinner animate-spin ml-4">
+                <span className="block w-2 h-2 bg-blue-300 rounded-full"></span>
+              </span>
+            </span>
+          ) : (
+            <>
+              <span className="text-sm sm:text-base">Verify</span>
+              <span className="ml-auto opacity-0 group-hover:opacity-100 transition">
+                <MdOutlineKeyboardArrowRight />
+              </span>
+            </>
+          )}
+        </button>
+        {err && <p className="text-red-400 text-xs sm:text-sm mt-2">{err}</p>}
+        <div className="sm:pt-4 pt-2">
+          {isResendAvailable ? (
+            <button
+              onClick={handleResendOTP}
+              className="text-blue-300 text-xs sm:text-sm hover:underline"
+              disabled={loading}
+            >
+              Resend OTP
+            </button>
+          ) : (
+            <p className="text-xs sm:text-sm text-gray-300">
+              Resend available in {timer}s
+            </p>
+          )}
         </div>
       </div>
     </main>
   );
 };
+
 export default Otp;

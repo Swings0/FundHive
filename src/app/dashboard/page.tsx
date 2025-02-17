@@ -93,65 +93,69 @@ const Page = () => {
   return (
     <div className="h-full">
       <Layout username="">
-        <div className="lg:flex lg:flex-row flex flex-col w-full lg:gap-5 gap-7">
-          <div className="lg:w-64 w-full h-80 bg-white rounded-sm shadow-sm shadow-gray-200 p-4 flex flex-col space-y-5 mt-[-20px]">
-            <h1 className="font-medium text-gray-600 mb-2">Overview</h1>
-            <div className="flex justify-between items-center">
-              <div className="flex-1">
-                <p className="text-sm text-gray-600">Active Deposit</p>
-                <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
-                  ${investment.activeDeposit.toLocaleString()}.00
-                </span>
+        <div className="lg:flex lg:flex-row flex flex-col lg:gap-5 gap-7">
+          <div className='lg:w-[17rem] w-full'>
+            <div className="lg:w-[17rem] w-full h-[21rem] bg-white rounded-sm shadow-sm shadow-gray-200 p-4 flex flex-col space-y-5 mt-[-20px]">
+              <h1 className="font-medium text-gray-600 mb-2">Overview</h1>
+              <div className="flex justify-between items-center">
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600">Active Deposit</p>
+                  <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
+                    ${investment.activeDeposit.toLocaleString()}.00
+                  </span>
+                </div>
+                <div className="flex flex-col items-end">
+                  <FaArrowUp className="text-blue-500 mb-1 text-xs" />
+                  <div className="w-16 bg-gray-200 rounded-full h-1">
+                    <div
+                      className="bg-blue-500 h-1 rounded-full"
+                      style={{ width: `${progressPercentage}%` }}
+                    ></div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-end">
-                <FaArrowUp className="text-blue-500 mb-1 text-xs" />
-                <div className="w-16 bg-gray-200 rounded-full h-1">
-                  <div
-                    className="bg-blue-500 h-1 rounded-full"
-                    style={{ width: `${progressPercentage}%` }}
-                  ></div>
+              <span className="w-48 h-[1px] bg-slate-200"></span>
+              <div className="flex justify-between items-center">
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600">Total Deposit</p>
+                  <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
+                    ${investment.totalDeposit.toLocaleString()}.00
+                  </span>
+                </div>
+                <div className="flex flex-col items-end">
+                  <FaArrowUp className="text-green-500 mb-1 text-xs" />
+                  <div className="w-16 bg-gray-200 rounded-full h-1">
+                    <div
+                      className="bg-green-500 h-1 rounded-full"
+                      style={{ width: `${progressPercentageOne}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <span className="w-48 h-[1px] bg-slate-200"></span>
+              <div className="flex justify-between items-center">
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600">Total Withdrawal</p>
+                  <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
+                    $0.00
+                  </span>
+                </div>
+                <div className="flex flex-col items-end">
+                  <FaArrowDown className="text-red-500 mb-1 text-xs" />
+                  <div className="w-16 bg-gray-200 rounded-full h-1">
+                    <div
+                      className="bg-red-500 h-1 rounded-full"
+                      style={{ width: "0%" }}
+                    ></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <span className="w-48 h-[1px] bg-slate-200"></span>
-            <div className="flex justify-between items-center">
-              <div className="flex-1">
-                <p className="text-sm text-gray-600">Total Deposit</p>
-                <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
-                  ${investment.totalDeposit.toLocaleString()}.00
-                </span>
-              </div>
-              <div className="flex flex-col items-end">
-                <FaArrowUp className="text-green-500 mb-1 text-xs" />
-                <div className="w-16 bg-gray-200 rounded-full h-1">
-                  <div
-                    className="bg-green-500 h-1 rounded-full"
-                    style={{ width: `${progressPercentageOne}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <span className="w-48 h-[1px] bg-slate-200"></span>
-            <div className="flex justify-between items-center">
-              <div className="flex-1">
-                <p className="text-sm text-gray-600">Total Withdrawal</p>
-                <span className="text-gray-800 font-semibold text-sm md:text-base lg:text-base">
-                  $0.00
-                </span>
-              </div>
-              <div className="flex flex-col items-end">
-                <FaArrowDown className="text-red-500 mb-1 text-xs" />
-                <div className="w-16 bg-gray-200 rounded-full h-1">
-                  <div
-                    className="bg-red-500 h-1 rounded-full"
-                    style={{ width: "0%" }}
-                  ></div>
-                </div>
-              </div>
-            </div>
+
           </div>
+
           <div className="w-full">
-            <div className="h-[21rem] bg-white rounded-sm shadow-sm shadow-gray-200 p-4 mt-[-20px] space-y-2">
+            <div className="h-[22rem] bg-white rounded-sm shadow-sm shadow-gray-200 p-4 mt-[-20px] space-y-2">
               <h1 className="text-lg font-semibold text-gray-700 mb-2">
                 Your Account
               </h1>

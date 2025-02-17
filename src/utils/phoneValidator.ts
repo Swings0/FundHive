@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ABSTRACT_API_KEY = process.env.ABSTRACT_API || '';
+const ABSTRACT_API_KEY = process.env.NEXT_PUBLIC_ABSTRACT_PHONE_API_KEY || '';
 
 
 

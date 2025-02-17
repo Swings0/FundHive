@@ -159,7 +159,7 @@ const Page: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900">
       <Layout username={session?.user?.name || ""}>
         <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2  mt-[-20px] overflow-hidden">
-          <h1 className="text-3xl font-bold text-blue-900 mb-6">TradeView</h1>
+          <h1 className="text-3xl font-bold text-blue-900 mb-6 lg:ml-3 md:ml-3 ml-4">TradeView</h1>
 
           {loading ? (
             <p className="text-center text-lg">Loading investment data...</p>
@@ -227,11 +227,11 @@ const Page: React.FC = () => {
             </div>
           ) : (
             <div className="border border-gray-300 p-6 rounded-lg text-center">
-              <p className="text-2xl text-gray-600 mb-4">
+              <p className="text-xl text-gray-600 mb-4">
                 You have no ongoing investment yet.
               </p>
               <Link href={"/deposit"}>
-                <button className="px-6 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white transition">
+                <button className="px-6 py-2 glass bg-blue-600 rounded hover:bg-blue-700 text-white transition">
                   Invest Now
                 </button>
               </Link>

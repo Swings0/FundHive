@@ -68,17 +68,17 @@ const Login = () => {
 
   return (
     <div className='fixed lg:w-full w-screen lg:h-[100vh] h-screen flex flex-col justify-center items-center bg'>
-        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white py-8 px-8  rounded-md md:shadow-md lg:border-blue-300 md:border-blue-300 lg:border-t-2 md:border-t-2 lg:py-11'>
+        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white/40 backdrop-blur-lg py-8 px-8  rounded-md md:shadow-md border-2 border-white lg:py-11'>
         
           <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>Login</h1>
 
             <form onSubmit={submitHandler} className='flex flex-col gap-5 pt-6 pb-3'>
                 <div className='w-full relative'>
-                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} className= {`${emailError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`} type='email' placeholder={`${emailError && 'please enter email' || 'Email'}`} /> <div className={( emailError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><IoMdMail/></div>
+                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} className= {`${emailError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600 focus:border-red-200' || 'border-2 border-white focus:border-blue-200 w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`} type='email' placeholder={`${emailError && 'please enter email' || 'Email'}`} /> <div className={( emailError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><IoMdMail/></div>
                 </div>
 
                 <div className='w-full relative'>
-                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)} className= {`${passwordError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600' || 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`}
+                <input onChange={(e:React.ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)} className= {`${passwordError && 'border-2 border-white  w-full rounded-lg py-1 px-4 bg-red-50 text-base lg:text-sm outline-none  text-red-600 text-opacity-90 placeholder-opacity-70 placeholder-red-600 focus:border-red-200' || 'border-2 border-white focus:border-blue-200 w-full rounded-lg py-1 px-4 bg-slate-50 text-base lg:text-sm  outline-none placeholder-blue-400 text-blue-900 text-opacity-90 placeholder-opacity-70'}`}
                  type={( show === true ? 'password' : 'text')} placeholder={`${passwordError && 'please enter password' || 'Password'}`} /> <div className={( passwordError ? 'absolute top-2 right-4 text-sm text-red-600 opacity-50 z-10' :  'absolute top-2 right-4 text-sm text-blue-400 opacity-50 z-10')}><FaLock/></div>
                 </div>
                   

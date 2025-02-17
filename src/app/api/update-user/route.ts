@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
-      fullName,
+      fullname,
       email, 
       newEmail,
       newPassword,
@@ -36,8 +36,8 @@ export async function POST(req: NextRequest) {
     const updatedFields: string[] = [];
 
     // Update fields if provided in the request
-    if (fullName && fullName !== user.fullname) {
-      user.fullname = fullName;
+    if (fullname && fullname !== user.fullname) {
+      user.fullname = fullname;
       updatedFields.push('Your FullName');
     }
 
