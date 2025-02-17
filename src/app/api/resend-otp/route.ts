@@ -7,7 +7,7 @@ import User from "@/models/user";
 const uri = process.env.MONGODB_URL as string;
 const client = new MongoClient(uri);
 const database = client.db("fundhive");
-const usersCollection = database.collection("users");
+// Removed: const usersCollection = database.collection("users");
 
 const generateOTP = (): string => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
 
     // Update OTP fields
     user.otp = otp;
-    user.otpExpiresAt = otpExpiresAt;
+    user.otpExpires = otpExpiresAt; // using otpExpires as defined in your model
     await user.save();
 
     const mailOptions = {

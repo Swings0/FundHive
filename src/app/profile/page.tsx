@@ -15,7 +15,7 @@ const Page = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
-  const [registrationDate, setRegistrationDate] = useState<string | null>(null); // New state for registration date
+  const [registrationDate, setRegistrationDate] = useState<string | null>(null);
   const [fullName, setFullName] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
@@ -30,7 +30,6 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>("");
-  
 
   interface User {
     fullname?: string;
@@ -40,7 +39,6 @@ const Page = () => {
     usdtTrc20Address?: string;
     usdtErc20Address?: string;
     bitcoinAddress?: string;
-    // other properties here
   }
   const [userData, setUserData] = useState<User | null>(null);
 
@@ -51,10 +49,7 @@ const Page = () => {
           const response = await axios.get("/api/getuser");
           setFetchedUsername(response.data.username || "");
           setEmail(response.data.email || "");
-          setRegistrationDate(response.data.registrationDate || null); // Set registration date
-
-          // setFetchedUsername(data.username || '');
-          // setEmail(data.email || '');
+          setRegistrationDate(response.data.registrationDate || null);
           setFullName(response.data.fullname || "");
           setUserName(response.data.username || "");
           setRegistrationDate(response.data.registrationDate || null);
@@ -123,10 +118,7 @@ const Page = () => {
       }
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
-        console.error(
-          "Error updating account data:",
-          error.response?.data || error
-        );
+        console.error("Error updating account data:", error.response?.data || error);
         setModalMessage(
           error.response?.data?.message ||
             "An error occurred while updating account data."
@@ -148,15 +140,15 @@ const Page = () => {
       const fetchUserData = async () => {
         try {
           const response = await axios.get("/api/displayinfo", {
-            headers: { "user-id": session.user.id }, // Pass user ID from session
+            headers: { "user-id": session.user.id },
           });
-          setUserData(response.data); // Set fetched data
+          setUserData(response.data);
         } catch (error) {
           console.error("Error fetching user data:", error);
           setModalMessage("Failed to load user data.");
           setIsModalVisible(true);
         } finally {
-          setIsLoading(false); // Stop loading
+          setIsLoading(false);
         }
       };
       fetchUserData();
@@ -165,102 +157,92 @@ const Page = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 1200, // Animation duration in milliseconds
-      offset: 200, // Offset in pixels
+      duration: 1200,
+      offset: 200,
       once: false,
     });
   }, []);
 
-  const displayUsername = fetchedUsername || "Guest";
-
-  // if (isLoading) {
-  //   return <p>Loading...</p>; // Show loading indicator while data fetch is in progress
-  // }
-
-  const userInfo = userData || {}; // Ensure safe access
-
   return (
     <div className="">
-    <Layout username={""}>
-      {/* Profile Header */}
-      <div className="relative flex flex-col sm:flex-row items-center bg-white/80 backdrop-blur-lg mb-3 transform transition-transform hover:scale-100 w-full rounded-sm shadow-sm  p-5 mt-[-24px] z-10">
-        {/* Avatar Container */}
-        <div className="relative w-24 h-24 sm:w-[7rem] sm:h-[7rem] mb-4 sm:mb-0 p-3 ml-3 mr-0 sm:mr-5">
-          <Image
-            src={"/avatar3.png"}
-            alt="Profile Picture"
-            layout="fill"
-            className="rounded-full shadow-xl"
-          />
-        </div>
-        {/* User Details */}
-        <div className="flex flex-col items-center sm:items-start mb-3 text-center sm:text-left">
-          <h1 className="lg:text-2xl md:text-2xl text-xl font-bold text-blue-800 mb-1">
-            {userData?.fullname || fullName || "Not set..."}
-          </h1>
-          <p className="text-sm text-slate-500 mb-0">
-            {userData?.email || email || "loading..."}
-          </p>
-          <p className="text-sm text-slate-400">
-            Registration date:{" "}
-            {registrationDate
-              ? new Date(registrationDate).toLocaleDateString()
-              : "loading..."}
-          </p>
-        </div>
-        {/* Info Icon */}
-        <div className="absolute top-4 right-4">
-          <p
-            onClick={() => setShowInfo(!showInfo)}
-            className="text-xl text-blue-600 cursor-pointer transition-transform transform hover:rotate-180"
-          >
-            <IoIosInformationCircle />
-          </p>
-        </div>
-        {showInfo && userData && (
-          <div
-            data-aos="fade-down"
-            className="absolute right-0 top-9 mt-4  bg-white/70 backdrop-blur-lg shadow-lg rounded-lg p-3 z-10"
-          >
-            <ul className="text-xs text-gray-700">
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">Full Name:</span>{" "}
-                {userData.fullname || "Not set"}
-              </li>
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">Email:</span>{" "}
-                {userData.email || "Not set"}
-              </li>
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">Username:</span>{" "}
-                {userData.username || "Not set"}
-              </li>
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">USDT TRC:</span>{" "}
-                {userData.usdtTrc20Address || "Not set"}
-              </li>
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">USDT ERC:</span>{" "}
-                {userData.usdtErc20Address || "Not set"}
-              </li>
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">Bitcoin:</span>{" "}
-                {userData.bitcoinAddress || "Not set"}
-              </li>
-              <li className="py-1">
-                <span className="font-semibold text-slate-600">Phone:</span>{" "}
-                {userData.phone || "Not set"}
-              </li>
-            </ul>
+      <Layout username={""}>
+        {/* Profile Header */}
+        <div className="relative flex flex-col sm:flex-row items-center bg-white/80 backdrop-blur-lg mb-3 transform transition-transform hover:scale-100 w-full rounded-sm shadow-sm p-5 mt-[-24px] z-10">
+          {/* Avatar Container */}
+          <div className="relative w-24 h-24 sm:w-[7rem] sm:h-[7rem] mb-4 sm:mb-0 p-3 ml-3 mr-0 sm:mr-5">
+            <Image
+              src={"/avatar3.png"}
+              alt="Profile Picture"
+              layout="fill"
+              className="rounded-full shadow-xl"
+            />
           </div>
-        )}
-      </div>
+          {/* User Details */}
+          <div className="flex flex-col items-center sm:items-start mb-3 text-center sm:text-left">
+            <h1 className="lg:text-2xl md:text-2xl text-xl font-bold text-blue-800 mb-1">
+              {userData?.fullname || fullName || "Not set..."}
+            </h1>
+            <p className="text-sm text-slate-500 mb-0">
+              {userData?.email || email || "loading..."}
+            </p>
+            <p className="text-sm text-slate-400">
+              Registration date:{" "}
+              {registrationDate
+                ? new Date(registrationDate).toLocaleDateString()
+                : "loading..."}
+            </p>
+          </div>
+          {/* Info Icon */}
+          <div className="absolute top-4 right-4">
+            <p
+              onClick={() => setShowInfo(!showInfo)}
+              className="text-xl text-blue-600 cursor-pointer transition-transform transform hover:rotate-180"
+            >
+              <IoIosInformationCircle />
+            </p>
+          </div>
+          {showInfo && userData && (
+            <div
+              data-aos="fade-down"
+              className="absolute right-0 top-9 mt-4 bg-white/70 backdrop-blur-lg shadow-lg rounded-lg p-3 z-10"
+            >
+              <ul className="text-xs text-gray-700">
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">Full Name:</span>{" "}
+                  {userData.fullname || "Not set"}
+                </li>
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">Email:</span>{" "}
+                  {userData.email || "Not set"}
+                </li>
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">Username:</span>{" "}
+                  {userData.username || "Not set"}
+                </li>
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">USDT TRC:</span>{" "}
+                  {userData.usdtTrc20Address || "Not set"}
+                </li>
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">USDT ERC:</span>{" "}
+                  {userData.usdtErc20Address || "Not set"}
+                </li>
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">Bitcoin:</span>{" "}
+                  {userData.bitcoinAddress || "Not set"}
+                </li>
+                <li className="py-1">
+                  <span className="font-semibold text-slate-600">Phone:</span>{" "}
+                  {userData.phone || "Not set"}
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
 
-        <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5  md:p-6 py-5 px-4  mt-3 lg:mb-0 mb-10 profile">
-          <form
-            className="flex flex-col gap-3 p-1 vest"
-            onSubmit={handleSubmit}
-          >
+        {/* Profile Form */}
+        <div className="w-full bg-slate-50 glass rounded-sm shadow-sm lg:p-5 md:p-6 py-5 px-4 mt-3 lg:mb-0 mb-10 profile">
+          <form className="flex flex-col gap-3 p-1 vest" onSubmit={handleSubmit}>
             <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
               <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
                 Enter full name:
@@ -381,8 +363,7 @@ const Page = () => {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-
-            <div className="pt-3 flex lg:justify-end md:justify-end justify-center w-full  ">
+            <div className="pt-3 flex lg:justify-end md:justify-end justify-center w-full">
               <button
                 type="submit"
                 className={`update-btn ${
@@ -400,7 +381,6 @@ const Page = () => {
             </div>
           </form>
         </div>
-
         <Modal
           isVisible={isModalVisible}
           message={modalMessage}
