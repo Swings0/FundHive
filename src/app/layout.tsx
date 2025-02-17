@@ -41,9 +41,10 @@ export default function RootLayout({
       <body
          className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}
       >
-      <Providers>
-        {children}
-      </Providers>
+        <Providers>
+          {children}
+        </Providers>
+
        <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cm3suitcw0eaosvbm7id1fvcr"></script>
    
       </body>

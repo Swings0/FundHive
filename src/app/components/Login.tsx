@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div className='fixed lg:w-full w-screen lg:h-[100vh] h-screen flex flex-col justify-center items-center bg'>
-        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white/40 backdrop-blur-lg py-8 px-8  rounded-md md:shadow-md border-2 border-white lg:py-11'>
+        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white/40 backdrop-blur-lg py-8 px-8  rounded-md md:shadow-md border-2 border-white lg:py-11 '>
         
           <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>Login</h1>
 

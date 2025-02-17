@@ -177,9 +177,9 @@ const Register = () => {
 
   return (
     <div 
-     className='w-screen lg:w-full md:w-screen fixed  lg:h-[100vh] h-screen flex flex-col justify-center items-center bg-no-repeat bg-cover bg-center bg'
+     className='w-screen lg:w-full md:w-screen fixed  lg:h-[100vh] h-screen flex flex-col justify-center items-center bg-no-repeat bg-cover bg-center bg '
       >
-        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white/40 backdrop-blur-lg py-8 px-8 rounded-md shadow-sm md:shadow-md border-2 border-white lg:py-11'>
+        <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white/40 backdrop-blur-lg py-8 px-8 rounded-md sm:shadow-md border-t-2  sm:border-2 border-white lg:py-11 sm:mb-0 mb-4'>
         
           <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>Register</h1>
           {/* <div className='w-[8rem] h-[2px] bg-gradient-to-r from-[#86abd4] via-[#c7d5e6] to-[#6190c7] ml-3 opacity-70'></div>
