@@ -6,8 +6,8 @@ import User from "@/models/user";
 
 const uri = process.env.MONGODB_URL as string;
 const client = new MongoClient(uri);
-const database = client.db("fundhive");
-// Removed: const usersCollection = database.collection("users");
+// const database = client.db("fundhive");
+// const usersCollection = database.collection("users");
 
 const generateOTP = (): string => {
   return Math.floor(100000 + Math.random() * 900000).toString();

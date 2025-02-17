@@ -14,7 +14,7 @@ import "aos/dist/aos.css";
 const Page = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
+  // const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
   const [registrationDate, setRegistrationDate] = useState<string | null>(null);
   const [fullName, setFullName] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
@@ -47,7 +47,7 @@ const Page = () => {
       const fetchUserData = async () => {
         try {
           const response = await axios.get("/api/getuser");
-          setFetchedUsername(response.data.username || "");
+          // setFetchedUsername(response.data.username || "");
           setEmail(response.data.email || "");
           setRegistrationDate(response.data.registrationDate || null);
           setFullName(response.data.fullname || "");
