@@ -3,7 +3,7 @@ import ResetPassword from '../components/ResetPassword';// Adjust the path to yo
 
 export default function ResetPasswordPage() {
   return (
-    <Suspense fallback={<div className='flex items-center justify-center bg-zinc-900 text-white'>Loading...</div>}>
+    <Suspense fallback={<div className='flex items-center justify-center w-full h-screen bg-zinc-900 text-white'>Loading...</div>}>
       <ResetPassword />
     </Suspense>
   );

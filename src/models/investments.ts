@@ -1,27 +1,41 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+export interface ITransaction {
+  type: string;
+  amount: number;
+  wallet: string;
+  dateTime: Date;
+}
+
 export interface IInvestment extends Document {
   userEmail: string;
   userId: string;
-  totalDeposit: number;          // Process A: deposit amount
-  activeDeposit: number;         // Process A: current active deposit (increments from 0 to targetActiveDeposit)
-  targetActiveDeposit: number;   // Process A: target value for active deposit increment
-  duration: number;              // Process A: duration for active deposit increment
-  durationUnit: 'min' | 'hour' | 'day'; // Process A: unit for active deposit duration
-  startTime: Date;               // Process A start time
+  totalDeposit: number;
+  activeDeposit: number;
+  targetActiveDeposit: number;
+  duration: number;
+  durationUnit: 'min' | 'hour' | 'day';
+  startTime: Date;
   status: 'active' | 'completed';
-  // Process B fields:
-  pendingAccountBalance: number; // The new account balance entered by admin
-  accountBalanceUpdateDuration: number; // Process B: duration delay for updating the account balance
-  accountBalanceUpdateUnit: 'min' | 'hour' | 'day'; // Process B: unit for account balance update delay
-  accountBalanceUpdateStartTime: Date; // Process B start time
-  accountBalance: number;        // Final account balance (displayed only after Process B completes)
-  // New: Withdrawal activation flags.
+  pendingAccountBalance: number;
+  accountBalanceUpdateDuration: number;
+  accountBalanceUpdateUnit: 'min' | 'hour' | 'day';
+  accountBalanceUpdateStartTime: Date;
+  accountBalance: number;
   withdrawalActivation: {
     USDT_TRC20: boolean;
     USDT_ERC20: boolean;
     Bitcoin: boolean;
   };
+  pendingWithdrawal: number;
+  displayWithdrawalStatus: boolean;
+  // New transactions field:
+  transactions: ITransaction[];
+  // Existing withdrawal status fields (if used)
+  withdrawalStatusHeader?: string;
+  withdrawalStatusMessage?: string;
+  withdrawalStatusButtonText?: string;
+  withdrawalStatusHidden?: boolean;
 }
 
 const InvestmentSchema: Schema = new Schema({
@@ -44,8 +58,24 @@ const InvestmentSchema: Schema = new Schema({
     required: true,
     default: { USDT_TRC20: false, USDT_ERC20: false, Bitcoin: false },
   },
+  pendingWithdrawal: { type: Number, required: true, default: 0 },
+  displayWithdrawalStatus: { type: Boolean, default: false },
+  transactions: {
+    type: [
+      {
+        type: { type: String, required: true },
+        amount: { type: Number, required: true },
+        wallet: { type: String, required: true },
+        dateTime: { type: Date, required: true },
+      },
+    ],
+    default: [],
+  },
+  withdrawalStatusHeader: { type: String, default: "" },
+  withdrawalStatusMessage: { type: String, default: "" },
+  withdrawalStatusButtonText: { type: String, default: "" },
+  withdrawalStatusHidden: { type: Boolean, default: false },
 });
 
 export default mongoose.models.Investment ||
   mongoose.model<IInvestment>('Investment', InvestmentSchema);
-

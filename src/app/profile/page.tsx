@@ -12,7 +12,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Page = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   // const [fetchedUsername, setFetchedUsername] = useState<string | null>(null);
   const [registrationDate, setRegistrationDate] = useState<string | null>(null);
@@ -30,6 +30,7 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   interface User {
     fullname?: string;
@@ -163,9 +164,20 @@ const Page = () => {
     });
   }, []);
 
+
+  useEffect(() => {
+    setLoading(status === "loading");
+  }, [status]);
+
+
   return (
     <div className="">
       <Layout username={""}>
+        {loading && (
+            <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+              <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
+            </div>
+          )}
         {/* Profile Header */}
         <div className="relative flex flex-col sm:flex-row items-center bg-white/80 backdrop-blur-lg mb-3 transform transition-transform hover:scale-100 w-full rounded-sm shadow-sm p-5 mt-[-24px] z-10">
           {/* Avatar Container */}

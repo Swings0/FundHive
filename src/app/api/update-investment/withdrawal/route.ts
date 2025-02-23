@@ -3,53 +3,51 @@ import dbConnect from "@/utils/dbConnect";
 import Investment from "@/models/investments";
 import User from "@/models/user";
 
-export async function GET() {
-  // Disallow GET requests for this endpoint.
-  return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
-}
-
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const { email, currency, activate } = body;
+    const body = await req.json();
+    const { email, currency, activate, activationDuration, activationUnit } = body;
 
     if (!email || !currency || activate === undefined) {
-      return NextResponse.json(
-        { message: "Missing required fields" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
     }
 
     await dbConnect();
 
-    // First, find the user by email.
-    const user = await User.findOne({ email });
-    if (!user) {
-      return NextResponse.json(
-        { message: "User not found" },
-        { status: 404 }
-      );
-    }
-
-    // Define the mapping between the currency string and the document key.
+    // Map currency to internal key.
     let key = "";
     if (currency === "USDT TRC20") key = "USDT_TRC20";
     else if (currency === "USDT ERC20") key = "USDT_ERC20";
     else if (currency === "Bitcoin") key = "Bitcoin";
     else {
-      return NextResponse.json(
-        { message: "Invalid currency" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "Invalid currency" }, { status: 400 });
     }
 
-    // Update only the specific field using $set.
+    // When activating, record the current time.
+    const settingsUpdate = activate
+      ? {
+          activated: true,
+          activationStartTime: new Date(),
+          activationDuration: activationDuration ? parseFloat(activationDuration) : 0,
+          activationUnit: activationUnit || "min",
+        }
+      : {
+          activated: false,
+          activationStartTime: null,
+          activationDuration: 0,
+          activationUnit: "min",
+        };
+
     const updateResult = await Investment.updateOne(
       { userEmail: email },
-      { $set: { [`withdrawalActivation.${key}`]: activate } }
+      {
+        $set: {
+          [`withdrawalActivation.${key}`]: activate,
+          [`withdrawalActivationSettings.${key}`]: settingsUpdate,
+        },
+      }
     );
 
-    // If no document was updated, you might want to create one.
     if (updateResult.matchedCount === 0) {
       const newInvestment = new Investment({
         userEmail: email,
@@ -66,9 +64,13 @@ export async function POST(request: Request) {
         accountBalanceUpdateUnit: "min",
         accountBalanceUpdateStartTime: new Date(),
         accountBalance: 0,
+        pendingWithdrawal: 0,
         withdrawalActivation: { USDT_TRC20: false, USDT_ERC20: false, Bitcoin: false },
+        displayWithdrawalStatus: false,
+        transactions: [],
       });
       newInvestment.withdrawalActivation[key] = activate;
+      newInvestment.withdrawalActivationSettings[key] = settingsUpdate;
       await newInvestment.save();
     }
 

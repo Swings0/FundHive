@@ -34,7 +34,9 @@ function generateRandomData(
 
 // ProfitChart component: displays an animated line chart with gradient stroke.
 const ProfitChart: React.FC = () => {
-  const [data, setData] = useState<number[]>(generateRandomData(30, 100, 10000));
+  const [data, setData] = useState<number[]>(
+    generateRandomData(30, 100, 10000)
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,9 +67,7 @@ const ProfitChart: React.FC = () => {
 
   return (
     <div className="relative">
-      <svg
-        className="bg-white rounded-lg shadow-lg w-80 h-36 md:w-[18.8rem] md:h-36 w-[17rem] h-36 ml-1 chart"
-      >
+      <svg className="bg-white rounded-lg shadow-lg w-80 h-36 md:w-[18.8rem] md:h-36 w-[17rem] h-36 ml-1 chart">
         <defs>
           <linearGradient id="chartGradient" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#4ade80" />
@@ -96,6 +96,7 @@ const Page: React.FC = () => {
   const { data: session, status } = useSession();
   const [investment, setInvestment] = useState<Investment | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Use the session's email dynamically.
   const email = session?.user?.email;
@@ -134,13 +135,10 @@ const Page: React.FC = () => {
       : 0;
   const randomProfit = Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
 
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen bg-gray-900 p-8 text-gray-100 flex items-center justify-center">
-        <p>Loading session...</p>
-      </div>
-    );
-  }
+  // If the session is loading, display a loading message.
+  useEffect(() => {
+    setIsLoading(status === "loading");
+  }, []);
 
   if (!session?.user) {
     return (
@@ -158,8 +156,15 @@ const Page: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900">
       <Layout username={session?.user?.name || ""}>
+        {loading && (
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
+          </div>
+        )}
         <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2  mt-[-20px] overflow-hidden">
-          <h1 className="text-3xl font-bold text-blue-900 mb-6 lg:ml-3 md:ml-3 ml-4">TradeView</h1>
+          <h1 className="text-3xl font-bold text-blue-900 mb-6 lg:ml-3 md:ml-3 ml-4">
+            TradeView
+          </h1>
 
           {loading ? (
             <p className="text-center text-lg">Loading investment data...</p>
@@ -215,7 +220,7 @@ const Page: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="flex justify-center lg:justify-start">
+                <div className="flex justify-center lg:justify-start ml-3">
                   <div className="flex space-x-3">
                     <FaArrowLeft className="text-blue-500 animate-slideLeft delay-100 text-xl" />
                     <FaArrowLeft className="text-blue-500 animate-slideLeft delay-200 text-xl" />
@@ -244,4 +249,3 @@ const Page: React.FC = () => {
 };
 
 export default Page;
-

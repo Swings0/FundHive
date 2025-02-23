@@ -1,54 +1,58 @@
-'use client'
-import Layout from '../components/Layout';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import { useEffect,useState } from 'react';
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
+"use client";
+import Layout from "../components/Layout";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 
 const Page = () => {
-  const { data: session } = useSession();
-  const [fetchedUsername, setFetchedUsername] = useState('');
+  const { data: session, status } = useSession();
+  const [fetchedUsername, setFetchedUsername] = useState("");
+  const [loading, setLoading] = useState(false);
   const [investment, setInvestment] = useState({
     activeDeposit: 0,
     totalDeposit: 0,
     accountBalance: 0,
-    targetActiveDeposit: 0, 
+    targetActiveDeposit: 0,
     targetTotalDeposit: 0,
   });
-  const [error, setError] = useState('');
-
+  const [error, setError] = useState("");
 
   const progressPercentage = investment.targetActiveDeposit
-  ? Math.min((investment.activeDeposit / investment.targetActiveDeposit) * 100, 100)
-  : 0;
-
+    ? Math.min(
+        (investment.activeDeposit / investment.targetActiveDeposit) * 100,
+        100
+      )
+    : 0;
 
   const minDeposit = 100;
   const maxDeposit = 10000;
   const deposit = investment.totalDeposit;
 
-  const progressPercentageOne = 
-  deposit <= minDeposit
-  ? 0
-  : deposit >= maxDeposit
-  ? 100
-  : ((deposit - minDeposit) / (maxDeposit - minDeposit) * 100)
+  const progressPercentageOne =
+    deposit <= minDeposit
+      ? 0
+      : deposit >= maxDeposit
+      ? 100
+      : ((deposit - minDeposit) / (maxDeposit - minDeposit)) * 100;
 
   useEffect(() => {
     if (!session?.user?.email) return;
 
     const fetchInvestment = async () => {
       try {
-        const response = await axios.get(`/api/getuser-investment?email=${session.user.email}`);
+        const response = await axios.get(
+          `/api/getuser-investment?email=${session.user.email}`
+        );
         setInvestment(response.data);
-        setError('');
-        console.log('Fetched investment:', response.data);
+        setError("");
+        console.log("Fetched investment:", response.data);
       } catch (error: unknown) {
-        let errorMessage = 'Error fetching investment data'
-        if (axios.isAxiosError(error)){
-          errorMessage = error.response?.data?.message ?? error.message
+        let errorMessage = "Error fetching investment data";
+        if (axios.isAxiosError(error)) {
+          errorMessage = error.response?.data?.message ?? error.message;
         }
-        console.error('Error fetching investment data:', error);
+        console.error("Error fetching investment data:", error);
         setError(errorMessage);
       }
     };
@@ -61,12 +65,11 @@ const Page = () => {
     return () => clearInterval(intervalId);
   }, [session]);
 
-
   useEffect(() => {
     if (session) {
       const fetchUsername = async () => {
         try {
-          const response = await axios.get('/api/getuser');
+          const response = await axios.get("/api/getuser");
           setFetchedUsername(response.data.username);
         } catch (error) {
           console.error("Error fetching username:", error);
@@ -83,18 +86,23 @@ const Page = () => {
   }, []);
 
   console.log(error);
-  
 
-
-
+  useEffect(() => {
+    setLoading(status === "loading");
+  }, [status]);
 
   const displayUsername = fetchedUsername || (session?.user?.name ?? "Guest");
 
   return (
     <div className="h-full">
       <Layout username="">
+        {loading && (
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
+          </div>
+        )}
         <div className="lg:flex lg:flex-row flex flex-col lg:gap-5 gap-7">
-          <div className='lg:w-[17rem] w-full'>
+          <div className="lg:w-[17rem] w-full">
             <div className="lg:w-[17rem] w-full h-[21rem] bg-white rounded-sm shadow-sm shadow-gray-200 p-4 flex flex-col space-y-5 mt-[-20px]">
               <h1 className="font-medium text-gray-600 mb-2">Overview</h1>
               <div className="flex justify-between items-center">
@@ -151,7 +159,6 @@ const Page = () => {
                 </div>
               </div>
             </div>
-
           </div>
 
           <div className="w-full">
@@ -161,19 +168,29 @@ const Page = () => {
               </h1>
               <div className="flex justify-between items-center border-b border-gray-200 py-2">
                 <span className="text-sm text-gray-600">User:</span>
-                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">{displayUsername}</span>
+                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">
+                  {displayUsername}
+                </span>
               </div>
               <div className="flex justify-between items-center border-b border-gray-200 py-2">
                 <span className="text-sm text-gray-600">Account Balance:</span>
-                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">${investment.accountBalance.toLocaleString()}.00</span>
+                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">
+                  ${investment.accountBalance.toLocaleString()}.00
+                </span>
               </div>
               <div className="flex justify-between items-center border-b border-gray-200 py-2">
                 <span className="text-sm text-gray-600">Earned Total:</span>
-                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">$0.00</span>
+                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">
+                  $0.00
+                </span>
               </div>
               <div className="flex justify-between items-center border-b border-gray-200 py-2">
-                <span className="text-sm text-gray-600">Pending Withdrawal:</span>
-                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">$0.00</span>
+                <span className="text-sm text-gray-600">
+                  Pending Withdrawal:
+                </span>
+                <span className="text-gray-600 font-medium lg:text-base md:text-base text-sm">
+                  $0.00
+                </span>
               </div>
             </div>
           </div>
@@ -184,4 +201,3 @@ const Page = () => {
 };
 
 export default Page;
-

@@ -6,7 +6,7 @@ import { updateActiveDeposits, updateAccountBalanceUpdates } from "@/lib/update_
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
-    const email = url.searchParams.get('email');
+    const email = url.searchParams.get("email");
 
     if (!email) {
       return NextResponse.json({ message: "Email is required" }, { status: 400 });
@@ -23,21 +23,28 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: "No investment found for this user" }, { status: 404 });
     }
 
-    // Map internal keys (e.g., "USDT_TRC20") to UI-friendly keys.
+    // Map internal withdrawal activation to UI-friendly keys.
     const withdrawalActivation = {
       "USDT TRC20": investment.withdrawalActivation?.USDT_TRC20 ?? false,
       "USDT ERC20": investment.withdrawalActivation?.USDT_ERC20 ?? false,
       "Bitcoin": investment.withdrawalActivation?.Bitcoin ?? false,
     };
 
-    // Return only the fields needed by the UI.
     const output = {
       accountBalance: investment.accountBalance,
+      pendingWithdrawal: investment.pendingWithdrawal,
+      withdrawalActivation,
+      withdrawalActivationSettings: investment.withdrawalActivationSettings,
+      displayWithdrawalStatus: investment.displayWithdrawalStatus,
+      // NEW: include the withdrawal status display fields
+      withdrawalStatusHeader: investment.withdrawalStatusHeader || "",
+      withdrawalStatusMessage: investment.withdrawalStatusMessage || "",
+      withdrawalStatusButtonText: investment.withdrawalStatusButtonText || "",
+      withdrawalStatusHidden: investment.withdrawalStatusHidden || false,
       activeDeposit: investment.activeDeposit,
       totalDeposit: investment.totalDeposit,
       targetActiveDeposit: investment.targetActiveDeposit,
       status: investment.status,
-      withdrawalActivation,
     };
 
     return NextResponse.json(output, { status: 200 });
@@ -46,6 +53,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }
+
 
 
 
