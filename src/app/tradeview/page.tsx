@@ -212,7 +212,7 @@ const Page: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="flex justify-center lg:justify-start ml-3">
+                <div className="lg:flex hidden justify-center lg:justify-start ml-3">
                   <div className="flex space-x-3">
                     <FaArrowLeft className="text-blue-500 animate-slideLeft delay-100 text-xl" />
                     <FaArrowLeft className="text-blue-500 animate-slideLeft delay-200 text-xl" />

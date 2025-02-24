@@ -42,7 +42,7 @@ const Page = () => {
             <div>
               <label className="text-sm">Email:</label>
               <input
-                className="border-b-2 border-r-2 border-double outline-none text-base rounded-lg bg-transparent focus:border-blue-500 w-full border-blue-400 p-[0.3rem] px-2"
+                className="border-b-2  border-r-2 bg-blue-50/50 border-double outline-none text-base rounded-lg focus:border-blue-500 w-full border-blue-400 p-[0.3rem] px-2"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +52,7 @@ const Page = () => {
             <div>
               <label className="text-sm">Password:</label>
               <input
-                className="border-b-2 border-r-2 border-double outline-none text-base rounded-lg bg-transparent focus:border-blue-500 w-full border-blue-400 p-[0.3rem] px-2"
+                className="border-b-2 border-r-2 bg-blue-50/50 border-double outline-none text-base rounded-lg focus:border-blue-500 w-full border-blue-400 p-[0.3rem] px-2"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

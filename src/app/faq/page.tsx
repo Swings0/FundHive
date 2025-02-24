@@ -15,7 +15,9 @@ const page = () => {
             Frequently Asked Questions
           </h1>
           <div className="flex items-center space-x-4 mt-4">
-            <p>Home </p>
+           <Link href={'/'}>
+             <p>Home </p>
+            </Link>
             <span>-</span>
             <p>FAQ&apos;s</p>
           </div>

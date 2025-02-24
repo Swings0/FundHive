@@ -60,7 +60,7 @@ const Footer = () => {
 
             <li className='text-slate-400 font-light text-xs whitespace-nowrap py-2'>
              <strong className='text-white'> Email: </strong>
-              support@comingsoon.com
+              fundhivecorps@gmail.com
             </li>
 
             </ul>

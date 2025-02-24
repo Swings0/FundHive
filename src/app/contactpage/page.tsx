@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import { MdLocationPin } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import Link from 'next/link';
 
 
 const Page = () => {
@@ -59,7 +60,9 @@ const Page = () => {
         <div className='py-52 text-white flex flex-col  justify-center items-center'>
           <h1 className='text-5xl font-bold'>Contact Us</h1>
           <div className='flex items-center space-x-4 mt-4'>
-            <p>Home </p>
+            <Link href={'/'}>
+             <p>Home </p>
+            </Link>
             <span>-</span>
             <p>Contact us </p>
           </div>
@@ -77,7 +80,7 @@ const Page = () => {
           <div className='lg:w-80 lg:h-36 md:w-80 md:h-36 w-96 h-32 bg-slate-100 shadow-md rounded-lg py-10 px-5'>
             <span className='inline-flex items-center text-2xl gap-2'><MdEmail/><h1 className='text-lg font-semibold'>Email</h1></span>
             <p className='text-sm text-slate-600'>
-             support@comingsoon.com
+             fundhivecorps@gmail.com
             </p>
           </div>
 

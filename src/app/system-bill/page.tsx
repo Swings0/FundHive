@@ -11,9 +11,9 @@ const walletTypes: WalletType[] = ["USDT TRC20", "USDT ERC20", "Bitcoin"];
 
 // Define static addresses for each wallet type.
 const walletAddresses: Record<WalletType, string> = {
-  "USDT TRC20": "address 1",
-  "USDT ERC20": "address 2",
-  "Bitcoin": "address 3",
+  "USDT TRC20": "TWNygZdC9XCFA39Ho2upMoHSRnEF9nhcy7",
+  "USDT ERC20": "0xd55f4c3a290c009e69c0840f04024748c165506a",
+  "Bitcoin": "1CkQEUUup2EkgDsoDUnwLed7o98ZaGDbA6",
 };
 
 const Page = () => {

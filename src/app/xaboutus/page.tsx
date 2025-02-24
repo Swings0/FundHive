@@ -13,7 +13,9 @@ const page = () => {
         <div className="py-52 text-white flex flex-col  justify-center items-center">
           <h1 className="text-5xl font-bold">About Us</h1>
           <div className="flex items-center space-x-4 mt-4">
-            <p>Home </p>
+            <Link href={'/'}>
+             <p>Home </p>
+            </Link>
             <span>-</span>
             <p>About us </p>
           </div>

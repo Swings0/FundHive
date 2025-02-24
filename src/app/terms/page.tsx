@@ -15,7 +15,9 @@ const page = () => {
             Terms & Conditions
           </h1>
           <div className="flex items-center space-x-4 mt-4">
-            <p>Home </p>
+            <Link href={'/'}>
+             <p>Home </p>
+            </Link>
             <span>-</span>
             <p>Terms</p>
           </div>

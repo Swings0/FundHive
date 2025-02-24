@@ -1,12 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 type Currency = "USDT TRC20" | "USDT ERC20" | "Bitcoin";
 const currencies: Currency[] = ["USDT TRC20", "USDT ERC20", "Bitcoin"];
 
 const Page = () => {
+  const router = useRouter();
+
   // User email state.
   const [email, setEmail] = useState("");
 
@@ -305,10 +308,36 @@ const Page = () => {
   };
 
   // Logout handler.
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/adminlogout", {
+        method: "POST",
+      });
+    } catch (error) {
+      console.error("Error during admin logout", error);
+    }
+    router.push("/adminlogin");
   };
+  
+  // Client-side inactivity detection for admin page (15 minutes)
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const resetTimer = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        localStorage.removeItem("token");
+        window.location.href = "/adminlogin";
+      }, 15 * 60 * 1000); // 15 minutes
+    };
+    window.addEventListener("mousemove", resetTimer);
+    window.addEventListener("keypress", resetTimer);
+    resetTimer();
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("mousemove", resetTimer);
+      window.removeEventListener("keypress", resetTimer);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-black flex flex-col items-center font-sans">

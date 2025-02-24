@@ -40,7 +40,7 @@ const Page = () => {
     const intervalId = setInterval(fetchTransactions, 5000);
     return () => clearInterval(intervalId);
   }, [session]);
-  
+
   useEffect(() => {
     setLoading(status === "loading");
   }, [status]);
@@ -50,51 +50,66 @@ const Page = () => {
       <Layout username="">
         {loading && (
           <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
-           <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
+            <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
           </div>
         )}
-
-      <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px] overflow-y-auto max-h-screen">
+        <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px] overflow-y-auto max-h-screen">
           <h1 className="text-3xl font-bold text-gray-800 mb-6 sm:text-start sm:ml-2 ml-0 text-center">
             Transactions
           </h1>
-          {/* Header Row */}
-          <div className="flex justify-between items-center bg-gray-200 px-4 py-2">
-            <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Type</span>
-            <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Amount</span>
-            <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Wallet</span>
-            <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Date & Time</span>
-          </div>
- {/* Transactions List */}
-          {transactions.length > 0 ? (
-            transactions.map((tx, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center border-b border-gray-100 px-4 py-3 hover:bg-gray-50"
-              >
-                <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
-                  {tx.type}
+          <div className="overflow-auto w-full h-80 bg-slate-50 rounded-sm pb-1 ">
+            <div className="min-w-[600px]">
+              {/* Sticky Header Row */}
+              <div className="sticky top-0 z-10 bg-gray-200 p-1 py-2 flex justify-between items-center">
+                <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                  Type
                 </span>
-                <span
-                  className={`w-1/4 text-center text-xs sm:text-sm font-medium ${
-                    tx.type.toLowerCase() === "deposit"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  ${tx.amount.toLocaleString()}
+                <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                  Amount
                 </span>
-                <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
-                  {tx.wallet}
+                <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                  Wallet
                 </span>
-                <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
-                  {new Date(tx.dateTime).toLocaleString()}
+                <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                  Date &amp; Time
                 </span>
               </div>
-            ))
-          ) : (
-            <p className="text-center text-gray-500 mt-4">No transactions found.</p>
-          )}
+              {/* Transactions List */}
+              {transactions.length > 0 ? (
+                <div className="space-y-2 mt-2">
+                  {transactions.map((tx, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center border-b border-gray-100 px-4 py-3 hover:bg-gray-50"
+                    >
+                      <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
+                        {tx.type}
+                      </span>
+                      <span
+                        className={`w-1/4 text-center text-xs sm:text-sm font-medium ${
+                          tx.type.toLowerCase() === "deposit"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        ${tx.amount.toLocaleString()}
+                      </span>
+                      <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
+                        {tx.wallet}
+                      </span>
+                      <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
+                        {new Date(tx.dateTime).toLocaleString()}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="sm:text-center text-start sm:p-2 p-0 text-gray-500 mt-4">
+                  No transactions found.
+                </p>
+              )}
+            </div>
+          </div>
           {error && (
             <div className="text-center text-red-500 mt-4">{error}</div>
           )}
@@ -105,4 +120,3 @@ const Page = () => {
 };
 
 export default Page;
-

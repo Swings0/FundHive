@@ -1,6 +1,15 @@
 import nodemailer from "nodemailer";
 
-const sendEmail = async  (depositData: { email:string, plan: string; amount: number; investmentType: string; transactionHash: string })=> {
+interface DepositData {
+  email: string;
+  plan: string;
+  amount: number;
+  investmentType: string;
+  transactionHash: string;
+  depositTime: Date;
+}
+
+const sendEmail = async (depositData: DepositData) => {
   if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
     throw new Error("Gmail credentials are not set in .env.local");
   }
@@ -16,7 +25,7 @@ const sendEmail = async  (depositData: { email:string, plan: string; amount: num
   const mailOptions = {
     from: `"FundHive" <${process.env.GMAIL_USER}>`,
     to: process.env.OWNER_EMAIL, // Your admin email
-    subject:'New Deposit Made',
+    subject: 'New Deposit Made',
     html: `
       <h3>New Deposit</h3>
       <p><strong>Email:</strong> ${depositData.email}</p>
@@ -24,8 +33,8 @@ const sendEmail = async  (depositData: { email:string, plan: string; amount: num
       <p><strong>Amount:</strong> $${depositData.amount.toFixed(2)}</p>
       <p><strong>Investment Type:</strong> ${depositData.investmentType}</p>
       <p><strong>Transaction Hash:</strong> ${depositData.transactionHash}</p>
+      <p><strong>Deposit Time:</strong> ${depositData.depositTime.toLocaleString()}</p>
     `,
-
   };
 
   try {

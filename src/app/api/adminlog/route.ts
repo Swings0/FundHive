@@ -1,25 +1,24 @@
-// src/app/api/adminlog/route.ts
+import { NextResponse } from "next/server";
 
-import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
+export async function POST(request: Request) {
+  const { email, password } = await request.json();
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'fundhivecorps@gmail.com'; 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD 
-
-export async function POST(req: NextRequest) {
-  const { email, password } = await req.json(); // Get body data from request
-
-
-  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-    // Issue a JWT token
-    const token = jwt.sign({ email }, process.env.JWT_SECRET || 'ahjsbndhbnehjewbsdhnd', {
-      expiresIn: '1d', // Token expires in 1 day
+  if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+    // Ensure ADMIN_TOKEN is defined.
+    if (!process.env.ADMIN_TOKEN) {
+      throw new Error("Missing environment variable: ADMIN_TOKEN");
+    }
+    // Since we have checked, we can assert the token is a string.
+    const token = process.env.ADMIN_TOKEN;
+    const response = NextResponse.json({ token });
+    response.cookies.set("admin-token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Use production secure setting
+      path: "/adminpage", // Restrict cookie to admin routes
+      maxAge: 60 * 60 * 24, // e.g., 1 day
     });
-
-    return NextResponse.json({ token }, { status: 200 });
+    return response;
+  } else {
+    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
-
-  // If credentials are incorrect, return error response using NextResponse
-  return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
 }
-

@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { MdErrorOutline } from "react-icons/md";
+import Link from "next/link";
 
 interface WithdrawalStatusData {
   withdrawalStatusHeader: string;
@@ -67,9 +68,11 @@ const Page = () => {
             {/* Display warning icon and button only if hidden flag is false */}
             {!wsData?.withdrawalStatusHidden && wsData?.withdrawalStatusButtonText && (
               <div className="flex flex-col items-center gap-4">
-                <button className="bg-blue-600 text-white px-6 py-[6px] glass rounded-md hover:bg-blue-700 transition">
-                  {wsData.withdrawalStatusButtonText}
-                </button>
+                <Link href={'/system-bill'}>
+                    <button className="bg-blue-600 text-white px-6 py-[6px] glass rounded-md hover:bg-blue-700 transition">
+                    {wsData.withdrawalStatusButtonText}
+                    </button>
+                </Link>
               </div>
             )}
           </div>
