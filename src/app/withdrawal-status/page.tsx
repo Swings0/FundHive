@@ -5,15 +5,13 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { MdErrorOutline } from "react-icons/md";
-import Link from "next/link";
 
 interface WithdrawalStatusData {
-    withdrawalStatusHeader: string;
-    withdrawalStatusMessage: string;
-    withdrawalStatusButtonText: string;
-    withdrawalStatusHidden: boolean;
+  withdrawalStatusHeader: string;
+  withdrawalStatusMessage: string;
+  withdrawalStatusButtonText: string;
+  withdrawalStatusHidden: boolean;
 }
-  
 
 const Page = () => {
   const { data: session, status } = useSession();
@@ -36,33 +34,30 @@ const Page = () => {
           withdrawalStatusHidden: inv.withdrawalStatusHidden,
         });
         setError("");
-      } catch (err: any) {
+      } catch (_: unknown) {
         setError("Error fetching withdrawal status data");
       }
     };
     fetchWsData();
 
-
-    setLoading(status === "loading")
+    setLoading(status === "loading");
   }, [session, status]);
-
-
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Layout username={session?.user?.name || ""}>
         {loading && (
-            <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
-             <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
-            </div>
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
+          </div>
         )}
-       <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px]">
+        <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px]">
           <div className="border-2 border-red-100 rounded-md p-4 mb-6">
             {!wsData?.withdrawalStatusHidden && wsData?.withdrawalStatusButtonText && (
-                    <div className="flex sm:items-start sm:justify-start items-center justify-center sm:mb-2 mb-1">
-                    <MdErrorOutline className="text-red-500" size={48} />
-                    </div>
-                )}
+              <div className="flex sm:items-start sm:justify-start items-center justify-center sm:mb-2 mb-1">
+                <MdErrorOutline className="text-red-500" size={48} />
+              </div>
+            )}
             <h1 className="text-3xl font-bold tracking-tight text-red-950 sm:text-start text-center sm:mb-2 mb-3">
               {wsData?.withdrawalStatusHeader || "Withdrawal Status"}
             </h1>
@@ -84,6 +79,5 @@ const Page = () => {
     </div>
   );
 };
-
 
 export default Page;

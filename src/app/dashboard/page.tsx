@@ -83,7 +83,7 @@ const Page = () => {
     if (status === "unauthenticated") {
       console.error("User is not authenticated");
     }
-  }, []);
+  }, [status]);
 
   console.log(error);
 

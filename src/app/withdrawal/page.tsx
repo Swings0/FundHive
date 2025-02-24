@@ -5,7 +5,6 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-
 type Currency = "USDT TRC20" | "USDT ERC20" | "Bitcoin";
 const currencies: Currency[] = ["USDT TRC20", "USDT ERC20", "Bitcoin"];
 
@@ -30,7 +29,8 @@ interface InvestmentType {
 
 const Page = () => {
   const { data: session, status } = useSession();
-  const [error, setError] = useState("");
+  // Removed unused error state.
+  // const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [investment, setInvestment] = useState<InvestmentType>({
     accountBalance: 0,
@@ -77,9 +77,8 @@ const Page = () => {
           withdrawalActivationSettings: inv.withdrawalActivationSettings,
           displayWithdrawalStatus: inv.displayWithdrawalStatus,
         });
-        setError("");
         console.log("Fetched investment:", inv);
-      } catch (err: any) {
+      } catch (err: unknown) {
         if (axios.isAxiosError(err) && err.response?.status === 404) {
           setInvestment({
             accountBalance: 0,
@@ -98,7 +97,7 @@ const Page = () => {
           });
         } else {
           console.error("Error fetching investment data:", err);
-          setError("Error fetching investment data");
+          // Optionally, you could set an error state here if needed.
         }
       }
     };
@@ -108,11 +107,9 @@ const Page = () => {
     return () => clearInterval(intervalId);
   }, [session]);
 
-
   useEffect(() => {
     setLoading(status === "loading");
   }, [status]);
-
 
   return (
     <div className="h-full bg-gray-50">
@@ -121,8 +118,8 @@ const Page = () => {
           <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
             <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
           </div>
-         )}
-         <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px] overflow-hidden">
+        )}
+        <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px] overflow-hidden">
           {/* Header Card */}
           <div className="bg-white shadow rounded-lg p-6 mb-6">
             <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-4 text-center">
@@ -150,33 +147,30 @@ const Page = () => {
               <div className="min-w-[600px]">
                 {/* Header Row */}
                 <div className="flex justify-between items-center bg-gray-200 px-4 py-2">
-                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Processing</span>
-                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Available</span>
-                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Pending</span>
-                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">Account</span>
+                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                    Processing
+                  </span>
+                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                    Available
+                  </span>
+                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                    Pending
+                  </span>
+                  <span className="w-1/4 text-center text-xs sm:text-sm font-semibold text-gray-600">
+                    Account
+                  </span>
                 </div>
                 {/* Data Rows */}
                 {currencies.map((currency) => {
                   const key = currency.replace(" ", "_");
-                  const settings = investment.withdrawalActivationSettings?.[key as keyof typeof investment.withdrawalActivationSettings];
-                  let canWithdraw = false;
-                  if (settings && settings.activated && settings.activationStartTime) {
-                    const duration = Number(settings.activationDuration);
-                    if (duration > 0) {
-                      const multiplier =
-                        settings.activationUnit === "min"
-                          ? 60000
-                          : settings.activationUnit === "hour"
-                          ? 3600000
-                          : 86400000;
-                      const activationTime = new Date(settings.activationStartTime).getTime() + duration * multiplier;
-                      if (Date.now() >= activationTime) {
-                        canWithdraw = true;
-                      }
-                    }
-                  }
+                  const settings = investment.withdrawalActivationSettings?.[
+                    key as keyof typeof investment.withdrawalActivationSettings
+                  ];
                   return (
-                    <div key={currency} className="flex justify-between items-center border-b border-gray-100 px-4 py-3 hover:bg-gray-50">
+                    <div
+                      key={currency}
+                      className="flex justify-between items-center border-b border-gray-100 px-4 py-3 hover:bg-gray-50"
+                    >
                       <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
                         {currency}
                       </span>
@@ -230,7 +224,5 @@ const Page = () => {
     </div>
   );
 };
-
-
 
 export default Page;

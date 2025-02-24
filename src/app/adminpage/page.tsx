@@ -7,32 +7,32 @@ type Currency = "USDT TRC20" | "USDT ERC20" | "Bitcoin";
 const currencies: Currency[] = ["USDT TRC20", "USDT ERC20", "Bitcoin"];
 
 const Page = () => {
+  // User email state.
   const [email, setEmail] = useState("");
 
   // Process A fields.
-  const [totalDeposit, setTotalDeposit] = useState<string>("");
-  const [targetActiveDeposit, setTargetActiveDeposit] = useState<string>("");
-  const [processADuration, setProcessADuration] = useState<string>("");
-  const [processADurationUnit, setProcessADurationUnit] = useState<string>("min");
+  const [totalDeposit, setTotalDeposit] = useState("");
+  const [targetActiveDeposit, setTargetActiveDeposit] = useState("");
+  const [processADuration, setProcessADuration] = useState("");
+  const [processADurationUnit, setProcessADurationUnit] = useState("min");
 
   // Process B fields.
-  const [accountBalance, setAccountBalance] = useState<string>("");
-  const [accountBalanceUpdateDuration, setAccountBalanceUpdateDuration] = useState<string>("");
-  const [accountBalanceUpdateUnit, setAccountBalanceUpdateUnit] = useState<string>("min");
+  const [accountBalance, setAccountBalance] = useState("");
+  const [accountBalanceUpdateDuration, setAccountBalanceUpdateDuration] = useState("");
+  const [accountBalanceUpdateUnit, setAccountBalanceUpdateUnit] = useState("min");
 
-  // Messages.
+  // Process messages.
   const [messageA, setMessageA] = useState("");
   const [errorA, setErrorA] = useState("");
   const [messageB, setMessageB] = useState("");
   const [errorB, setErrorB] = useState("");
 
-  // Withdrawal activation state.
+  // Withdrawal activation state and messages.
   const [withdrawalActivation, setWithdrawalActivation] = useState<{ [key in Currency]: boolean }>(() => ({
     "USDT TRC20": false,
     "USDT ERC20": false,
     Bitcoin: false,
   }));
-  // Duration inputs always visible.
   const [activationDurations, setActivationDurations] = useState<{ [key in Currency]: string }>(() => ({
     "USDT TRC20": "",
     "USDT ERC20": "",
@@ -43,32 +43,29 @@ const Page = () => {
     "USDT ERC20": "min",
     Bitcoin: "min",
   }));
-
   const [withdrawalMsg, setWithdrawalMsg] = useState("");
   const [withdrawalErr, setWithdrawalErr] = useState("");
 
-  // Global toggle for display of withdrawal status.
-  const [displayStatus, setDisplayStatus] = useState<boolean>(false);
-  const [globalMsg, setGlobalMsg] = useState<string>("");
-  const [globalErr, setGlobalErr] = useState<string>("");
+  // Global display status for withdrawals.
+  const [displayStatus, setDisplayStatus] = useState(false);
+  const [globalMsg, setGlobalMsg] = useState("");
+  const [globalErr, setGlobalErr] = useState("");
 
-  // New withdrawal status inputs.
+  // Withdrawal status update inputs.
   const [wsHeader, setWsHeader] = useState("");
   const [wsMessage, setWsMessage] = useState("");
   const [wsButtonText, setWsButtonText] = useState("");
   const [wsMsg, setWsMsg] = useState("");
   const [wsErr, setWsErr] = useState("");
+  const [warnHidden, setWarnHidden] = useState(false);
 
-  // State to track whether the warning icon and button are hidden.
-  const [warnHidden, setWarnHidden] = useState<boolean>(false);
-
-  // Transaction Section state.
-  // const [txType, setTxType] = useState("");
-  // const [txAmount, setTxAmount] = useState("");
-  // const [txWallet, setTxWallet] = useState("");
-  // const [txDateTime, setTxDateTime] = useState("");
-  // const [txMsg, setTxMsg] = useState("");
-  // const [txErr, setTxErr] = useState("");
+  // Transaction Section states.
+  const [txType, setTxType] = useState("");
+  const [txAmount, setTxAmount] = useState("");
+  const [txWallet, setTxWallet] = useState("");
+  const [txDateTime, setTxDateTime] = useState("");
+  const [txMsg, setTxMsg] = useState("");
+  const [txErr, setTxErr] = useState("");
 
   // Process A submission.
   const handleProcessASubmit = async (e: React.FormEvent) => {
@@ -76,7 +73,7 @@ const Page = () => {
     setMessageA("");
     setErrorA("");
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-investment/processA",
         {
           email,
@@ -87,7 +84,7 @@ const Page = () => {
         },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      setMessageA(response.data.message);
+      setMessageA(data.message);
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
       if (axios.isAxiosError(error)) {
@@ -103,7 +100,7 @@ const Page = () => {
     setMessageB("");
     setErrorB("");
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-investment/processB",
         {
           email,
@@ -113,7 +110,7 @@ const Page = () => {
         },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      setMessageB(response.data.message);
+      setMessageB(data.message);
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
       if (axios.isAxiosError(error)) {
@@ -132,18 +129,18 @@ const Page = () => {
     const newState = !withdrawalActivation[currency];
     setWithdrawalActivation((prev) => ({ ...prev, [currency]: newState }));
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-investment/withdrawal",
-        { 
-          email, 
-          currency, 
-          activate: newState, 
-          activationDuration: newState ? parseFloat(activationDurations[currency]) : 0, 
+        {
+          email,
+          currency,
+          activate: newState,
+          activationDuration: newState ? parseFloat(activationDurations[currency]) : 0,
           activationUnit: newState ? activationUnits[currency] : "min"
         },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      setWithdrawalMsg(response.data.message);
+      setWithdrawalMsg(data.message);
       setWithdrawalErr("");
     } catch (error: unknown) {
       setWithdrawalActivation((prev) => ({ ...prev, [currency]: !newState }));
@@ -165,12 +162,12 @@ const Page = () => {
     const newStatus = !displayStatus;
     setDisplayStatus(newStatus);
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-investment/display-status",
         { email, displayStatus: newStatus },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      setGlobalMsg(response.data.message);
+      setGlobalMsg(data.message);
       setGlobalErr("");
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
@@ -185,12 +182,12 @@ const Page = () => {
   // Update withdrawal status display.
   const handleWithdrawalStatusUpdate = async () => {
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-withdrawal-status",
         { email, header: wsHeader, message: wsMessage, buttonText: wsButtonText, hidden: warnHidden },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      setWsMsg(response.data.message);
+      setWsMsg(data.message);
       setWsErr("");
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
@@ -204,14 +201,27 @@ const Page = () => {
 
   // Clear a specific withdrawal status field.
   const handleClearField = async (field: "header" | "message" | "buttonText") => {
-    // In this implementation, we do not clear the local state, we just re-save the current values.
+    let newWsHeader = wsHeader;
+    let newWsMessage = wsMessage;
+    let newWsButtonText = wsButtonText;
+
+    if (field === "header") {
+      newWsHeader = "";
+      setWsHeader("");
+    } else if (field === "message") {
+      newWsMessage = "";
+      setWsMessage("");
+    } else if (field === "buttonText") {
+      newWsButtonText = "";
+      setWsButtonText("");
+    }
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-withdrawal-status",
-        { email, header: wsHeader, message: wsMessage, buttonText: wsButtonText, hidden: warnHidden },
+        { email, header: newWsHeader, message: newWsMessage, buttonText: newWsButtonText, hidden: warnHidden },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      setWsMsg("Field update confirmed.");
+      setWsMsg(data.message || "Field update confirmed.");
       setWsErr("");
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
@@ -223,11 +233,11 @@ const Page = () => {
     }
   };
 
-  // Toggle warning icon and button display without clearing inputs.
+  // Toggle warning icon and button display.
   const handleToggleWarnAndButton = async () => {
     const newHidden = !warnHidden;
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-withdrawal-status",
         { email, hidden: newHidden },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
@@ -245,14 +255,15 @@ const Page = () => {
     }
   };
 
+  // Clear pending withdrawal.
   const clearPendingWithdrawal = async () => {
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/update-withdrawal",
         { email },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
-      alert(response.data.message);
+      alert(data.message);
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
       if (axios.isAxiosError(error)) {
@@ -269,14 +280,14 @@ const Page = () => {
       return;
     }
     try {
-      const response = await axios.post("/api/add-transaction", {
+      const { data } = await axios.post("/api/add-transaction", {
         email,
         type: txType,
         amount: parseFloat(txAmount),
         wallet: txWallet,
         dateTime: txDateTime,
       });
-      setTxMsg(response.data.message);
+      setTxMsg(data.message);
       setTxErr("");
       // Clear transaction fields.
       setTxType("");
@@ -293,13 +304,7 @@ const Page = () => {
     }
   };
 
-  const [txType, setTxType] = useState("");
-  const [txAmount, setTxAmount] = useState("");
-  const [txWallet, setTxWallet] = useState("");
-  const [txDateTime, setTxDateTime] = useState("");
-  const [txMsg, setTxMsg] = useState("");
-  const [txErr, setTxErr] = useState("");
-
+  // Logout handler.
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/login";
@@ -328,7 +333,6 @@ const Page = () => {
         </div>
 
         <div className="grid lg:flex md:flex gap-4">
-
           {/* Process A Form */}
           <div className="lg:w-2/3 bg-gradient-to-r from-gray-800 via-gray-900 to-black rounded-xl shadow-3xl p-8 mb-8">
             <h2 className="text-3xl font-semibold text-white text-center mb-6">Process A: Active Deposit Increment</h2>
@@ -437,79 +441,70 @@ const Page = () => {
         {/* Withdrawal Settings Section */}
         <div className="mt-12 bg-gradient-to-r from-gray-800 via-gray-900 to-black rounded-xl shadow-3xl p-8 mb-8">
           <h2 className="text-3xl font-semibold text-white text-center mb-6">Withdrawal Settings</h2>
-          {currencies.map((currency) => {
-            const key = currency.replace(" ", "_");
-            return (
-              <div key={currency} className="flex flex-col gap-2 border-b border-gray-600 py-4">
-                {/* Duration inputs always visible */}
-                <div className="flex gap-2 items-center">
-                  <label className="text-sm text-white">Duration:</label>
-                  <input
-                    type="number"
-                    placeholder="Duration"
-                    value={activationDurations[currency]}
-                    onChange={(e) =>
-                      setActivationDurations((prev) => ({
-                        ...prev,
-                        [currency]: e.target.value,
-                      }))
-                    }
-                    className="w-1/2 p-2 border border-gray-500 rounded-md bg-gray-700 text-white focus:outline-none"
-                  />
-                  <select
-                    value={activationUnits[currency]}
-                    onChange={(e) =>
-                      setActivationUnits((prev) => ({
-                        ...prev,
-                        [currency]: e.target.value,
-                      }))
-                    }
-                    className="w-1/2 p-2 border border-gray-500 rounded-md bg-gray-700 text-white focus:outline-none"
-                  >
-                    <option value="min">Minutes</option>
-                    <option value="hour">Hours</option>
-                    <option value="day">Days</option>
-                  </select>
-                </div>
-                <p className="text-xs text-gray-300">
-                  Withdraw will display only after the specified duration has elapsed.
-                </p>
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => handleWithdrawalToggle(currency)}
-                    className={`px-4 py-2 rounded-md text-sm transition-colors duration-300 ${
-                      withdrawalActivation[currency]
-                        ? "bg-green-600 hover:bg-green-700"
-                        : "bg-blue-600 hover:bg-blue-700"
-                    }`}
-                  >
-                    {withdrawalActivation[currency] ? "Deactivate" : "Activate"}
-                  </button>
-                </div>
+          {currencies.map((currency) => (
+            <div key={currency} className="flex flex-col gap-2 border-b border-gray-600 py-4">
+              {/* Duration inputs always visible */}
+              <div className="flex gap-2 items-center">
+                <label className="text-sm text-white">Duration:</label>
+                <input
+                  type="number"
+                  placeholder="Duration"
+                  value={activationDurations[currency]}
+                  onChange={(e) =>
+                    setActivationDurations((prev) => ({
+                      ...prev,
+                      [currency]: e.target.value,
+                    }))
+                  }
+                  className="w-1/2 p-2 border border-gray-500 rounded-md bg-gray-700 text-white focus:outline-none"
+                />
+                <select
+                  value={activationUnits[currency]}
+                  onChange={(e) =>
+                    setActivationUnits((prev) => ({
+                      ...prev,
+                      [currency]: e.target.value,
+                    }))
+                  }
+                  className="w-1/2 p-2 border border-gray-500 rounded-md bg-gray-700 text-white focus:outline-none"
+                >
+                  <option value="min">Minutes</option>
+                  <option value="hour">Hours</option>
+                  <option value="day">Days</option>
+                </select>
               </div>
-            );
-          })}
+              <p className="text-xs text-gray-300">
+                Withdraw will display only after the specified duration has elapsed.
+              </p>
+              <div className="flex justify-end">
+                <button
+                  onClick={() => handleWithdrawalToggle(currency)}
+                  className={`px-4 py-2 rounded-md text-sm transition-colors duration-300 ${
+                    withdrawalActivation[currency]
+                      ? "bg-green-600 hover:bg-green-700"
+                      : "bg-blue-600 hover:bg-blue-700"
+                  }`}
+                >
+                  {withdrawalActivation[currency] ? "Deactivate" : "Activate"}
+                </button>
+              </div>
+            </div>
+          ))}
+          {withdrawalMsg && <div className="mt-4 text-blue-500 text-center">{withdrawalMsg}</div>}
+          {withdrawalErr && <div className="mt-4 text-red-500 text-center">{withdrawalErr}</div>}
           <div className="mt-8 flex items-center justify-center gap-2">
-            <span className="text-white text-lg">
-              Display users withdrawer status:
-            </span>
+            <span className="text-white text-lg">Display users withdrawal status:</span>
             <button
               onClick={handleDisplayStatusToggle}
               className={`px-4 py-2 rounded-md text-sm transition-colors duration-300 ${
-                displayStatus
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-blue-600 hover:bg-blue-700"
+                displayStatus ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
               {displayStatus ? "On" : "Off"}
             </button>
           </div>
-          {globalMsg && (
-            <div className="mt-4 text-blue-500 text-center">{globalMsg}</div>
-          )}
-          {globalErr && (
-            <div className="mt-4 text-red-500 text-center">{globalErr}</div>
-          )}
+          {globalMsg && <div className="mt-4 text-blue-500 text-center">{globalMsg}</div>}
+          {globalErr && <div className="mt-4 text-red-500 text-center">{globalErr}</div>}
 
           {/* New Withdrawal Status Inputs */}
           <div className="mt-12 bg-gray-700 rounded-lg p-6">
@@ -558,12 +553,8 @@ const Page = () => {
                 Save Withdrawal Status
               </button>
             </div>
-            {wsMsg && (
-              <div className="mt-4 text-blue-500 text-center">{wsMsg}</div>
-            )}
-            {wsErr && (
-              <div className="mt-4 text-red-500 text-center">{wsErr}</div>
-            )}
+            {wsMsg && <div className="mt-4 text-blue-500 text-center">{wsMsg}</div>}
+            {wsErr && <div className="mt-4 text-red-500 text-center">{wsErr}</div>}
             <div className="mt-6 text-center">
               <button
                 onClick={handleToggleWarnAndButton}
@@ -573,7 +564,7 @@ const Page = () => {
               </button>
             </div>
           </div>
-          
+
           <div className="mt-8 text-center">
             <button
               onClick={clearPendingWithdrawal}

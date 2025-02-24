@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/utils/dbConnect";
 import nodemailer from "nodemailer";
-import User from "@/models/user";
+
 
 // Connect to your database
 

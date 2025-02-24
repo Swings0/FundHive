@@ -34,9 +34,7 @@ function generateRandomData(
 
 // ProfitChart component: displays an animated line chart with gradient stroke.
 const ProfitChart: React.FC = () => {
-  const [data, setData] = useState<number[]>(
-    generateRandomData(30, 100, 10000)
-  );
+  const [data, setData] = useState<number[]>(generateRandomData(30, 100, 10000));
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,10 +91,9 @@ const ProfitChart: React.FC = () => {
 };
 
 const Page: React.FC = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [investment, setInvestment] = useState<Investment | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
 
   // Use the session's email dynamically.
   const email = session?.user?.email;
@@ -135,11 +132,6 @@ const Page: React.FC = () => {
       : 0;
   const randomProfit = Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
 
-  // If the session is loading, display a loading message.
-  useEffect(() => {
-    setIsLoading(status === "loading");
-  }, []);
-
   if (!session?.user) {
     return (
       <div className="min-h-screen bg-gray-900 p-8 text-gray-100 flex flex-col items-center justify-center space-y-4">
@@ -161,7 +153,7 @@ const Page: React.FC = () => {
             <div className="loader border-y-2 border-blue-300 rounded-full animate-spin"></div>
           </div>
         )}
-        <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2  mt-[-20px] overflow-hidden">
+        <div className="w-full bg-white rounded-sm shadow-sm shadow-gray-200 py-10 lg:px-8 md:px-8 px-2 mt-[-20px] overflow-hidden">
           <h1 className="text-3xl font-bold text-blue-900 mb-6 lg:ml-3 md:ml-3 ml-4">
             TradeView
           </h1>

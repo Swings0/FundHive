@@ -26,8 +26,12 @@ const Page = () => {
         );
         setTransactions(response.data.transactions || []);
         setError("");
-      } catch (err: any) {
-        console.error("Error fetching transactions:", err);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error("Error fetching transactions:", err.message);
+        } else {
+          console.error("Error fetching transactions:", err);
+        }
         setError("Error fetching transactions");
       }
     };

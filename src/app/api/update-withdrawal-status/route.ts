@@ -3,6 +3,13 @@ import dbConnect from "@/utils/dbConnect";
 import Investment from "@/models/investments";
 import User from "@/models/user";
 
+interface WithdrawalStatusUpdate {
+  withdrawalStatusHidden: boolean;
+  withdrawalStatusHeader?: string;
+  withdrawalStatusMessage?: string;
+  withdrawalStatusButtonText?: string;
+}
+
 export async function POST(req: Request) {
   try {
     await dbConnect();
@@ -11,11 +18,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Email is required" }, { status: 400 });
     }
 
-        // Ensure the user exists.
+    // Ensure the user exists.
     const user = await User.findOne({ email });
     if (!user) {
-        return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
+
     // Retrieve the existing investment document.
     const investment = await Investment.findOne({ userEmail: email });
     if (!investment) {
@@ -47,8 +55,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Withdrawal status created." }, { status: 200 });
     }
 
-    // If header/message/buttonText are not provided, preserve the current values.
-    const updateData: any = {
+    // Build the update object using a proper type.
+    const updateData: WithdrawalStatusUpdate = {
       withdrawalStatusHidden: hidden,
     };
     if (header !== undefined) updateData.withdrawalStatusHeader = header;
