@@ -11,7 +11,7 @@ interface DepositRequestBody {
   profit?: number; // Optional if calculated on the server
   investmentType: string;
   transactionHash: string;
-  email:string;
+  email: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     await dbConnect();
 
     const sessionToken = await getToken({
-      req: request as NextRequest,
+      req: request,
       secret: process.env.NEXTAUTH_SECRET
     });
 
@@ -28,8 +28,6 @@ export async function POST(request: NextRequest) {
     }
 
     const userEmail = sessionToken.email;
-
-
 
     // Parse and validate the request body
     const body: DepositRequestBody = await request.json();
@@ -52,18 +50,19 @@ export async function POST(request: NextRequest) {
       profit,
       investmentType,
       transactionHash,
-      email:userEmail
+      email: userEmail
     });
 
     await newDeposit.save();
 
-    // Send a confirmation email
+    // Send a confirmation email with the current deposit time.
     await sendEmail({
       plan,
       amount,
       investmentType,
       transactionHash,
-      email:userEmail
+      email: userEmail,
+      depositTime: new Date()
     });
 
     return NextResponse.json({
