@@ -237,7 +237,7 @@ const Page = () => {
   const handleToggleWarnAndButton = async () => {
     const newHidden = !warnHidden;
     try {
-      const { data } = await axios.post(
+       await axios.post(
         "/api/update-withdrawal-status",
         { email, hidden: newHidden },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }

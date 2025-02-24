@@ -29,8 +29,6 @@ interface InvestmentType {
 
 const Page = () => {
   const { data: session, status } = useSession();
-  // Removed unused error state.
-  // const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [investment, setInvestment] = useState<InvestmentType>({
     accountBalance: 0,
@@ -163,9 +161,6 @@ const Page = () => {
                 {/* Data Rows */}
                 {currencies.map((currency) => {
                   const key = currency.replace(" ", "_");
-                  const settings = investment.withdrawalActivationSettings?.[
-                    key as keyof typeof investment.withdrawalActivationSettings
-                  ];
                   return (
                     <div
                       key={currency}

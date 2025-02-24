@@ -34,7 +34,7 @@ const Page = () => {
           withdrawalStatusHidden: inv.withdrawalStatusHidden,
         });
         setError("");
-      } catch (_: unknown) {
+      } catch {
         setError("Error fetching withdrawal status data");
       }
     };
