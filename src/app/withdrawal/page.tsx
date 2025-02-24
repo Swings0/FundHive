@@ -159,40 +159,37 @@ const Page = () => {
                   </span>
                 </div>
                 {/* Data Rows */}
-                {currencies.map((currency) => {
-                  const key = currency.replace(" ", "_");
-                  return (
-                    <div
-                      key={currency}
-                      className="flex justify-between items-center border-b border-gray-100 px-4 py-3 hover:bg-gray-50"
-                    >
-                      <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
-                        {currency}
-                      </span>
-                      <span className="w-1/4 text-center text-xs sm:text-sm text-green-600 font-medium">
-                        {investment.withdrawalActivation[currency]
-                          ? `$${investment.accountBalance.toLocaleString()}.00`
-                          : "$0.00"}
-                      </span>
-                      <span className="w-1/4 text-center text-xs sm:text-sm text-red-500 font-medium">
-                        {investment.withdrawalActivation[currency]
-                          ? `$${investment.pendingWithdrawal.toLocaleString()}.00`
-                          : "$0.00"}
-                      </span>
-                      <span className="w-1/4 text-center">
-                        {investment.withdrawalActivation[currency] && investment.accountBalance > 0 ? (
-                          <Link href="/withdraw">
-                            <button className="bg-blue-600 glass hover:bg-blue-700 text-white px-2 py-1 rounded-lg text-xs sm:text-sm transition">
-                              Withdraw
-                            </button>
-                          </Link>
-                        ) : (
-                          <span className="text-blue-600 text-xs sm:text-sm">Not Set</span>
-                        )}
-                      </span>
-                    </div>
-                  );
-                })}
+                {currencies.map((currency) => (
+                  <div
+                    key={currency}
+                    className="flex justify-between items-center border-b border-gray-100 px-4 py-3 hover:bg-gray-50"
+                  >
+                    <span className="w-1/4 text-center text-xs sm:text-sm text-gray-700">
+                      {currency}
+                    </span>
+                    <span className="w-1/4 text-center text-xs sm:text-sm text-green-600 font-medium">
+                      {investment.withdrawalActivation[currency]
+                        ? `$${investment.accountBalance.toLocaleString()}.00`
+                        : "$0.00"}
+                    </span>
+                    <span className="w-1/4 text-center text-xs sm:text-sm text-red-500 font-medium">
+                      {investment.withdrawalActivation[currency]
+                        ? `$${investment.pendingWithdrawal.toLocaleString()}.00`
+                        : "$0.00"}
+                    </span>
+                    <span className="w-1/4 text-center">
+                      {investment.withdrawalActivation[currency] && investment.accountBalance > 0 ? (
+                        <Link href="/withdraw">
+                          <button className="bg-blue-600 glass hover:bg-blue-700 text-white px-2 py-1 rounded-lg text-xs sm:text-sm transition">
+                            Withdraw
+                          </button>
+                        </Link>
+                      ) : (
+                        <span className="text-blue-600 text-xs sm:text-sm">Not Set</span>
+                      )}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
