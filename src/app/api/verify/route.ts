@@ -17,6 +17,7 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+   
     // Check OTP validity and expiration.
     if (String(user.otp) !== String(otp) || user.otpExpiresAt < new Date()) {
       return NextResponse.json({ error: "Invalid OTP or OTP expired" }, { status: 400 });

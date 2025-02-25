@@ -17,8 +17,8 @@ export const POST = async (req: NextRequest) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.EMAIL_ADDRESS, 
-          pass: process.env.EMAIL_APP_PASSWORD, 
+          user: process.env.EMAIL_ADDRESS,
+          pass: process.env.EMAIL_APP_PASSWORD,
         },
         tls: {
           rejectUnauthorized: false,
@@ -42,24 +42,28 @@ export const POST = async (req: NextRequest) => {
       });
     } catch (error) {
       if (error instanceof Error) {
-        console.error("Error:", error.message);
+        console.error("Email sending error:", error.message);
       }
     }
   }
 
-  const { fullname, username, email, password, phone, country, referral } = await req.json();
   try {
+    const { fullname, username, email, password, phone, country, referral } = await req.json();
+
+    // Validate phone number.
     const phonevalidation = await validatePhoneNumber(phone, country);
     if (phonevalidation && !phonevalidation.valid) {
       return NextResponse.json({ msg: "Invalid phone number" }, { status: 400 });
     }
 
+    // Connect to the database.
     await dbConnect();
 
+    // Generate password hash.
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
-    // Generate OTP and set expiry (5 minutes).
+    // Generate OTP and expiry (5 minutes).
     const otp = generateOTP();
     const otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
@@ -90,7 +94,6 @@ export const POST = async (req: NextRequest) => {
     // Send OTP email.
     sendOTPByEmail(email, otp);
 
-    // Return a success message.
     return NextResponse.json(
       { msg: "User registered successfully. Please verify OTP." },
       { status: 200 }

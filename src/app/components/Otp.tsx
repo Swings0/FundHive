@@ -61,9 +61,9 @@ const Otp = () => {
       if (response.status === 404) {
         setErr("User not found");
       } else if (response.status === 401) {
-        setErr("OTP expired");
+        setErr("OTP required");
       } else if (response.status === 400) {
-        setErr("OTP incorrect");
+        setErr("OTP incorrect or expired");
       } else if (response.ok) {
         router.push("/login");
       } else {
@@ -141,13 +141,15 @@ const Otp = () => {
         </form>
         <button
           onClick={handleVerifyOTP}
-          className="group flex items-center justify-center w-full px-6 py-2 glass text-white bg-blue-600 rounded-md transition transform hover:scale-105 hover:bg-blue-700 duration-300"
+          className="group flex items-center justify-center w-full px-6 py-2 glass text-white bg-blue-600 rounded-md transition transform hover:bg-blue-700 duration-300"
           disabled={loading}
         >
           {loading ? (
-            <span className="flex items-center justify-center">
-              <span className="spinner animate-spin ml-4">
-                <span className="block w-2 h-2 bg-blue-300 rounded-full"></span>
+              <span className="flex items-center justify-center">
+              <span className="button-loader py-1 ">
+                <span></span>
+                <span></span>
+                <span></span>
               </span>
             </span>
           ) : (
