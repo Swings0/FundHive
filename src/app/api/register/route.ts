@@ -48,7 +48,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
-    const { fullname, username, email, password, phone, country, referral } = await req.json();
+    const { fullname, username, email, password, phone, referral } = await req.json();
 
     // Validate phone number.
     const phonevalidation = await validatePhoneNumber(phone);
