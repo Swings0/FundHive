@@ -17,9 +17,11 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-   
+    // Convert otpExpiresAt to a Date object if it isn't one already.
+    const otpExpiry = new Date(user.otpExpiresAt);
+
     // Check OTP validity and expiration.
-    if (String(user.otp) !== String(otp) || user.otpExpiresAt < new Date()) {
+    if (String(user.otp) !== String(otp) || otpExpiry < new Date()) {
       return NextResponse.json({ error: "Invalid OTP or OTP expired" }, { status: 400 });
     }
 
