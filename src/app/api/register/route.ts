@@ -51,7 +51,7 @@ export const POST = async (req: NextRequest) => {
     const { fullname, username, email, password, phone, country, referral } = await req.json();
 
     // Validate phone number.
-    const phonevalidation = await validatePhoneNumber(phone, country);
+    const phonevalidation = await validatePhoneNumber(phone);
     if (phonevalidation && !phonevalidation.valid) {
       return NextResponse.json({ msg: "Invalid phone number" }, { status: 400 });
     }

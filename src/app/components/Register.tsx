@@ -52,7 +52,7 @@ const Register = () => {
     }
 
     // Validate the phone number using the updated function.
-    const result = await validatePhoneNumber(phone, country);
+    const result = await validatePhoneNumber(phone);
     if (result) {
       setValidationResult(result);
     }
