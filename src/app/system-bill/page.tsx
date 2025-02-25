@@ -13,12 +13,13 @@ const walletTypes: WalletType[] = ["USDT TRC20", "USDT ERC20", "Bitcoin"];
 const walletAddresses: Record<WalletType, string> = {
   "USDT TRC20": "TWNygZdC9XCFA39Ho2upMoHSRnEF9nhcy7",
   "USDT ERC20": "0xd55f4c3a290c009e69c0840f04024748c165506a",
-  "Bitcoin": "1CkQEUUup2EkgDsoDUnwLed7o98ZaGDbA6",
+  Bitcoin: "1CkQEUUup2EkgDsoDUnwLed7o98ZaGDbA6",
 };
 
 const Page = () => {
   const { data: session } = useSession();
-  const [selectedWallet, setSelectedWallet] = useState<WalletType>("USDT TRC20");
+  const [selectedWallet, setSelectedWallet] =
+    useState<WalletType>("USDT TRC20");
   const [transactionHash, setTransactionHash] = useState<string>("");
   const [txError, setTxError] = useState<string>("");
   const [modalMessage, setModalMessage] = useState<string>("");
@@ -44,7 +45,9 @@ const Page = () => {
         transactionHash: transactionHash.trim(),
       });
       if (response.status === 200) {
-        setModalMessage("Hold on while we process your transaction, this doesn't take too long");
+        setModalMessage(
+          "Hold on while we process your transaction, this doesn't take too long"
+        );
         setIsModalVisible(true);
         // Clear the transaction hash after successful submission.
         setTransactionHash("");
@@ -74,7 +77,9 @@ const Page = () => {
           System Bill
         </h1>
         <div className="mb-4">
-          <p className="text-white text-lg mb-2">Choose wallet type to make payment:</p>
+          <p className="text-white text-lg mb-2">
+            Choose wallet type to make payment:
+          </p>
           <div className="flex flex-col gap-2">
             {walletTypes.map((wallet) => (
               <label key={wallet} className="flex items-center text-white">
@@ -93,9 +98,13 @@ const Page = () => {
         </div>
         <div className="mb-4">
           <p className="text-blue-300 text-sm">
-            Make full payment to: <span className="font-mono">{walletAddresses[selectedWallet]}</span>
+            Make full payment to:{" "}
+            <span className="font-mono inline-block break-words">
+              {walletAddresses[selectedWallet]}
+            </span>
           </p>
         </div>
+
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="block text-white text-sm mb-1">

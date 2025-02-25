@@ -36,15 +36,15 @@ const page = () => {
                 Gold plan
               </p>
               <h1 className="text-black text-lg pt-3 font-bold group-hover:text-white transition duration-500">
-                3.4% Daily
+                36.9% Daily
               </h1>
               <p className="text-sm font-semibold text-gray-600 group-hover:text-gray-400 transition duration-500">
-                For 14 Days
+                For 1 Day
               </p>
 
               <ul className="text-center text-sm  text-gray-500 leading-loose py-8 group-hover:text-gray-400 transition duration-500">
                 <li>Stable Profit</li>
-                <li>Minimum Amount - $200</li>
+                <li>Minimum Amount - $100</li>
                 <li> Maximum Amount - $20,000</li>
                 <li>Support Service - 24/7</li>
               </ul>
@@ -72,10 +72,10 @@ const page = () => {
                 Diamond plan
               </p>
               <h1 className="text-white text-lg pt-3 font-bold group-hover:text-white transition duration-500">
-                3.6% Daily
+                40% Daily
               </h1>
               <p className="text-sm font-semibold text-gray-600 group-hover:text-gray-400 transition duration-500">
-                For 8 Days
+                For 2 Days
               </p>
 
               <ul className="text-center text-sm text-gray-500 leading-loose py-8 group-hover:text-gray-400 transition duration-500">
@@ -102,10 +102,10 @@ const page = () => {
                 Zonal Representative
               </p>
               <h1 className="text-black text-lg pt-3 font-bold group-hover:text-white transition duration-500">
-                4% Daily
+                60% Daily
               </h1>
               <p className="text-sm font-semibold text-gray-600 group-hover:text-gray-400 transition duration-500">
-                For 6 Days
+                For 3 Days
               </p>
 
               <ul className="text-center text-sm text-gray-500 leading-loose py-8 group-hover:text-gray-400 transition duration-500">

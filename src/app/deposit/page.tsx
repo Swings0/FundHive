@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 import axios from 'axios';
+import { useSession } from "next-auth/react";
 
 // Define the interface for the plan structure
 interface Plan {
@@ -13,10 +14,16 @@ interface Plan {
   principalReturn: boolean;
 }
 
+
+interface InvestmentType {
+  accountBalance: number;
+}
+
 const Page = () => {
   // State variables
+  const {data: session, status} = useSession()
   const [selectedPlan, setSelectedPlan] = useState<string>("Gold Plan");
-  const [investmentAmount, setInvestmentAmount] = useState<number>(200);
+  const [investmentAmount, setInvestmentAmount] = useState<number>(100);
   const [selectedCurrency, setSelectedCurrency] = useState<string>("USDT TRC20");
   const [profit, setProfit] = useState<number>(0);
   const [isConfirming, setIsConfirming] = useState<boolean>(false); // Track if we're on the confirm page
@@ -26,29 +33,61 @@ const Page = () => {
   const [modalMessage, setModalMessage] = useState<string>("");
   const [err, setErr] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [investment, setInvestment] = useState<InvestmentType>({
+      accountBalance: 0
+    });
+
+      useEffect(() => {
+        if (!session?.user?.email) return;
+        const fetchInvestment = async () => {
+          try {
+            const response = await axios.get(
+              `/api/getuser-investment?email=${session.user.email}`
+            );
+            const inv = response.data;
+            setInvestment({
+              accountBalance: inv.accountBalance,
+            });
+            console.log("Fetched investment:", inv);
+          } catch (err: unknown) {
+            if (axios.isAxiosError(err) && err.response?.status === 404) {
+              setInvestment({
+                accountBalance: 0,
+              });
+            } else {
+              console.error("Error fetching investment data:", err);
+              // Optionally, you could set an error state here if needed.
+            }
+          }
+        };
+    
+        fetchInvestment();
+        const intervalId = setInterval(fetchInvestment, 5000);
+        return () => clearInterval(intervalId);
+      }, [session]);
 
   // Plan definitions
   const plans: Record<string, Plan> = useMemo(
     () => ({
     "Gold Plan": {
-      min: 200,
+      min: 100,
       max: 20000,
-      dailyProfit: 3.4,
-      duration: 14,
+      dailyProfit: 36.9,
+      duration: 1,
       principalReturn: true,
     },
     "Diamond Plan": {
       min: 25000,
       max: 40000,
-      dailyProfit: 3.6,
-      duration: 8,
+      dailyProfit: 40,
+      duration: 2,
       principalReturn: true,
     },
     "Zonal Representative": {
       min: 50000,
       max: 1000000,
-      dailyProfit: 4.0,
-      duration: 6,
+      dailyProfit: 60,
+      duration: 3,
       principalReturn: true,
     },
   }),
@@ -172,6 +211,10 @@ const Page = () => {
       validateAmount(formattedAmount);
     }
   };
+
+  useEffect(() => {
+   setIsLoading(status === "loading");
+  }, [status]);
 
   
   return (
@@ -303,7 +346,7 @@ const Page = () => {
             {/* Account Balance */}
             <div className="text-xs text-gray-600 mt-2">
               <p className="whitespace-nowrap">
-                Your account balance ($): <strong> $0.00</strong>
+                Your account balance ($):<strong> ${investment.accountBalance.toLocaleString()}.00</strong>
               </p>
             </div>
           </div>

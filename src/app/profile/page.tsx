@@ -76,7 +76,7 @@ const Page = () => {
     }
 
     const payload = {
-      fullName: fullName.trim() || undefined,
+      fullname: fullName.trim() || undefined, // Changed from fullName to fullname
       email: email.trim() || undefined,
       newEmail: newEmail.trim() || undefined,
       newPassword: newPassword || undefined,
@@ -87,6 +87,7 @@ const Page = () => {
       userName: userName.trim() || undefined,
       phone: phone.trim() || undefined,
     };
+    
 
     setIsLoading(true);
 
@@ -192,12 +193,12 @@ const Page = () => {
           {/* User Details */}
           <div className="flex flex-col items-center sm:items-start mb-3 text-center sm:text-left">
             <h1 className="lg:text-2xl md:text-2xl text-xl font-bold text-blue-800 mb-1">
-              {userData?.fullname || fullName || "Not set..."}
+              <span className="font-sans inline-block break-words" >{userData?.fullname || fullName || "Not set..."}</span> 
             </h1>
             <p className="text-sm text-slate-500 mb-0">
               {userData?.email || email || "loading..."}
             </p>
-            <p className="text-sm text-slate-400">
+            <p className="text-xs text-slate-400">
               Registration date:{" "}
               {registrationDate
                 ? new Date(registrationDate).toLocaleDateString()
