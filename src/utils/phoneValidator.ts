@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ABSTRACT_API_KEY = process.env.NEXT_PUBLIC_ABSTRACT_PHONE_API_KEY || '';
+const ABSTRACT_API_KEY = process.env.NEXT_PUBLIC_ABSTRACT_PHONE_API_KEY || "7f3720b5df1b4b40a017bd0ea49a7ba9";
 
 export interface PhoneValidationResponse {
   valid: boolean;
