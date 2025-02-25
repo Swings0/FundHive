@@ -10,14 +10,14 @@ export interface PhoneValidationResponse {
     e164: string;
   };
   location: string;
-  country: string;
+//   country: string;
   carrier: string;
   type: string;
 }
 
 export const validatePhoneNumber = async (
   phoneNumber: string,
-  country: string // country parameter available if needed
+//   country: string // country parameter available if needed
 ): Promise<PhoneValidationResponse | null> => {
   try {
     if (!ABSTRACT_API_KEY) {
