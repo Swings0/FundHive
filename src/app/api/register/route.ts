@@ -1,18 +1,23 @@
 import User from "@/models/user";
 import dbConnect from "@/utils/dbConnect";
-import { validatePhoneNumber } from "@/utils/phoneValidator";
+// import { validatePhoneNumber } from "@/utils/phoneValidator";
 import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+type UserInput = {
+  fullname: string;
+  username: string;
+  email: string;
+  password: string;
+};
+
 export const POST = async (req: NextRequest) => {
-  // Helper to generate a 6-digit OTP.
   const generateOTP = (): string => {
     return Math.floor(100000 + Math.random() * 900000).toString();
   };
 
-  // Function to send the OTP via email.
-  function sendOTPByEmail(email: string, otp: string) {
+  const sendOTPByEmail = async (email: string, otp: string): Promise<void> => {
     try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -33,47 +38,59 @@ export const POST = async (req: NextRequest) => {
         text: `Your One Time Password (OTP) is ${otp}`,
       };
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error("Error sending email:", error);
-        } else {
-          console.log("Email sent:", info.response);
-        }
-      });
+      await transporter.sendMail(mailOptions);
     } catch (error) {
       if (error instanceof Error) {
-        console.error("Email sending error:", error.message);
+        console.error("OTP Email sending error:", error.message);
       }
     }
-  }
+  };
+
+  const emailNewUserToAdmin = async (user: UserInput) => {
+    try {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_ADDRESS,
+          pass: process.env.EMAIL_APP_PASSWORD,
+        },
+        tls: {
+          rejectUnauthorized: false,
+        },
+        connectionTimeout: 10000,
+      });
+
+      const mailOptions = {
+        from: `"Fundhivecorps.com" <${process.env.EMAIL_ADDRESS}>`,
+        to: process.env.ADMIN_EMAIL,
+        subject: "New User Registration",
+        text: `A new user has registered:\n\nName: ${user.fullname}\nEmail: ${user.email} \nUsername: ${user.username}`,
+      };
+
+      await transporter.sendMail(mailOptions);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Admin Email sending error:", error.message);
+      }
+    }
+  };
 
   try {
-    const { fullname, username, email, password, phone, referral } = await req.json();
+    const { fullname, username, email, password, referral } = await req.json();
 
-    // Validate phone number.
-    const phonevalidation = await validatePhoneNumber(phone);
-    if (phonevalidation && !phonevalidation.valid) {
-      return NextResponse.json({ msg: "Invalid phone number" }, { status: 400 });
-    }
-
-    // Connect to the database.
     await dbConnect();
 
-    // Generate password hash.
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
-    // Generate OTP and expiry (5 minutes).
     const otp = generateOTP();
     const otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
-    // Create new user with isVerified set to false.
     const userCreated = new User({
       fullname,
       username,
       email,
       password: hashedPassword,
-      phone,
       otp,
       otpExpiresAt,
       referral: referral || null,
@@ -82,7 +99,6 @@ export const POST = async (req: NextRequest) => {
 
     await userCreated.save();
 
-    // If a referral exists, update the referrer's count.
     if (referral) {
       const referrer = await User.findById(referral);
       if (referrer) {
@@ -91,8 +107,11 @@ export const POST = async (req: NextRequest) => {
       }
     }
 
-    // Send OTP email.
-    sendOTPByEmail(email, otp);
+    // Send OTP to user
+    await sendOTPByEmail(email, otp);
+
+    // Send admin the new user info
+    await emailNewUserToAdmin({ fullname, email, username, password });
 
     return NextResponse.json(
       { msg: "User registered successfully. Please verify OTP." },

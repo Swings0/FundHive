@@ -1,7 +1,9 @@
 'use client'
 import React, { useEffect, useRef, memo } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const TradingViewWidget: React.FC = () => {
+  const {t} = useLanguage();
   const container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -33,8 +35,8 @@ const TradingViewWidget: React.FC = () => {
     <div className="bg4 py-24">
       <div className="container mx-auto px-4">
         <div className="flex flex-col text-center items-center justify-center pb-10 text-white">
-          <p className="text-sm tracking-wide">Designed For You</p>
-          <h1 className="text-3xl font-semibold">Our Features</h1>
+          <p className="text-sm tracking-wide">{t("sec3.header.prefix")}</p>
+          <h1 className="text-3xl font-semibold">{t("sec3.header.title")}</h1>
         </div>
         {/* Single centered container for the TradingView widget */}
         <div

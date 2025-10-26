@@ -7,15 +7,17 @@ import { FaCheckSquare } from "react-icons/fa";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { FaUser } from "react-icons/fa6";
 import Link from "next/link";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-import {
-  validatePhoneNumber,
-  PhoneValidationResponse,
-} from "@/utils/phoneValidator";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+
+
+// import "react-phone-number-input/style.css";
+// import PhoneInput from "react-phone-number-input";
+// import {
+//   validatePhoneNumber,
+//   PhoneValidationResponse,
+// } from "@/utils/phoneValidator";
 
 const Register = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -24,44 +26,44 @@ const Register = () => {
   const [username, setUsername] = useState<string | boolean>(false);
   const [fullname, setFullName] = useState<string | boolean>(false);
 
-  const [phone, setPhone] = useState<string | undefined>("");
-  const [country, setCountry] = useState<string>("US");
-  const [phoneError, setPhoneError] = useState<boolean>(false);
+  // const [phone, setPhone] = useState<string | undefined>("");
+  // const [country, setCountry] = useState<string>("US");
+  // const [phoneError, setPhoneError] = useState<boolean>(false);
   const [err, setErr] = useState<string | null | boolean>(null);
-  const [validationResult, setValidationResult] =
-    useState<PhoneValidationResponse | null>(null);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [usernameError, setUsernameError] = useState<boolean>(false);
   const [fullNameError, setFullNameError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  // const [validationResult, setValidationResult] =
+  //   useState<PhoneValidationResponse | null>(null);
 
   const router = useRouter();
 
-  const handleCountryChange = (newCountry: string | undefined) => {
-    setCountry(newCountry || "US");
-  };
+  // const handleCountryChange = (newCountry: string | undefined) => {
+  //   setCountry(newCountry || "US");
+  // };
 
-  const handleValidate = async () => {
-    setErr(null);
-    setValidationResult(null);
+  // const handleValidate = async () => {
+  //   setErr(null);
+  //   setValidationResult(null);
 
-    if (!phone || !country) {
-      setErr("Please enter phone number");
-      return;
-    }
+  //   if (!phone || !country) {
+  //     setErr("Please enter phone number");
+  //     return;
+  //   }
 
-    // Validate the phone number using the updated function.
-    const result = await validatePhoneNumber(phone);
-    if (result) {
-      setValidationResult(result);
-    }
-    if (result && !result.valid) {
-      setErr("Please enter a valid phone number");
-    } else {
-      setErr("");
-    }
-  };
+  //   // Validate the phone number using the updated function.
+  //   const result = await validatePhoneNumber(phone);
+  //   if (result) {
+  //     setValidationResult(result);
+  //   }
+  //   if (result && !result.valid) {
+  //     setErr("Please enter a valid phone number");
+  //   } else {
+  //     setErr("");
+  //   }
+  // };
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,18 +89,18 @@ const Register = () => {
     } else {
       setUsernameError(false);
     }
-    if (!phone) {
-      setPhoneError(true);
-    } else {
-      setPhoneError(false);
-    }
+    // if (!phone) {
+    //   setPhoneError(true);
+    // } else {
+    //   setPhoneError(false);
+    // }
 
-    await handleValidate();
+    // await handleValidate();
 
-    if (err || !validationResult?.valid) {
-      setLoading(false);
-      return; // Stop form submission if there's an error
-    }
+    // if (err || !validationResult?.valid) {
+    //   setLoading(false);
+    //   return; // Stop form submission if there's an error
+    // }
 
     try {
       const resUserExists = await fetch("/api/user", {
@@ -125,8 +127,8 @@ const Register = () => {
         username,
         email,
         password,
-        phone,
-        country,
+        // phone,
+        // country,
       });
       if (res.status === 200) {
         console.log("User registered successfully");
@@ -254,7 +256,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="w-full relative flex items-center">
+          {/* <div className="w-full relative flex items-center">
             <PhoneInput
               defaultCountry="US"
               value={phone}
@@ -271,7 +273,7 @@ const Register = () => {
                 </p>
               )}
             </div>
-          </div>
+          </div> */}
 
           <div className="w-full relative text-xs text-center flex items-center">
             {show ? (

@@ -8,9 +8,11 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import  { useLanguage } from '@/context/LanguageContext';
 
 const Login = () => {
-
+ const {t} = useLanguage()
+ 
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState <string | boolean>(false)
   const [password, setPassword] = useState<string |boolean>(false)
@@ -70,7 +72,7 @@ const Login = () => {
     <div className='fixed lg:w-full w-screen lg:h-[100vh] h-screen flex flex-col justify-center items-center bg'>
         <div className='w-[22rem] flex flex-col fixed justify-center items-left bg-white/40 backdrop-blur-lg py-8 px-8  rounded-md md:shadow-md border-2 border-white lg:py-11 '>
         
-          <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>Login</h1>
+          <h1 className='ml-3 text-3xl font-bold bg-gradient-to-r from-blue-400 to bg-indigo-900 bg-clip-text  text-transparent'>{t("log.login")}</h1>
 
             <form onSubmit={submitHandler} className='flex flex-col gap-5 pt-6 pb-3'>
                 <div className='w-full relative'>
@@ -88,7 +90,7 @@ const Login = () => {
                     :
                  <p onClick={toggle}  className='text-blue-400 ml-auto flex items-center text-center mr-2  cursor-pointer text-xs'><FaCheckSquare/></p>
                   )}
-                 <p className='text-xs text-blue-400 mr-3'>Show password</p>
+                 <p className='text-xs text-blue-400 mr-3'>{t("log.show")}</p>
                 </div>
 
                 <button className='group flex place-items-center justify-between w-full px-4 py-2 relative bg-blue-600  text-white font-semibold rounded-md hover:bg-blue-700 hover:translate-y-px duration-300 glass ' type='submit' disabled={loading}>
@@ -100,11 +102,11 @@ const Login = () => {
                     </span>
                   </span>):(<>
                   
-                 <span className='absolute left-1/2 -translate-x-1/2 transition'>Login</span> 
+                 <span className='absolute left-1/2 -translate-x-1/2 transition'>{t("log.login")}</span> 
                  <span className='ml-auto opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition'><MdOutlineKeyboardArrowRight/></span>
                   </>)}
                 </button>
-                  <Link href={"/forgotpassword"} className='text-xs mt-1 text-blue-400'>Forgot Password?</Link>
+                  <Link href={"/forgotpassword"} className='text-xs mt-1 text-blue-400'>{t("log.forgot")}</Link>
               
 
                 {err && <div className='text-red-600 text-xs'>{err}</div> }
@@ -112,12 +114,14 @@ const Login = () => {
             </form>        
 
             <div className=''>
-              <span className="text-sm flex gap-2 whitespace-nowrap items-center">Don&apos;t have an account? <Link href={"/register"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>Create account</Link></span>
+              <span className="text-sm flex gap-2 whitespace-nowrap items-center">{t("log.bottom1")} <Link href={"/register"} className='text-sm bg-gradient-to-r from-sky-600  to-cyan-900 text-transparent bg-clip-text cursor-pointer'>{t("log.bottom2")}</Link></span>
             </div>
         </div>
       </div>
   )
 }
+
+
 
 export default Login
 

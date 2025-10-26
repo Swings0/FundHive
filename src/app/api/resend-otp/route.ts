@@ -1,33 +1,25 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-// import { MongoClient } from "mongodb";
 import dbConnect from "@/utils/dbConnect";
 import User from "@/models/user";
 
-// const uri = process.env.MONGODB_URL as string;
-// const client = new MongoClient(uri);
-// const database = client.db("fundhive");
-// const usersCollection = database.collection("users");
-
-
-
+// Generate a 6-digit OTP
 const generateOTP = (): string => {
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
+// Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.GMAIL_USER, 
-    pass: process.env.GMAIL_PASS, 
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
   },
 });
 
 export async function POST(req: Request) {
   try {
-    const rawBody = await req.text();
-    console.log("Raw request body:", rawBody);
-    const { email } = JSON.parse(rawBody);
+    const { email } = await req.json();
 
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
@@ -35,33 +27,31 @@ export async function POST(req: Request) {
 
     await dbConnect();
 
-    // Find user even if unverified.
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Generate new OTP and set expiration (1 minute from now)
     const otp = generateOTP();
-    const otpExpiresAt = new Date(Date.now() + 1 * 60 * 1000);
+    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 mins expiry
 
-    // Update OTP fields
     user.otp = otp;
-    user.otpExpires = otpExpiresAt; // using otpExpires as defined in your model
+    user.otpExpiresAt = otpExpiresAt; // ✅ this field must exist in schema
     await user.save();
 
     const mailOptions = {
-      from: process.env.EMAIL_ADDRESS,
+      from: process.env.GMAIL_USER,
       to: email,
       subject: "Your OTP Code",
-      text: `Your OTP code is ${otp}. It will expire in 1 minute.`,
+      text: `Your OTP code is ${otp}. It will expire in 10 minutes.`,
     };
 
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ message: "OTP sent successfully" });
-  } catch (error) {
-    console.error("Error in resend OTP:", error);
+  } catch (error: any) {
+    console.error("Error in /api/resend-otp:", error.message || error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+

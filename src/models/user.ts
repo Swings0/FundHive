@@ -4,7 +4,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
-  phone: string;
+  // phone: string;
   otp?: string;
   fullname: string;
   otpExpires?: Date;
@@ -35,18 +35,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    phone: {
-      type: String,
-      required: true,
-    },
+    // phone: {
+    //   type: String,
+    //   required: true,
+    // },
     country: {
       type: String,
     },
     otp: {
       type: String,
+      defualt: null,
     },
     otpExpires: {
       type: Date,
+    },
+    otpExpiresAt: {
+      type: Date,
+      default: null, 
     },
     resetPasswordToken: {
       type: String,

@@ -3,10 +3,8 @@ import localFont from "next/font/local";
 import { Sora } from "next/font/google";
 import "./globals.css";
 import Providers from "./Providers";
-
-
-
-
+import { LanguageProvider } from "@/context/LanguageContext";
+import LanguageSelector from "./components/LanguageSelector";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,35 +16,38 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-const sora = Sora ({
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sora-mono",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
-
-
 
 export const metadata: Metadata = {
   title: "Fundhivecorps.com",
-  description: "Empowering your financial growth with smart tools, expert insights——invest with confidence.",
+  description:
+    "Empowering your financial growth with smart tools, expert insights——invest with confidence.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" data-theme="light" >
+    <html lang="en" data-theme="light">
       <body
-         className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <LanguageProvider>
+            <Providers>{children}</Providers>
+          {/* <LanguageSelector/> */}
+         </LanguageProvider>
 
-       <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cm3suitcw0eaosvbm7id1fvcr"></script>
-   
+        <script
+          defer
+          src="https://app.fastbots.ai/embed.js"
+          data-bot-id="cm3suitcw0eaosvbm7id1fvcr"
+        ></script>
       </body>
     </html>
   );

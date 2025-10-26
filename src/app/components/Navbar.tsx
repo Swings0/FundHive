@@ -18,6 +18,15 @@ const Navbar = () => {
     });
   }, []);
 
+  // const renderTextWithBreaks = (text: string): React.ReactNode =>
+  //   text.split(/<br\s*\/?>/i).map((line, index, arr) => (
+  //     <React.Fragment key={index}>
+  //       {line}
+  //       {index < arr.length - 1 && <br />}
+  //     </React.Fragment>
+  //   ));
+  
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showSecondNavbar, setShowSecondNavbar] = useState<boolean>(false);
 
@@ -54,7 +63,7 @@ const Navbar = () => {
               height={0}
             />
             <h1 className="text-lg tracking-wide font-semibold text-white">
-              FundHive.
+              FundHive
             </h1>
           </Link>
         </div>
@@ -101,7 +110,7 @@ const Navbar = () => {
           <li
             className={`delay-100 hover:text-cyan-300 transition-all duration-500 ease-linear`}
           >
-            <Link href={"/faq"}> FAQ </Link>{" "}
+            <Link href={"/faq"}>FAQ</Link>{" "}
           </li>
           <span className="lg:inline hidden text-white">-</span>
           <li
@@ -121,7 +130,7 @@ const Navbar = () => {
           <ul className="lg:hidden flex gap-3 ">
             <li className="whitespace-nowrap inline-flex items-center gap-1 delay-200  hover:text-cyan-300 transition-all duration-500 ease-linear">
               <Link className="inline-flex items-center gap-2" href={"/login"}>
-                Login{" "}
+               Login
                 <span>
                   <RxEnter />
                 </span>
@@ -137,7 +146,7 @@ const Navbar = () => {
           <li className="whitespace-nowrap inline-flex items-center gap-2 hover:text-cyan-300 transition-all delay-200  duration-500 ease-linear">
             {" "}
             <Link className="inline-flex items-center gap-2" href={"/login"}>
-              Login{" "}
+              Login
               <span>
                 <RxEnter />
               </span>
@@ -211,7 +220,7 @@ const Navbar = () => {
             </li>
             <span className="text-white">-</span>
             <li className="hover:text-cyan-400 hover:border-b hover:border-cyan-400 transition-all ease-linear duration-300 delay-300">
-              <Link href={"/faq"}> FAQ </Link>{" "}
+              <Link href={"/faq"}>FAQ</Link>{" "}
             </li>
             <span className="text-white">-</span>
             <li className="hover:text-cyan-400 hover:border-b hover:border-cyan-400 transition-all ease-linear duration-300 delay-300">
@@ -231,7 +240,7 @@ const Navbar = () => {
             <li className="whitespace-nowrap inline-flex items-center gap-2 hover:text-cyan-400 transition-all ease-linear duration-500  delay-200">
               {" "}
               <Link className="inline-flex items-center gap-2" href={"/login"}>
-                Login{" "}
+                Login
                 <span>
                   <RxEnter />
                 </span>

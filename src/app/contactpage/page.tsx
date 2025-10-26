@@ -6,9 +6,12 @@ import { MdLocationPin } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 
 const Page = () => {
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,13 +61,13 @@ const Page = () => {
       <Navbar/>
       <div className='w-full bg-cyan-600 bg-opacity-25 '>
         <div className='py-52 text-white flex flex-col  justify-center items-center'>
-          <h1 className='text-5xl font-bold'>Contact Us</h1>
+          <h1 className='text-5xl font-bold'>{t("contact.header.title")}</h1>
           <div className='flex items-center space-x-4 mt-4'>
             <Link href={'/'}>
-             <p>Home </p>
+             <p>{t("home")} </p>
             </Link>
             <span>-</span>
-            <p>Contact us </p>
+            <p>{t("contact.header.title")} </p>
           </div>
 
         </div>
@@ -86,27 +89,29 @@ const Page = () => {
 
         </div>
 
-        <div className="bg-slate-300 flex flex-col lg:flex-row py-12 px-6 lg:py-20 lg:px-20 md:pl-10">
-        {/* Left Section */}
-        <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-          <h1 className="text-2xl lg:text-3xl font-bold text-left lg:text-left">Get In Touch</h1>
-          <p className="text-slate-600 text-xs md:text-sm lg:text-sm text-left lg:text-left mt-2">
-            Send us a message, we&apos;ll be sure to get back to you.
-          </p>
-        </div>
+        <div className="bg-slate-300 flex flex-col lg:flex-row py-12 px-6 lg:py-20 lg:px-20">
+          {/* Left Section */}
+          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+            <h1 className="text-2xl lg:text-3xl font-bold">{t("contact.get")}</h1>
+            <p className="text-slate-600 text-sm mt-2">
+              {t("contact.header.desc")}
+            </p>
+          </div>
 
-        {/* Form Section */}
-        <div className="w-full lg:w-1/2 flex justify-center md:justify-start items-center">
+          {/* Form Section */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center">
             <form
               className="grid grid-cols-1 gap-3 lg:gap-6 w-full max-w-lg bg-slate-300 rounded-lg"
               onSubmit={handleSubmit}
             >
-              <div className="flex flex-col lg:text-sm text-base">
-                <label className="text-sm font-semibold text-gray-600 mb-2">Name</label>
+              <div className="flex flex-col">
+                <label className="text-sm font-semibold text-gray-600 mb-2">
+                  {t("contact.form.name.label")}
+                </label>
                 <input
                   type="text"
                   name="name"
-                  placeholder="Your Name"
+                  placeholder={t("contact.form.name.placeholder")}
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -114,13 +119,15 @@ const Page = () => {
                 />
               </div>
 
-            {/* Email Input */}
-            <div className="flex flex-col lg:text-sm text-base">
-                <label className="text-sm font-semibold text-gray-600 mb-2">Email</label>
+              {/* Email Input */}
+              <div className="flex flex-col">
+                <label className="text-sm font-semibold text-gray-600 mb-2">
+                  {t("contact.form.email.label")}
+                </label>
                 <input
                   type="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder={t("contact.form.email.placeholder")}
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -128,12 +135,14 @@ const Page = () => {
                 />
               </div>
 
-            {/* Message Input */}
-            <div className="flex flex-col lg:text-sm text-base">
-                <label className="text-sm font-semibold text-gray-600 mb-2">Message</label>
+              {/* Message Input */}
+              <div className="flex flex-col">
+                <label className="text-sm font-semibold text-gray-600 mb-2">
+                  {t("contact.form.message.label")}
+                </label>
                 <textarea
                   name="message"
-                  placeholder="Your Message"
+                  placeholder={t("contact.form.message.placeholder")}
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -141,21 +150,21 @@ const Page = () => {
                 ></textarea>
               </div>
 
-            {/* Submit Button */}
-            <div className="text-center">
+              {/* Submit Button */}
+              <div className="text-center">
                 <button
                   type="submit"
-                  className="group flex items-center justify-between lg:px-7 px-4 py-2 relative border border-slate-400 text-slate-400 font-semibold rounded-md bg-slate-600 bg-opacity-0 hover:bg-opacity-55 hover:text-white hover:transition-opacity hover:border-slate-200 hover:translate-y-px ease-in-out duration-500"
+                  className="group flex items-center justify-between px-7 py-2 border border-slate-400 text-slate-400 font-semibold rounded-md bg-slate-600 bg-opacity-0 hover:bg-opacity-55 hover:text-white transition-opacity ease-in-out duration-500"
                   disabled={loading}
                 >
                   {loading ? (
-                    <span className="text-sm lg:text-sm animate-pulse">Submitting...</span>
+                    <span className="text-sm animate-pulse">Submitting...</span>
                   ) : (
                     <>
-                      <span className="ml-7 -translate-x-2 transition ease-in duration-75 text-center lg:text-sm text-xs">
-                        Submit
+                      <span className="ml-7 -translate-x-2 transition ease-in duration-75 text-center text-sm">
+                        {t("contact.form.submit")}
                       </span>
-                      <span className="opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 text-white transition duration-75">
+                      <span className="opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition duration-75">
                         <MdOutlineKeyboardArrowRight />
                       </span>
                     </>
@@ -165,19 +174,22 @@ const Page = () => {
             </form>
           </div>
         </div>
+  
         {modal.open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-md shadow-md text-center">
-            <p className={`text-md ${modal.isError ? 'text-red-600' : 'text-green-600'}`}>{modal.message}</p>
-            <button
-              onClick={() => setModal({ open: false, message: '', isError: false })}
-              className="mt-4 px-4 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm transition"
-            >
-              Close
-            </button>
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded-md shadow-md text-center">
+              <p className={`text-md ${modal.isError ? "text-red-600" : "text-green-600"}`}>
+                {modal.message}
+              </p>
+              <button
+                className="mt-4 px-4 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm transition"
+                onClick={() => setModal({ open: false, message: "", isError: false })}           
+              >
+                {t("contact.modal.close")}
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
         <div className=''>
           <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2034.9250180392637!2d18.076253676432025!3d59.33420567461665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9d5afa21e747%3A0x46df839ae839b719!2sRiddargatan%2013a%2C%20114%2042%20Stockholm%2C%20Sweden!5e0!3m2!1sen!2sng!4v1734203956944!5m2!1sen!2sng"  height="450" className='border-0 w-full' loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe></p>

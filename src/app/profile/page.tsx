@@ -244,10 +244,10 @@ const Page = () => {
                   <span className="font-semibold text-slate-600">Bitcoin:</span>{" "}
                   {userData.bitcoinAddress || "Not set"}
                 </li>
-                <li className="py-1">
+                {/* <li className="py-1">
                   <span className="font-semibold text-slate-600">Phone:</span>{" "}
                   {userData.phone || "Not set"}
-                </li>
+                </li> */}
               </ul>
             </div>
           )}
@@ -365,7 +365,7 @@ const Page = () => {
                 onChange={(e) => setUserName(e.target.value)}
               />
             </div>
-            <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
+            {/* <div className="lg:flex lg:items-center lg:justify-between md:flex md:items-center md:justify-between grid">
               <label className="text-xs text-slate-800 mb-1 lg:mb-0 md:mb-0">
                 Phone:
               </label>
@@ -375,7 +375,7 @@ const Page = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
-            </div>
+            </div> */}
             <div className="pt-3 flex lg:justify-end md:justify-end justify-center w-full">
               <button
                 type="submit"
