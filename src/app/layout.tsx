@@ -4,7 +4,7 @@ import { Sora } from "next/font/google";
 import "./globals.css";
 import Providers from "./Providers";
 import { LanguageProvider } from "@/context/LanguageContext";
-import LanguageSelector from "./components/LanguageSelector";
+// import LanguageSelector from "./components/LanguageSelector";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

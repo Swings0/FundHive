@@ -15,7 +15,7 @@ const renderTextWithBreaks = (text: string): React.ReactNode =>
     </React.Fragment>
   ));
 
-const page = () => {
+const Page = () => {
   const { t } = useLanguage();
   return (
     <div className="bg4">
@@ -223,4 +223,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

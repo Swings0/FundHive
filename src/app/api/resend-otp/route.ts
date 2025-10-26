@@ -49,9 +49,16 @@ export async function POST(req: Request) {
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ message: "OTP sent successfully" });
-  } catch (error: any) {
-    console.error("Error in /api/resend-otp:", error.message || error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error in /api/resend-otp:", error.message);
+    } else {
+      console.error("Unknown error in /api/resend-otp:", error);
+    }
+  
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
-}
-
+}  

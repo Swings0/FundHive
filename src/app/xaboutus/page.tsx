@@ -7,7 +7,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 
-const page = () => {
+const Page = () => {
   const { t } = useLanguage();
   return (
     <div className="bg6 ">
@@ -218,4 +218,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
