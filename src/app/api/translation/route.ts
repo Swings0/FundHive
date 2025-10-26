@@ -51,3 +51,4 @@
 
 //   return NextResponse.json(translations);
 // }
+export {};
