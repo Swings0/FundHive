@@ -25,27 +25,20 @@ const Login = () => {
   const submitHandler = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    setErr(null)
 
-    if (!email) {
-      setEmailError(true)
-    }
+    if (!email) setEmailError(true)
+    else setEmailError(false)
 
-    else{
-      setEmailError(false)
-    }
 
-    if (!password) {
-      setPasswordError(true)
-    }
+    if (!password) setPasswordError(true)
+    else setPasswordError(false)
 
-    else {
-      setPasswordError(false)
-    }
     try {
       const res = await signIn("credentials", {
+        redirect:false,
         email,
         password,
-        redirect:false
       });
 
       if(res?.error){
@@ -53,7 +46,7 @@ const Login = () => {
         return
       }
 
-      router.replace('/dashboard')
+      router.push('/dashboard')
     } catch (error) {
       setErr("Something went wrong");
       console.error("An issue occured",error);

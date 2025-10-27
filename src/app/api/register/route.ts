@@ -32,9 +32,9 @@ export const POST = async (req: NextRequest) => {
       });
 
       const mailOptions = {
-        from: `"Fundhivecorps.com" <${process.env.EMAIL_ADDRESS}>`,
+        from: process.env.EMAIL_ADDRESS,
         to: email,
-        subject: "Verify Your Email",
+        subject: "Fundhivecorps.com; Verify Your Email",
         text: `Your One Time Password (OTP) is ${otp}`,
       };
 
@@ -51,8 +51,8 @@ export const POST = async (req: NextRequest) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.EMAIL_ADDRESS,
-          pass: process.env.EMAIL_APP_PASSWORD,
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_PASS,
         },
         tls: {
           rejectUnauthorized: false,
@@ -61,8 +61,8 @@ export const POST = async (req: NextRequest) => {
       });
 
       const mailOptions = {
-        from: `"Fundhivecorps.com" <${process.env.EMAIL_ADDRESS}>`,
-        to: process.env.ADMIN_EMAIL,
+        from: `"Fundhivecorps.com" <${process.env.GMAIL_USER}>`,
+        to: process.env.GMAIL_USER,
         subject: "New User Registration",
         text: `A new user has registered:\n\nName: ${user.fullname}\nEmail: ${user.email} \nUsername: ${user.username}`,
       };

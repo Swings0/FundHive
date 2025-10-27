@@ -12,8 +12,8 @@ const generateOTP = (): string => {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS,
+    user: process.env.EMAIL_ADDRESS,
+    pass: process.env.EMAIL_APP_PASSWORD,
   },
 });
 
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     await user.save();
 
     const mailOptions = {
-      from: process.env.GMAIL_USER,
+      from: process.env.EMAIL_ADDRESS,
       to: email,
       subject: "Your OTP Code",
       text: `Your OTP code is ${otp}. It will expire in 10 minutes.`,
