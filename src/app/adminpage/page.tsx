@@ -70,6 +70,7 @@ const Page = () => {
   const [txMsg, setTxMsg] = useState("");
   const [txErr, setTxErr] = useState("");
 
+
   // Process A submission.
   const handleProcessASubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -275,6 +276,29 @@ const Page = () => {
       alert(errorMessage);
     }
   };
+
+  // Clear user balance.
+   const clearUserBalance = async () => {
+    if (!email) {
+      alert("Please enter an email.");
+      return;
+    }
+    try {
+      const { data } = await axios.post(
+        "/api/clear-user-balance",
+        { email },
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      );
+      alert(data.message);
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || errorMessage;
+      }
+      alert(errorMessage);
+    }
+  };
+
 
   // Transaction Section handler.
   const handleAddTransaction = async () => {
@@ -594,14 +618,22 @@ const Page = () => {
             </div>
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={clearPendingWithdrawal}
               className="bg-red-600 glass text-white px-4 py-2 rounded-md transition"
             >
               Clear user pending withdrawal
             </button>
+
+            <button
+              onClick={clearUserBalance}
+              className="bg-yellow-600 text-white px-4 py-2 rounded-md transition hover:bg-yellow-700"
+            >
+              Clear user balance
+            </button>
           </div>
+
 
           {/* Transaction Section */}
           <div className="mt-12 bg-gradient-to-r from-gray-800 via-gray-900 to-black rounded-xl shadow-3xl p-8">
